@@ -6,7 +6,7 @@
 
 ### Machine Learning Engineer | Data Scientist | Computer Vision & NLP Specialist
 
-[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Portfolio-00ffcc?style=for-the-badge)](https://github.com/muhammadokashapak/okasha)
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Portfolio-00ffcc?style=for-the-badge)](https://okasha-puce.vercel.app/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/muhammad-okasha23)
 [![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/muhammadokashapak)
 
