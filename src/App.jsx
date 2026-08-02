@@ -1,40 +1,86 @@
 import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, FileText, Terminal } from 'lucide-react';
 import Hero from './components/Hero';
 import Expertise from './components/Expertise';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import AiPlayground from './components/AiPlayground';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
+import CustomCursor from './components/CustomCursor';
+import TerminalModal from './components/TerminalModal';
 
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [terminalOpen, setTerminalOpen] = useState(false);
 
   const navItems = [
     { label: 'About', href: '#about' },
     { label: 'Expertise', href: '#expertise' },
     { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
+    { label: 'AI Sentinel', href: '#ai-playground' },
     { label: 'Skills', href: '#skills' },
     { label: 'Contact', href: '#contact' },
   ];
 
   return (
     <>
+      <CustomCursor />
+      <TerminalModal isOpen={terminalOpen} onClose={() => setTerminalOpen(false)} />
+
       <nav className="glass-nav">
         <div className="nav-content">
           <a href="#home" className="nav-brand">
             MO<span style={{ color: 'var(--accent-color)' }}>.</span>
           </a>
 
-          {/* Desktop Nav Links */}
-          <div className="nav-links nav-links-desktop">
+          {/* Desktop Nav Links & Actions */}
+          <div className="nav-links nav-links-desktop" style={{ alignItems: 'center' }}>
             {navItems.map((item) => (
               <a key={item.label} href={item.href}>
                 {item.label}
               </a>
             ))}
+
+            <button
+              onClick={() => setTerminalOpen(true)}
+              style={{
+                background: 'rgba(139, 92, 246, 0.1)',
+                border: '1px solid rgba(139, 92, 246, 0.4)',
+                color: 'var(--accent-alt)',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px'
+              }}
+            >
+              <Terminal size={14} /> &gt;_ CLI
+            </button>
+
+            <a
+              href="/Muhammad_Okasha_Resume.pdf"
+              download="Muhammad_Okasha_Resume.pdf"
+              style={{
+                background: 'var(--accent-gradient)',
+                color: '#000',
+                padding: '6px 16px',
+                borderRadius: '20px',
+                fontSize: '0.82rem',
+                fontWeight: 700,
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 4px 12px rgba(0, 255, 204, 0.2)'
+              }}
+            >
+              <FileText size={14} /> CV
+            </a>
           </div>
 
           {/* Mobile Hamburger Toggle */}
@@ -59,16 +105,62 @@ function App() {
                 {item.label}
               </a>
             ))}
+            
+            <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+              <button
+                onClick={() => {
+                  setMobileMenuOpen(false);
+                  setTerminalOpen(true);
+                }}
+                style={{
+                  flex: 1,
+                  background: 'rgba(139, 92, 246, 0.15)',
+                  border: '1px solid var(--accent-alt)',
+                  color: 'var(--accent-alt)',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Terminal size={16} /> &gt;_ CLI
+              </button>
+
+              <a
+                href="/Muhammad_Okasha_Resume.pdf"
+                download="Muhammad_Okasha_Resume.pdf"
+                style={{
+                  flex: 1,
+                  background: 'var(--accent-gradient)',
+                  color: '#000',
+                  padding: '10px',
+                  borderRadius: '10px',
+                  fontWeight: 700,
+                  fontSize: '0.9rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <FileText size={16} /> Resume
+              </a>
+            </div>
           </div>
         )}
       </nav>
 
       <main>
-        <Hero />
+        <Hero onOpenTerminal={() => setTerminalOpen(true)} />
         <About />
         <Expertise />
         <Experience />
         <Projects />
+        <AiPlayground />
         <Skills />
         <Contact />
       </main>

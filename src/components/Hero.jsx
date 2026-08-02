@@ -1,8 +1,9 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, OrbitControls, Sphere } from '@react-three/drei';
+import { Points, PointMaterial, OrbitControls } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 import { motion } from 'framer-motion';
+import { FileText, Terminal, ArrowDownCircle } from 'lucide-react';
 
 function Starfield(props) {
   const ref = useRef();
@@ -28,7 +29,7 @@ function Starfield(props) {
   );
 }
 
-export default function Hero() {
+export default function Hero({ onOpenTerminal }) {
   return (
     <section id="home" style={{ position: 'relative', minHeight: '100dvh', width: '100%', overflow: 'hidden' }}>
       <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
@@ -42,7 +43,7 @@ export default function Hero() {
         position: 'relative',
         minHeight: '100dvh',
         width: '100%',
-        padding: '100px 20px 60px',
+        padding: '120px 20px 60px',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -50,7 +51,7 @@ export default function Hero() {
         zIndex: 1,
         pointerEvents: 'none'
       }}>
-        <div style={{ position: 'absolute', width: 'min(600px, 90vw)', height: 'min(600px, 90vw)', background: 'radial-gradient(circle, rgba(0,255,204,0.15) 0%, transparent 60%)', filter: 'blur(40px)', zIndex: -1 }} />
+        <div style={{ position: 'absolute', width: 'min(650px, 90vw)', height: 'min(650px, 90vw)', background: 'radial-gradient(circle, rgba(0,255,204,0.15) 0%, rgba(139,92,246,0.1) 40%, transparent 70%)', filter: 'blur(50px)', zIndex: -1 }} />
         
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
@@ -58,26 +59,103 @@ export default function Hero() {
           transition={{ duration: 1, ease: 'easeOut' }}
           style={{ textAlign: 'center', maxWidth: '900px' }}
         >
+          {/* Status Badge */}
+          <div style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px',
+            background: 'rgba(0, 255, 204, 0.08)',
+            border: '1px solid rgba(0, 255, 204, 0.25)',
+            padding: '6px 16px',
+            borderRadius: '20px',
+            marginBottom: '1.5rem',
+            pointerEvents: 'auto'
+          }}>
+            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#00ffcc', boxShadow: '0 0 8px #00ffcc', animation: 'pulse 2s infinite' }} />
+            <span style={{ color: 'var(--accent-color)', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.5px' }}>
+              Available for ML &amp; Data Science Opportunities
+            </span>
+          </div>
+
           <h1 style={{ fontSize: 'clamp(2.2rem, 7vw, 4.5rem)', marginBottom: '1.2rem', textShadow: '0 10px 30px rgba(0,0,0,0.5)', wordBreak: 'break-word' }}>
             Hi, I'm <span className="gradient-text">Muhammad Okasha</span>
           </h1>
           <h2 style={{ fontSize: 'clamp(1.1rem, 3.5vw, 2.2rem)', color: 'var(--text-secondary)', fontWeight: 400, letterSpacing: '0.5px', lineHeight: 1.4 }}>
-            Data Scientist | Machine Learning Engineer
+            Machine Learning Engineer | Data Scientist
           </h2>
           
+          {/* Action CTAs */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            style={{ marginTop: 'clamp(2rem, 5vw, 3.5rem)' }}
+            style={{
+              marginTop: 'clamp(2rem, 5vw, 3rem)',
+              display: 'flex',
+              flexWrap: 'wrap',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: '1.2rem',
+              pointerEvents: 'auto'
+            }}
           >
             <a href="#projects" className="btn-primary">
               View My Work
             </a>
+
+            <a
+              href="/Muhammad_Okasha_Resume.pdf"
+              download="Muhammad_Okasha_Resume.pdf"
+              className="card"
+              style={{
+                padding: '14px 28px',
+                borderRadius: '30px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontWeight: 700,
+                color: '#fff',
+                fontSize: '1rem',
+                border: '1px solid rgba(0, 255, 204, 0.4)',
+                background: 'rgba(0, 255, 204, 0.06)'
+              }}
+            >
+              <FileText size={18} color="var(--accent-color)" />
+              Download Resume
+            </a>
+
+            <button
+              onClick={onOpenTerminal}
+              className="card"
+              style={{
+                padding: '14px 22px',
+                borderRadius: '30px',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px',
+                fontWeight: 600,
+                color: 'var(--accent-color)',
+                fontSize: '0.95rem',
+                border: '1px solid rgba(139, 92, 246, 0.4)',
+                background: 'rgba(139, 92, 246, 0.08)',
+                cursor: 'pointer'
+              }}
+            >
+              <Terminal size={18} />
+              &gt;_ CLI Mode
+            </button>
           </motion.div>
         </motion.div>
       </div>
+
+      <style>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.4; transform: scale(1.2); }
+        }
+      `}</style>
     </section>
   );
 }
+
 

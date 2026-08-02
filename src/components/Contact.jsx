@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, FileText } from 'lucide-react';
 
 export default function Contact() {
   return (
@@ -31,6 +31,16 @@ export default function Contact() {
               Email Me
             </a>
             
+            <a
+              href="/Muhammad_Okasha_Resume.pdf"
+              download="Muhammad_Okasha_Resume.pdf"
+              className="card contact-btn"
+              style={{ padding: '12px 24px', display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center', borderRadius: '30px', border: '1px solid rgba(0, 255, 204, 0.4)', background: 'rgba(0, 255, 204, 0.08)' }}
+            >
+              <FileText color="var(--accent-color)" size={20} />
+              <span style={{ color: '#fff', fontWeight: 600, fontSize: '0.95rem' }}>Download Resume</span>
+            </a>
+
             <a href="tel:+923495696659" className="card contact-btn" style={{ padding: '12px 24px', display: 'flex', alignItems: 'center', gap: '10px', justifyContent: 'center', borderRadius: '30px' }}>
               <Phone color="var(--accent-color)" size={20} />
               <span style={{ color: 'var(--text-primary)', fontWeight: 600, fontSize: '0.95rem' }}>+92 3495696659</span>
