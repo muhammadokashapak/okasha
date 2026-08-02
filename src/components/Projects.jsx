@@ -46,7 +46,7 @@ export default function Projects() {
           <span className="gradient-text">Featured Projects</span>
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '2.5rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: 'clamp(1.2rem, 3vw, 2rem)' }}>
           {projects.map((project, index) => (
             <motion.div
               key={index}
@@ -57,30 +57,30 @@ export default function Projects() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
               <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1.2rem', marginBottom: '1.5rem' }}>
-                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '16px', borderRadius: '16px', border: '1px solid var(--card-border)' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', gap: '1rem', marginBottom: '1.2rem' }}>
+                  <div style={{ background: 'rgba(255, 255, 255, 0.05)', padding: '12px', borderRadius: '14px', border: '1px solid var(--card-border)', flexShrink: 0 }}>
                     {project.icon}
                   </div>
                   <div>
-                    <h3 style={{ fontSize: '1.4rem', color: 'var(--text-primary)', marginBottom: '0.2rem' }}>{project.title}</h3>
-                    <p style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{project.subtitle}</p>
+                    <h3 style={{ fontSize: 'clamp(1.15rem, 3vw, 1.35rem)', color: 'var(--text-primary)', marginBottom: '0.2rem', lineHeight: 1.3 }}>{project.title}</h3>
+                    <p style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>{project.subtitle}</p>
                   </div>
                 </div>
                 
-                <p style={{ color: 'var(--text-secondary)', fontSize: '1rem', lineHeight: 1.7, marginBottom: '2rem', flexGrow: 1 }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.95rem', lineHeight: 1.65, marginBottom: '1.5rem', flexGrow: 1 }}>
                   {project.description}
                 </p>
 
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                   {project.tags.map((tag, i) => (
                     <span key={i} style={{ 
                       background: 'rgba(0, 255, 204, 0.1)', 
                       color: 'var(--accent-color)', 
-                      padding: '4px 10px', 
-                      borderRadius: '8px', 
-                      fontSize: '0.75rem',
+                      padding: '4px 9px', 
+                      borderRadius: '6px', 
+                      fontSize: '0.72rem',
                       fontWeight: 600,
-                      letterSpacing: '0.5px'
+                      letterSpacing: '0.3px'
                     }}>
                       {tag}
                     </span>

@@ -29,7 +29,7 @@ export default function Skills() {
           <span className="gradient-text">Skills & Certifications</span>
         </h2>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 'clamp(2rem, 4vw, 3rem)' }}>
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}
@@ -38,11 +38,11 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
             >
-              <h3 style={{ fontSize: '1.5rem', marginBottom: '1.5rem', color: 'var(--text-primary)', borderBottom: '1px solid var(--card-border)', paddingBottom: '0.5rem' }}>
+              <h3 style={{ fontSize: 'clamp(1.2rem, 3.5vw, 1.5rem)', marginBottom: '1.2rem', color: 'var(--text-primary)', borderBottom: '1px solid var(--card-border)', paddingBottom: '0.5rem' }}>
                 {category.title}
               </h3>
               
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.75rem' }}>
                 {category.skills.map((skill, i) => (
                   <motion.div
                     key={i}
@@ -50,9 +50,10 @@ export default function Skills() {
                     style={{
                       background: 'var(--card-bg)',
                       border: '1px solid var(--card-border)',
-                      padding: '10px 20px',
+                      padding: '8px 16px',
                       borderRadius: '8px',
                       color: 'var(--text-secondary)',
+                      fontSize: '0.88rem',
                       fontWeight: 500,
                       cursor: 'default',
                       transition: 'border-color 0.3s'

@@ -33,7 +33,7 @@ export default function Expertise() {
           <span className="gradient-text">What I Do</span>
         </h2>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: 'clamp(1.2rem, 3vw, 2rem)' }}>
           {expertiseItems.map((item, index) => (
             <motion.div
               key={index}
@@ -47,17 +47,17 @@ export default function Expertise() {
             >
               <div style={{ 
                 background: 'rgba(255,255,255,0.03)', 
-                padding: '20px', 
+                padding: '16px', 
                 borderRadius: '50%', 
-                marginBottom: '1.5rem',
+                marginBottom: '1.2rem',
                 border: '1px solid var(--card-border)'
               }}>
                 {item.icon}
               </div>
-              <h3 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', marginBottom: '1rem' }}>
+              <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
                 {item.title}
               </h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.95rem' }}>
                 {item.description}
               </p>
             </motion.div>

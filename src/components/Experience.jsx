@@ -46,7 +46,7 @@ function ExperienceCard({ exp, index }) {
       transition={{ duration: 0.5, delay: index * 0.2 }}
     >
       <div
-        className="card"
+        className="card exp-card"
         style={{
           borderLeft: `3px solid ${exp.color}`,
           cursor: 'pointer',
@@ -55,11 +55,11 @@ function ExperienceCard({ exp, index }) {
         onClick={() => setExpanded(!expanded)}
       >
         {/* Card Header */}
-        <div style={{ padding: '2rem 2rem 1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem' }}>
-          <div style={{ display: 'flex', gap: '1.2rem', alignItems: 'flex-start', flex: 1 }}>
+        <div className="exp-header">
+          <div style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start', flex: 1 }}>
             {/* Icon Badge */}
-            <div style={{
-              width: '52px', height: '52px', borderRadius: '14px', flexShrink: 0,
+            <div className="exp-icon-badge" style={{
+              width: '46px', height: '46px', borderRadius: '12px', flexShrink: 0,
               background: `${exp.color}18`,
               border: `1px solid ${exp.color}40`,
               display: 'flex', alignItems: 'center', justifyContent: 'center',
@@ -70,10 +70,10 @@ function ExperienceCard({ exp, index }) {
 
             {/* Title & Company */}
             <div>
-              <h3 style={{ fontSize: '1.3rem', color: 'var(--text-primary)', fontFamily: 'var(--font-display)', marginBottom: '0.3rem' }}>
+              <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.3rem)', color: 'var(--text-primary)', fontFamily: 'var(--font-display)', marginBottom: '0.2rem', lineHeight: 1.3 }}>
                 {exp.role}
               </h3>
-              <p style={{ color: exp.color, fontWeight: 600, fontSize: '0.95rem' }}>
+              <p style={{ color: exp.color, fontWeight: 600, fontSize: '0.9rem' }}>
                 {exp.company}
                 <span style={{ color: 'var(--text-secondary)', fontWeight: 400 }}> · {exp.location}</span>
               </p>
@@ -81,29 +81,29 @@ function ExperienceCard({ exp, index }) {
           </div>
 
           {/* Right: Duration + Type badge + expand arrow */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '0.5rem', flexShrink: 0 }}>
+          <div className="exp-right-meta">
             <span style={{
               background: `${exp.color}18`, color: exp.color,
               border: `1px solid ${exp.color}40`,
-              padding: '3px 12px', borderRadius: '20px',
+              padding: '3px 10px', borderRadius: '20px',
               fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.5px'
             }}>
               {exp.type}
             </span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>{exp.duration}</span>
-            <span style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', transition: 'transform 0.3s', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '0.85rem' }}>{exp.duration}</span>
+            <span style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', transition: 'transform 0.3s', transform: expanded ? 'rotate(180deg)' : 'rotate(0deg)' }}>▾</span>
           </div>
         </div>
 
         {/* Highlight chips */}
-        <div style={{ padding: '0 2rem 1.5rem', display: 'flex', gap: '0.6rem', flexWrap: 'wrap' }}>
+        <div className="exp-highlights">
           {exp.highlights.map((h, i) => (
             <span key={i} style={{
               background: 'rgba(255,255,255,0.05)',
               color: 'var(--text-secondary)',
               border: '1px solid var(--card-border)',
-              padding: '4px 12px', borderRadius: '8px',
-              fontSize: '0.8rem', fontWeight: 500
+              padding: '3px 10px', borderRadius: '8px',
+              fontSize: '0.78rem', fontWeight: 500
             }}>
               ✦ {h}
             </span>
@@ -120,21 +120,17 @@ function ExperienceCard({ exp, index }) {
               transition={{ duration: 0.3 }}
               style={{ overflow: 'hidden' }}
             >
-              <div style={{
-                borderTop: '1px solid var(--card-border)',
-                margin: '0 2rem',
-                padding: '1.5rem 0 2rem'
-              }}>
-                <ul style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div className="exp-points-container">
+                <ul style={{ display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                   {exp.points.map((point, i) => (
-                    <li key={i} style={{ display: 'flex', gap: '1rem', alignItems: 'flex-start' }}>
+                    <li key={i} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-start' }}>
                       <span style={{
-                        width: '8px', height: '8px', borderRadius: '50%',
+                        width: '7px', height: '7px', borderRadius: '50%',
                         background: exp.color,
                         marginTop: '7px', flexShrink: 0,
                         boxShadow: `0 0 8px ${exp.color}`
                       }} />
-                      <span style={{ color: 'var(--text-secondary)', lineHeight: 1.7 }}>{point}</span>
+                      <span style={{ color: 'var(--text-secondary)', lineHeight: 1.65, fontSize: '0.92rem' }}>{point}</span>
                     </li>
                   ))}
                 </ul>
@@ -160,16 +156,68 @@ export default function Experience() {
           <span className="gradient-text">Experience</span>
         </h2>
 
-        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: '-2.5rem', marginBottom: '4rem', fontSize: '0.95rem' }}>
+        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: 'clamp(-2.5rem, -3vw, -1.5rem)', marginBottom: 'clamp(2rem, 5vw, 4rem)', fontSize: '0.9rem' }}>
           Click a card to expand details
         </p>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem', maxWidth: '860px', margin: '0 auto' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '860px', margin: '0 auto' }}>
           {experiences.map((exp, i) => (
             <ExperienceCard key={i} exp={exp} index={i} />
           ))}
         </div>
       </motion.div>
+
+      <style>{`
+        .exp-header {
+          padding: 1.8rem 1.8rem 1.2rem;
+          display: flex;
+          justify-content: space-between;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+        .exp-right-meta {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 0.4rem;
+          flex-shrink: 0;
+        }
+        .exp-highlights {
+          padding: 0 1.8rem 1.5rem;
+          display: flex;
+          gap: 0.5rem;
+          flex-wrap: wrap;
+        }
+        .exp-points-container {
+          border-top: 1px solid var(--card-border);
+          margin: 0 1.8rem;
+          padding: 1.2rem 0 1.8rem;
+        }
+        @media (max-width: 640px) {
+          .exp-header {
+            padding: 1.25rem 1rem 1rem;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 0.8rem;
+          }
+          .exp-right-meta {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            border-top: 1px solid rgba(255,255,255,0.04);
+            padding-top: 0.6rem;
+          }
+          .exp-highlights {
+            padding: 0 1rem 1.25rem;
+          }
+          .exp-points-container {
+            margin: 0 1rem;
+            padding: 1rem 0 1.25rem;
+          }
+        }
+      `}</style>
     </section>
   );
 }
+
