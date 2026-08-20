@@ -1,128 +1,81 @@
-<div align="center">
+﻿<div align="center">
 
-<img src="public/profile.png" alt="Muhammad Okasha" width="130" style="border-radius: 50%;" />
+# 🌐 Muhammad Okasha — Personal Portfolio & Showcase
 
-# 🚀 Muhammad Okasha — 3D AI Portfolio
+<p align="center">
+  <strong>Personal Web Showcase & Resume Portfolio</strong>
+</p>
 
-### Machine Learning Engineer | Data Scientist | Computer Vision & NLP Specialist
+<p align="center">
+  ![JavaScript](https://img.shields.io/badge/JavaScript-2563EB?style=for-the-badge&logo=github&logoColor=white) ![HTML5](https://img.shields.io/badge/HTML5-2563EB?style=for-the-badge&logo=github&logoColor=white) ![CSS3](https://img.shields.io/badge/CSS3-2563EB?style=for-the-badge&logo=github&logoColor=white) ![Portfolio](https://img.shields.io/badge/Portfolio-2563EB?style=for-the-badge&logo=github&logoColor=white) 
+</p>
 
-[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-Visit%20Portfolio-00ffcc?style=for-the-badge)](https://okasha-puce.vercel.app/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin)](https://linkedin.com/in/muhammad-okasha23)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github)](https://github.com/muhammadokashapak)
+<p align="center">
+  <a href="#-overview">Overview</a> •
+  <a href="#-key-features">Key Features</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-author--license">Author</a>
+</p>
 
 </div>
 
 ---
 
-## ✨ Overview
+## 📌 Overview
 
-A **modern, 3D-animated personal portfolio** built to showcase the skills, projects, and experience of **Muhammad Okasha** — a passionate Machine Learning Engineer from Islamabad, Pakistan.
-
-The portfolio is designed with a premium **dark-mode aesthetic**, featuring:
-- 🌌 **Interactive 3D starfield** in the hero section (React Three Fiber)
-- 🎞️ **Smooth scroll animations** powered by Framer Motion
-- 💎 **Glassmorphism design** with neon glow effects
-- 📱 **Fully responsive** layout for all screen sizes
-- ⚡ **Expandable experience cards** with animated accordion
-- 🏷️ **Tech stack badges** on every project card
+Personal developer homepage presenting academic background, machine learning research, software engineering achievements, and technical skillsets.
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Key Features
 
-| Category        | Technologies                                       |
-|----------------|----------------------------------------------------|
-| **Framework**  | React 19, Vite 8                                   |
-| **3D Graphics**| Three.js, @react-three/fiber, @react-three/drei    |
-| **Animations** | Framer Motion                                      |
-| **Icons**      | Lucide React                                       |
-| **Styling**    | Vanilla CSS (custom design system)                 |
-| **Fonts**      | Inter, Outfit (Google Fonts)                       |
+- 📄 **Interactive Resume**: Comprehensive timeline of education, experience, and accomplishments.
+- 💡 **Skills Matrix**: Visual representation of proficiency across AI, Mobile, and Web stacks.
+- 🔗 **Quick Links**: Direct access to open-source repositories and social profiles.
 
 ---
 
-## 📂 Project Structure
+## 🛠️ Tech Stack & Tools
 
-```
-portfolio_3d/
-├── public/
-│   └── profile.png          # Profile photo
-├── src/
-│   ├── components/
-│   │   ├── Hero.jsx          # 3D animated landing section
-│   │   ├── About.jsx         # Biography, stats & education
-│   │   ├── Expertise.jsx     # Core domain highlights
-│   │   ├── Experience.jsx    # Interactive accordion timeline
-│   │   ├── Projects.jsx      # Project showcase with tech badges
-│   │   ├── Skills.jsx        # Skills & certifications
-│   │   └── Contact.jsx       # Contact links & social icons
-│   ├── App.jsx               # Root component & navigation
-│   ├── index.css             # Global design system & CSS tokens
-│   └── main.jsx              # Entry point
-├── package.json
-└── vite.config.js
-```
-
----
-
-## 🔥 Featured Projects
-
-| Project | Description | Stack |
-|---------|-------------|-------|
-| **CHASHM AI** | AI-powered assistive headset for the visually impaired using YOLO & ESP32-CAM | FastAPI, OpenCV, YOLO, WebSockets |
-| **Shina NLP Engine** | Language detection model for the regional Shina language | LSTM, CNN, TensorFlow |
-| **Toxicity Sentinel** | Real-time hate speech classifier for Twitter data | NLP, TF-IDF, Scikit-learn |
-| **MediScan AI** | Automated Chicken Pox detection from skin images | CNN, Data Augmentation |
+- **HTML5**
+- **CSS3**
+- **JavaScript**
+- **GitHub Pages**
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js v18+
-- npm v9+
+Make sure you have the required runtime installed:
+- **Git** installed on your system
+- **Python 3.9+ / Node.js 18+** (depending on the stack)
 
-### Installation
+### Installation & Run
 
-```bash
-# Clone the repository
+`ash
+# 1. Clone the repository
 git clone https://github.com/muhammadokashapak/okasha.git
 
-# Navigate into the project
+# 2. Navigate into the project directory
 cd okasha
-
-# Install dependencies
-npm install
-
-# Start the development server
-npm run dev
-```
-
-Open your browser at **`http://localhost:5173`** to view the portfolio.
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-The optimized output will be in the `dist/` folder, ready for deployment.
+`
 
 ---
 
-## 📬 Contact
+## 👨‍💻 Author & Connect
 
-| Platform | Link |
-|----------|------|
-| 📧 Email | [muhammad.okasha2146@gmail.com](mailto:muhammad.okasha2146@gmail.com) |
-| 💼 LinkedIn | [linkedin.com/in/muhammad-okasha23](https://linkedin.com/in/muhammad-okasha23) |
-| 🐙 GitHub | [github.com/muhammadokashapak](https://github.com/muhammadokashapak) |
-| 📍 Location | Islamabad, Pakistan |
+**Muhammad Okasha**
+- GitHub: [@muhammadokashapak](https://github.com/muhammadokashapak)
+- LinkedIn: [Muhammad Okasha](https://linkedin.com/in/muhammad-okasha)
 
 ---
 
 <div align="center">
 
-Made with ❤️ by **Muhammad Okasha** · © 2026
+⭐ **Star this repository if you find it helpful!** ⭐
+
+*© 2026 [Muhammad Okasha](https://github.com/muhammadokashapak). All rights reserved.*
 
 </div>
