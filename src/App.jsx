@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Menu, X, FileText, Terminal } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Menu, X, FileText, Terminal, Sun, Moon } from 'lucide-react';
 import Hero from './components/Hero';
 import Expertise from './components/Expertise';
 import About from './components/About';
@@ -14,6 +14,18 @@ import TerminalModal from './components/TerminalModal';
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('portfolio-theme') || 'dark';
+  });
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('portfolio-theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
+  };
 
   const navItems = [
     { label: 'About', href: '#about' },
@@ -44,6 +56,21 @@ function App() {
               </a>
             ))}
 
+            {/* Theme Switcher Button */}
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle-btn"
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? (
+                <Sun size={17} color="#fbbf24" />
+              ) : (
+                <Moon size={17} color="#7c3aed" />
+              )}
+            </button>
+
+            {/* CLI Terminal Launcher */}
             <button
               onClick={() => setTerminalOpen(true)}
               style={{
@@ -63,12 +90,13 @@ function App() {
               <Terminal size={14} /> &gt;_ CLI
             </button>
 
+            {/* CV Download */}
             <a
               href="/Muhammad_Okasha_Resume.pdf"
               download="Muhammad_Okasha_Resume.pdf"
               style={{
                 background: 'var(--accent-gradient)',
-                color: '#000',
+                color: '#fff',
                 padding: '6px 16px',
                 borderRadius: '20px',
                 fontSize: '0.82rem',
@@ -76,21 +104,31 @@ function App() {
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '6px',
-                boxShadow: '0 4px 12px rgba(0, 255, 204, 0.2)'
+                boxShadow: '0 4px 14px rgba(0, 255, 204, 0.25)'
               }}
             >
               <FileText size={14} /> CV
             </a>
           </div>
 
-          {/* Mobile Hamburger Toggle */}
-          <button
-            className="nav-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X size={26} color="var(--accent-color)" /> : <Menu size={26} />}
-          </button>
+          {/* Mobile Actions (Theme + Hamburger) */}
+          <div style={{ display: 'none' }} className="mobile-actions-wrapper">
+            <button
+              onClick={toggleTheme}
+              className="theme-toggle-btn"
+              style={{ marginRight: '8px' }}
+              aria-label="Toggle Theme"
+            >
+              {theme === 'dark' ? <Sun size={18} color="#fbbf24" /> : <Moon size={18} color="#7c3aed" />}
+            </button>
+            <button
+              className="nav-toggle"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+            >
+              {mobileMenuOpen ? <X size={26} color="var(--accent-color)" /> : <Menu size={26} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Dropdown Menu */}
@@ -136,7 +174,7 @@ function App() {
                 style={{
                   flex: 1,
                   background: 'var(--accent-gradient)',
-                  color: '#000',
+                  color: '#fff',
                   padding: '10px',
                   borderRadius: '10px',
                   fontWeight: 700,
@@ -155,7 +193,7 @@ function App() {
       </nav>
 
       <main>
-        <Hero onOpenTerminal={() => setTerminalOpen(true)} />
+        <Hero onOpenTerminal={() => setTerminalOpen(true)} theme={theme} />
         <About />
         <Expertise />
         <Experience />
@@ -164,9 +202,17 @@ function App() {
         <Skills />
         <Contact />
       </main>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .mobile-actions-wrapper {
+            display: flex !important;
+            align-items: center;
+          }
+        }
+      `}</style>
     </>
   );
 }
 
 export default App;
-

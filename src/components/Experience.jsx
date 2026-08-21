@@ -152,13 +152,17 @@ export default function Experience() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="section-title">
-          <span className="gradient-text">Experience</span>
-        </h2>
-
-        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: 'clamp(-2.5rem, -3vw, -1.5rem)', marginBottom: 'clamp(2rem, 5vw, 4rem)', fontSize: '0.9rem' }}>
-          Click a card to expand details
-        </p>
+        <div className="section-header">
+          <div className="section-tag">
+            <TrendingUp size={14} /> Career &amp; Milestones
+          </div>
+          <h2 className="section-title">
+            Professional <span className="gradient-text">Experience</span>
+          </h2>
+          <p className="section-subtitle">
+            Hands-on machine learning engineering, enterprise AI consulting, and technical leadership track record.
+          </p>
+        </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '860px', margin: '0 auto' }}>
           {experiences.map((exp, i) => (

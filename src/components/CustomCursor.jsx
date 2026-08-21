@@ -53,13 +53,13 @@ export default function CustomCursor() {
           width: isPointer ? '44px' : '30px',
           height: isPointer ? '44px' : '30px',
           borderRadius: '50%',
-          border: '1px solid rgba(0, 255, 204, 0.6)',
-          backgroundColor: isPointer ? 'rgba(0, 255, 204, 0.15)' : 'transparent',
+          border: '1.5px solid var(--accent-color)',
+          backgroundColor: isPointer ? 'rgba(0, 255, 204, 0.12)' : 'transparent',
           transform: `translate3d(${position.x - (isPointer ? 22 : 15)}px, ${position.y - (isPointer ? 22 : 15)}px, 0)`,
           transition: 'width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s',
           pointerEvents: 'none',
           zIndex: 9999,
-          boxShadow: isPointer ? '0 0 20px rgba(0,255,204,0.4)' : 'none'
+          boxShadow: isPointer ? '0 0 20px var(--accent-color)' : 'none'
         }}
       />
       {/* Center Dot */}
@@ -75,7 +75,7 @@ export default function CustomCursor() {
           transform: `translate3d(${position.x - 3}px, ${position.y - 3}px, 0)`,
           pointerEvents: 'none',
           zIndex: 10000,
-          boxShadow: '0 0 10px #00ffcc'
+          boxShadow: '0 0 10px var(--accent-color)'
         }}
       />
     </>

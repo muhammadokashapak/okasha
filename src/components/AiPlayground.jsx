@@ -74,18 +74,22 @@ export default function AiPlayground() {
         viewport={{ once: true, margin: '-100px' }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="section-title">
-          <span className="gradient-text">Interactive AI Sentinel Demo</span>
-        </h2>
+        <div className="section-header">
+          <div className="section-tag">
+            <Sparkles size={14} /> Live Neural Lab
+          </div>
+          <h2 className="section-title">
+            Interactive <span className="gradient-text">AI Sentinel Demo</span>
+          </h2>
+          <p className="section-subtitle">
+            Test the NLP Sentinel pipeline logic and real-time sentiment & toxicity classification live in your browser.
+          </p>
+        </div>
 
-        <p style={{ textAlign: 'center', color: 'var(--text-secondary)', marginTop: 'clamp(-2rem, -3vw, -1rem)', marginBottom: '3rem', fontSize: '0.95rem' }}>
-          Test the NLP Sentinel pipeline logic live in your browser
-        </p>
-
-        <div className="card" style={{ maxWidth: '820px', margin: '0 auto', padding: 'clamp(20px, 4vw, 36px)' }}>
+        <div className="card" style={{ maxWidth: '840px', margin: '0 auto', padding: 'clamp(20px, 4vw, 36px)' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '1.2rem' }}>
             <Sparkles color="var(--accent-color)" size={24} />
-            <h3 style={{ fontSize: '1.3rem', color: '#fff', fontFamily: 'var(--font-display)' }}>
+            <h3 style={{ fontSize: '1.3rem', color: 'var(--text-primary)', fontFamily: 'var(--font-display)' }}>
               Real-time NLP Sentiment &amp; Toxicity Classifier
             </h3>
           </div>

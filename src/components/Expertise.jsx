@@ -1,22 +1,31 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { BrainCircuit, Cpu, Binary } from 'lucide-react';
+import { Bot, Cpu, Eye, Network, Sparkles, Zap, Server, ShieldCheck } from 'lucide-react';
 
 const expertiseItems = [
   {
-    title: "Computer Vision",
-    icon: <Cpu size={40} color="var(--accent-color)" />,
-    description: "Designing real-time object detection systems and automated diagnostic tools using deep learning architectures like CNNs and YOLO. I focus on optimizing model inference for edge devices and low-latency environments."
+    title: "Enterprise GenAI & Multimodal RAG",
+    icon: <Bot size={34} color="var(--accent-color)" />,
+    tag: "Vector & LLM Architecture",
+    description: "Architecting high-accuracy retrieval-augmented generation pipelines using Gemini 3.7 Flash, ChromaDB, and FastEmbed ONNX with Reciprocal Rank Fusion, document intelligence, and real-time SSE token streaming."
   },
   {
-    title: "Natural Language Processing",
-    icon: <Binary size={40} color="var(--accent-alt)" />,
-    description: "Building intelligent language models capable of classifying text, detecting nuances like hate speech, and processing regional languages through tokenization and advanced embeddings."
+    title: "On-Device Neural AI & Edge Systems",
+    icon: <Cpu size={34} color="var(--accent-cyan)" />,
+    tag: "100% Offline Edge Inference",
+    description: "Quantizing neural models (INT8 Whisper, MarianMT seq2seq, MobileNet) to run completely on-device across Android Jetpack Compose and embedded microcontrollers with zero cloud dependencies and sub-second latency."
   },
   {
-    title: "Predictive Analytics & AI Strategy",
-    icon: <BrainCircuit size={40} color="#3b82f6" />,
-    description: "Transforming raw data into actionable business intelligence. I have a proven track record of boosting digital marketing revenues by 250% through data-driven insights and rigorous A/B testing strategies."
+    title: "Computer Vision & Assistive IoT",
+    icon: <Eye size={34} color="var(--accent-alt)" />,
+    tag: "Real-Time Embedded Perception",
+    description: "Building end-to-end edge vision systems using custom quantized YOLO on ESP32-CAM and mobile hardware, coupled with OpenCV pipelines and real-time 3D spatial directional audio feedback."
+  },
+  {
+    title: "Full-Stack AI Architecture & ERPs",
+    icon: <Network size={34} color="var(--accent-emerald)" />,
+    tag: "Mission-Critical Systems",
+    description: "Developing scalable full-stack platforms with FastAPI async gateways, WebSockets, React 18, and cross-platform native deployments for education, hospital clinical care, and live meeting co-pilots."
   }
 ];
 
@@ -29,11 +38,19 @@ export default function Expertise() {
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8 }}
       >
-        <h2 className="section-title">
-          <span className="gradient-text">What I Do</span>
-        </h2>
+        <div className="section-header">
+          <div className="section-tag">
+            <Sparkles size={14} /> Core Architectural Pillars
+          </div>
+          <h2 className="section-title">
+            Engineering <span className="gradient-text">Expertise</span>
+          </h2>
+          <p className="section-subtitle">
+            Transforming complex mathematical abstractions and neural weights into robust, production-grade applications.
+          </p>
+        </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(270px, 1fr))', gap: 'clamp(1.2rem, 3vw, 2rem)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 'clamp(1.4rem, 3vw, 2rem)' }}>
           {expertiseItems.map((item, index) => (
             <motion.div
               key={index}
@@ -41,23 +58,32 @@ export default function Expertise() {
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              whileHover={{ y: -10 }}
-              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
+              transition={{ duration: 0.5, delay: index * 0.15 }}
+              whileHover={{ y: -8 }}
+              style={{ display: 'flex', flexDirection: 'column', height: '100%' }}
             >
-              <div style={{ 
-                background: 'rgba(255,255,255,0.03)', 
-                padding: '16px', 
-                borderRadius: '50%', 
-                marginBottom: '1.2rem',
-                border: '1px solid var(--card-border)'
-              }}>
-                {item.icon}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1.2rem' }}>
+                <div style={{ 
+                  background: 'rgba(255,255,255,0.04)', 
+                  padding: '14px', 
+                  borderRadius: '16px', 
+                  border: '1px solid var(--card-border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {item.icon}
+                </div>
+                <span className="badge-neon" style={{ fontSize: '0.72rem' }}>
+                  {item.tag}
+                </span>
               </div>
-              <h3 style={{ fontSize: 'clamp(1.25rem, 3vw, 1.5rem)', color: 'var(--text-primary)', marginBottom: '0.8rem' }}>
+
+              <h3 style={{ fontSize: 'clamp(1.15rem, 2.5vw, 1.35rem)', color: 'var(--text-primary)', marginBottom: '0.8rem', fontWeight: 700 }}>
                 {item.title}
               </h3>
-              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.95rem' }}>
+              
+              <p style={{ color: 'var(--text-secondary)', lineHeight: 1.7, fontSize: '0.9rem', flexGrow: 1 }}>
                 {item.description}
               </p>
             </motion.div>

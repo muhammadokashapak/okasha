@@ -17,12 +17,17 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
           style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}
         >
-          <h2 className="section-title" style={{ marginBottom: '1.2rem' }}>
-            <span className="gradient-text">Let's Connect</span>
-          </h2>
-          <p style={{ color: 'var(--text-secondary)', maxWidth: '600px', marginBottom: 'clamp(2rem, 5vw, 4rem)', fontSize: 'clamp(0.95rem, 2.5vw, 1.1rem)', lineHeight: 1.7 }}>
-            I'm always open to discussing data science, machine learning, and exciting new opportunities. Feel free to reach out and say hello!
-          </p>
+          <div className="section-header" style={{ marginBottom: 'clamp(2rem, 4vw, 3rem)' }}>
+            <div className="section-tag">
+              <Mail size={14} /> Get In Touch
+            </div>
+            <h2 className="section-title">
+              Let's <span className="gradient-text">Build Together</span>
+            </h2>
+            <p className="section-subtitle">
+              I'm always open to discussing new AI architectures, full-stack systems engineering, and exciting opportunities. Feel free to reach out!
+            </p>
+          </div>
 
           <div className="contact-buttons-wrapper">
             {/* Upgraded Buttons */}
