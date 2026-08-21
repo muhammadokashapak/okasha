@@ -134,11 +134,11 @@ export default function AiPlayground() {
               placeholder="Enter text to analyze sentiment & toxicity..."
               style={{
                 flex: 1,
-                background: 'rgba(10, 10, 20, 0.8)',
+                background: 'var(--btn-sec-bg)',
                 border: '1px solid var(--card-border)',
                 borderRadius: '12px',
                 padding: '12px 16px',
-                color: '#fff',
+                color: 'var(--text-primary)',
                 outline: 'none',
                 fontSize: '0.95rem'
               }}
@@ -178,7 +178,7 @@ export default function AiPlayground() {
                   </span>
                 </div>
                 <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-                  Model Confidence: <strong style={{ color: '#fff' }}>{result.confidence}%</strong>
+                  Model Confidence: <strong style={{ color: 'var(--text-primary)' }}>{result.confidence}%</strong>
                 </span>
               </div>
 

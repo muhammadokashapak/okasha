@@ -310,11 +310,7 @@ export default function Projects() {
       {/* Projects Grid */}
       <motion.div 
         layout
-        style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-          gap: 'clamp(1.4rem, 3vw, 2.2rem)' 
-        }}
+        className="projects-grid"
       >
         <AnimatePresence>
           {filteredProjects.map((project, index) => (

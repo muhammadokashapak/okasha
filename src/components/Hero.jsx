@@ -116,19 +116,22 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
           style={{ textAlign: 'center', maxWidth: '960px' }}
         >
           {/* Status Badge */}
-          <div style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '8px',
-            background: isLight ? 'rgba(2, 132, 199, 0.08)' : 'rgba(0, 255, 204, 0.08)',
-            border: `1px solid ${isLight ? 'rgba(2, 132, 199, 0.3)' : 'rgba(0, 255, 204, 0.3)'}`,
-            padding: '6px 18px',
-            borderRadius: '30px',
-            marginBottom: '1.5rem',
-            pointerEvents: 'auto',
-            backdropFilter: 'blur(10px)',
-            boxShadow: `0 0 20px ${isLight ? 'rgba(2, 132, 199, 0.15)' : 'rgba(0, 255, 204, 0.15)'}`
-          }}>
+          <div 
+            className="hero-status-badge"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              background: isLight ? 'rgba(2, 132, 199, 0.08)' : 'rgba(0, 255, 204, 0.08)',
+              border: `1px solid ${isLight ? 'rgba(2, 132, 199, 0.3)' : 'rgba(0, 255, 204, 0.3)'}`,
+              padding: '6px 18px',
+              borderRadius: '30px',
+              marginBottom: '1.5rem',
+              pointerEvents: 'auto',
+              backdropFilter: 'blur(10px)',
+              boxShadow: `0 0 20px ${isLight ? 'rgba(2, 132, 199, 0.15)' : 'rgba(0, 255, 204, 0.15)'}`
+            }}
+          >
             <span className="pulse-dot" />
             <span style={{ color: 'var(--accent-color)', fontSize: '0.86rem', fontWeight: 700, letterSpacing: '0.4px' }}>
               Available for AI / ML Engineer &amp; Solutions Architect Roles
@@ -137,7 +140,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
 
           {/* Main Title */}
           <h1 style={{ 
-            fontSize: 'clamp(2.4rem, 7vw, 4.8rem)', 
+            fontSize: 'clamp(2.1rem, 7vw, 4.8rem)', 
             marginBottom: '1.2rem', 
             textShadow: isLight ? '0 4px 20px rgba(0,0,0,0.06)' : '0 10px 40px rgba(0,0,0,0.6)', 
             wordBreak: 'break-word',
@@ -148,7 +151,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
 
           {/* Subtitle / Roles */}
           <h2 style={{ 
-            fontSize: 'clamp(1.15rem, 3.5vw, 2rem)', 
+            fontSize: 'clamp(1.05rem, 3.5vw, 2rem)', 
             color: 'var(--text-secondary)', 
             fontWeight: 400, 
             letterSpacing: '0.4px', 
@@ -163,7 +166,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
 
           <p style={{
             color: 'var(--text-muted)',
-            fontSize: 'clamp(0.9rem, 2vw, 1.05rem)',
+            fontSize: 'clamp(0.88rem, 2vw, 1.05rem)',
             maxWidth: '680px',
             margin: '1.2rem auto 0',
             lineHeight: 1.6
@@ -176,6 +179,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.8 }}
+            className="hero-cta-group"
             style={{
               marginTop: 'clamp(2rem, 5vw, 2.8rem)',
               display: 'flex',
@@ -218,8 +222,9 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.7, duration: 0.8 }}
+            className="hero-metrics-grid"
             style={{
-              marginTop: 'clamp(3rem, 6vw, 4.5rem)',
+              marginTop: 'clamp(2.5rem, 6vw, 4.5rem)',
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
               gap: '14px',
@@ -231,7 +236,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
             {heroMetrics.map((item, idx) => (
               <div 
                 key={idx}
-                className="card"
+                className="card hero-metric-card"
                 style={{ 
                   padding: '16px 14px', 
                   borderRadius: '18px',
@@ -239,7 +244,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
                 }}
               >
                 <div style={{ 
-                  fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', 
+                  fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', 
                   fontWeight: 900, 
                   color: 'var(--accent-color)', 
                   fontFamily: 'var(--font-display)',
@@ -248,7 +253,7 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
                   {item.num}
                 </div>
                 <div style={{ 
-                  fontSize: '0.78rem', 
+                  fontSize: '0.76rem', 
                   color: 'var(--text-secondary)', 
                   fontWeight: 600, 
                   marginTop: '2px' 

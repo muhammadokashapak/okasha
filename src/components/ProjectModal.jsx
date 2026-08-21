@@ -38,21 +38,22 @@ export default function ProjectModal({ project, onClose }) {
           transition={{ type: "spring", stiffness: 300, damping: 25 }}
         >
           {/* Header */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '1.2rem', marginBottom: '1.5rem' }}>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div className="modal-header-row" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', borderBottom: '1px solid rgba(255, 255, 255, 0.08)', paddingBottom: '1.2rem', marginBottom: '1.5rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flex: 1, minWidth: 0 }}>
               <div style={{
                 background: 'rgba(0, 255, 204, 0.1)',
                 border: '1px solid rgba(0, 255, 204, 0.3)',
-                padding: '14px',
+                padding: '12px',
                 borderRadius: '16px',
                 color: 'var(--accent-color)',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                flexShrink: 0
               }}>
-                {project.icon || <Cpu size={32} />}
+                {project.icon || <Cpu size={28} />}
               </div>
-              <div>
+              <div style={{ minWidth: 0, flex: 1 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '4px' }}>
                   <span className="section-tag" style={{ margin: 0, padding: '2px 10px', fontSize: '0.72rem' }}>
                     {project.category}
@@ -64,10 +65,10 @@ export default function ProjectModal({ project, onClose }) {
                     </span>
                   )}
                 </div>
-                <h2 style={{ fontSize: 'clamp(1.4rem, 3.5vw, 1.85rem)', color: '#fff', fontWeight: 800 }}>
+                <h2 style={{ fontSize: 'clamp(1.25rem, 3.5vw, 1.85rem)', color: 'var(--text-primary)', fontWeight: 800, wordBreak: 'break-word' }}>
                   {project.title}
                 </h2>
-                <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', marginTop: '2px' }}>
+                <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', marginTop: '2px', wordBreak: 'break-word' }}>
                   {project.subtitle}
                 </p>
               </div>
@@ -76,12 +77,12 @@ export default function ProjectModal({ project, onClose }) {
             <button
               onClick={onClose}
               style={{
-                background: 'rgba(255, 255, 255, 0.06)',
-                border: '1px solid rgba(255, 255, 255, 0.12)',
-                color: '#fff',
+                background: 'var(--btn-sec-bg)',
+                border: '1px solid var(--btn-sec-border)',
+                color: 'var(--text-primary)',
                 borderRadius: '50%',
-                width: '38px',
-                height: '38px',
+                width: '36px',
+                height: '36px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -94,8 +95,8 @@ export default function ProjectModal({ project, onClose }) {
                 e.currentTarget.style.borderColor = 'rgba(244, 63, 94, 0.6)';
               }}
               onMouseLeave={(e) => {
-                e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)';
-                e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.12)';
+                e.currentTarget.style.background = 'var(--btn-sec-bg)';
+                e.currentTarget.style.borderColor = 'var(--btn-sec-border)';
               }}
             >
               <X size={18} />
@@ -104,7 +105,7 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Key Metrics Strip */}
           {project.metrics && project.metrics.length > 0 && (
-            <div style={{
+            <div className="modal-metrics-grid" style={{
               display: 'grid',
               gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
               gap: '12px',
