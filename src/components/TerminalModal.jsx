@@ -153,21 +153,41 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
 
       case 'ghl':
         newHistory.push({
-          text: '⚡ GHL ENTERPRISE RAG PLATFORM:\n• 5,717 vector chunks indexed in ChromaDB (nomic-embed-text-v1.5)\n• FastEmbed ONNX sub-150ms vectorization latency\n• Gemini 3.7 Flash multimodal vision (clipboard paste OCR) & voice notes\n• Official REST API v2 & OAuth 2.0 specs\n• 1:1 ChatGPT Dark cockpit with SSE token typewriter streaming',
+          text: `⚡ GOHIGHLEVEL (GHL) ENTERPRISE RAG PLATFORM
+Architecture: Enterprise ChatGPT-Grade AI Cockpit for GHL Developers & SaaS Architects
+• Vector Database: 5,717 semantic chunks indexing REST API v2 & OAuth 2.0 specs in ChromaDB
+• Embedding Pipeline: FastEmbed ONNX (nomic-embed-text-v1.5) with sub-150ms embedding latency
+• Retrieval Strategy: Reciprocal Rank Fusion (RRF) combining dense vectors with exact token match
+• Multimodal Ingestion: Clipboard OCR screenshot inspection, voice note waveform audio transcription
+• Real-Time Output: Gemini 3.7 Flash with Server-Sent Events (SSE) token typewriter streaming
+• Impact: Zero-hallucination workflow code generation, OAuth token exchange, and custom webhook solutions`,
           type: 'output'
         });
         break;
 
       case 'sales':
         newHistory.push({
-          text: '🎙️ SALES VOICE CO-PILOT:\n• Captures live audio from Zoom / Google Meet tabs via WebRTC\n• Local Whisper STT + Ollama intent classification (<50ms)\n• Detects client skepticism, objections & subconscious hesitation\n• Secret whisper TTS cues fed directly into rep\'s earphone\n• Floating transparent Zoom HUD overlay for stealth execution',
+          text: `🎙️ SALES VOICE CO-PILOT & REAL-TIME RAG
+Architecture: Sub-50ms Voice AI Sales Intelligence & Psychological Intent Classifier
+• Live Audio Ingestion: Browser tab and mic audio capture over WebRTC & WebSockets
+• Local Speech-to-Text: On-device OpenAI Whisper STT with Voice Activity Detection (VAD)
+• Intent Classification: Local Ollama LLM classifies hesitation (Budget, Authority, Skepticism)
+• Battlecard Retrieval: ChromaDB vector query latency under 50ms with proven closing pitches
+• Stealth Interface: Ultra-compact floating transparent Zoom HUD and secret whisper TTS earpiece cues
+• Impact: Closes live objections without awkward pauses or screen-share visibility`,
           type: 'output'
         });
         break;
 
       case 'translator':
         newHistory.push({
-          text: '🎬 OFFLINE AI VIDEO TRANSLATOR:\n• 100% On-Device Android app running on Jetpack Compose Material 3\n• Quantized INT8 OpenAI Whisper speech-to-text with VAD\n• MarianMT seq2seq neural translation (Urdu, Spanish, etc.)\n• Media3 ExoPlayer with binary search subtitle synchronization\n• Zero cloud costs & 0 KB data leakage with Room SQLite cache',
+          text: `🎬 OFFLINE AI VIDEO & SUBTITLE TRANSLATOR (ANDROID)
+Architecture: 100% On-Device Neural Video Subtitling & Translation Native Android App
+• On-Device STT: Quantized INT8 OpenAI Whisper speech recognition running on ONNX Runtime
+• Machine Translation: Autoregressive MarianMT / OPUS-MT seq2seq models (English to Urdu, Spanish, etc.)
+• Media Player Engine: Google Media3 ExoPlayer with binary search timestamp subtitle synchronization
+• Local Persistence: Room SQLite caching ensuring media files are transcribed exactly once
+• Privacy & Cost: 0 KB cloud data transfer, zero internet dependency, and zero recurring API costs`,
           type: 'output'
         });
         break;
@@ -175,7 +195,13 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'school':
       case 'apex':
         newHistory.push({
-          text: '🎓 APEX DIGITAL SCHOOL OPERATING SYSTEM:\n• 5 Role-based portals (Student, Teacher, Parent, Admin, Finance) with RBAC\n• Interactive Socratic AI diagnostic tutor & automated quiz engine\n• Virtual broadcast studio with real-time collaborative whiteboard\n• Cryptographic PDF marksheet & transcript generation\n• 360 Parent fee ledger & GPS bus route tracking',
+          text: `🎓 APEX DIGITAL SCHOOL OPERATING SYSTEM
+Architecture: Unified 5-Portal School Management ERP & Socratic AI Learning Engine
+• Role-Based Access: Dedicated portals for Student, Teacher, Parent, Admin, and Finance with RBAC
+• AI Socratic Tutor: Step-by-step diagnostic tutor with XP streaks, answer review, and automated quiz generation
+• Live Virtual Studio: WebRTC virtual classroom with real-time collaborative whiteboard and class messaging
+• Document Generation: Cryptographic PDF marksheet and student transcript generator with automated GPA calculation
+• Administrative Suite: 360 Parent fee ledger tracking, automated receipts, and bus GPS route status`,
           type: 'output'
         });
         break;
@@ -183,7 +209,13 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'hospital':
       case 'erp':
         newHistory.push({
-          text: '🏥 CLINICAL CARE & HOSPITAL MANAGEMENT ERP:\n• Centralized Patient EHR ledger for sanitized medical histories & labs\n• OPD/IPD ward management, bed allocation, and nurse handover logs\n• Pharmacy POS inventory tracking with batch expiration warnings\n• Cross-platform compilation for Android tablets and Windows desktop via Capacitor\n• Strict role-based clinical security protocols',
+          text: `🏥 CLINICAL CARE & HOSPITAL MANAGEMENT ERP
+Architecture: Enterprise Hospital Administration, Patient EHR & Pharmacy Billing Suite
+• Centralized EHR: Sanitized electronic health records tracking patient histories, vitals, and lab reports
+• Clinical Inpatient/Outpatient: Real-time OPD/IPD ward allocation, bed occupancy logs, and nurse handovers
+• Pharmacy POS: Inventory tracking with batch expiration warnings, low-stock triggers, and supplier reordering
+• Cross-Platform: Built with React & FastAPI, compiled natively for Android tablets and Windows desktop via Capacitor
+• Clinical Security: Strict compliance-ready access controls separating doctors, nurses, and billing staff`,
           type: 'output'
         });
         break;
@@ -191,7 +223,13 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'medprep':
       case 'fcps':
         newHistory.push({
-          text: '🩺 MEDPREP PRO & FCPS EXAMINATION ENGINE:\n• 10,000+ high-yield clinical MCQs covering Anatomy, Physiology, Pathology, Surgery\n• In-depth pathophysiological explanations & medical references for all options\n• Timed examination simulator with official negative marking rules\n• Spaced-repetition learning matrix tracking mistake patterns\n• Standalone Windows .exe installer & Android APK',
+          text: `🩺 MEDPREP PRO & FCPS MEDICAL LICENSURE ENGINE
+Architecture: AI Medical Licensure Exam Platform with 10,000+ High-Yield Clinical MCQs
+• Question Bank: Clinical questions across Anatomy, Physiology, Pathology, Pharmacology, Surgery, Medicine
+• Clinical Reasoning: In-depth pathophysiological explanations and textbook references for every option
+• Exam Simulator: Configurable timed examination modes featuring official negative marking rules
+• Spaced Repetition: Intelligent algorithms tracking user mistake patterns to resurface weak clinical topics
+• Distribution: Standalone Windows executable installer (.exe) via PyInstaller and native Android APK`,
           type: 'output'
         });
         break;
@@ -199,7 +237,12 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'medconnect':
       case 'telehealth':
         newHistory.push({
-          text: '🌐 MED CONNECT TELEMEDICINE NETWORK:\n• Specialist discovery directory with verified doctor credentials\n• Real-time calendar appointment scheduling & slot reservation\n• Automated digital prescription issuance & medicine schedule sync\n• Encrypted patient diagnostic health vault with permissioned doctor access',
+          text: `🌐 MED CONNECT TELEMEDICINE NETWORK
+Architecture: Decentralized Telehealth & Doctor-Patient Consultation Network
+• Specialist Directory: Search and filter verified medical specialists by specialty, fees, and ratings
+• Live Scheduling: Real-time appointment booking with instant calendar slot reservation
+• Digital Prescriptions: Automated electronic prescription issuance with dosage schedules and pharmacy sync
+• Encrypted Health Vault: Secure cloud repository for diagnostic reports with permissioned physician access`,
           type: 'output'
         });
         break;
@@ -208,7 +251,12 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'chashm-ai':
       case 'glasses':
         newHistory.push({
-          text: '👁️ CHASHM AI ASSISTIVE SMART HEADSET:\n• Wireless ESP32-CAM module streaming ultra-low latency MJPEG video\n• Custom INT8 quantized YOLO model (.tflite) with sub-30ms detection\n• Real-time spatial depth estimation for obstacle trajectory tracking\n• 3D directional Text-to-Speech audio navigation guidance\n• Live browser telemetry dashboard for caretakers',
+          text: `👁️ CHASHM AI ASSISTIVE SMART HEADSET
+Architecture: Edge Computer Vision & Spatial Audio Navigation for the Visually Impaired
+• Edge Video Stream: Wireless ESP32-CAM module streaming ultra-low latency MJPEG video over WebSockets
+• Quantized Neural Model: Custom INT8 quantized YOLO (.tflite) performing sub-30ms obstacle detection
+• 3D Audio Navigation: Directional Text-to-Speech (TTS) alerts (e.g. 'Obstacle ahead, 1.5m right')
+• Caretaker Console: Real-time browser telemetry dashboard with bounding box visualizer and proximity logs`,
           type: 'output'
         });
         break;
@@ -216,7 +264,12 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'shina':
       case 'nlp':
         newHistory.push({
-          text: '📜 SHINA NLP LINGUISTIC DEEP LEARNING ENGINE:\n• First standardized digital linguistic corpus for endangered Shina language\n• Custom N-gram tokenizers & phonetic word embeddings\n• Hybrid Bidirectional LSTM + 1D-CNN contextual neural architecture\n• 94%+ F1 classification benchmark score across regional dialects',
+          text: `📜 SHINA NLP LINGUISTIC DEEP LEARNING ENGINE
+Architecture: Deep Learning Architecture for Regional Endangered Shina Language Preservation
+• Linguistic Corpus: First standardized computational text corpus for Shina with morphological normalization
+• Custom Embeddings: Domain-specific dense vector matrices capturing regional phonetic variations
+• Neural Architecture: Hybrid Bidirectional LSTM and 1D-CNN contextual representation network
+• Benchmark Accuracy: Achieved 94%+ F1 classification benchmark score across regional dialects and sentiment`,
           type: 'output'
         });
         break;
@@ -224,28 +277,47 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       case 'toxicity':
       case 'sentinel':
         newHistory.push({
-          text: '🛡️ TOXICITY SENTINEL & MODERATION ENGINE:\n• 10,000 req/sec async inference throughput on FastAPI microservice\n• Advanced NLP cleaning with regex slang expansion & lemmatization\n• N-gram TF-IDF vectorization & multi-label classifier\n• 98.2% detection precision across toxic content, threats & hate speech',
+          text: `🛡️ TOXICITY SENTINEL & NLP MODERATION ENGINE
+Architecture: High-Throughput Content Safety & Hate Speech Detection Microservice
+• High Capacity: Async FastAPI gateway handling 10,000 requests/second with sub-5ms latency
+• Text Normalization: Regex slang expansion, lemmatization, and customized stop-word tuning
+• Multi-Label Classifier: N-gram TF-IDF vectorization with ensemble classifiers (Insult, Threat, Toxic)
+• Precision Metric: 98.2% detection precision with an ultra-low false-positive rate on noisy social streams`,
           type: 'output'
         });
         break;
 
       case 'stats':
         newHistory.push({
-          text: '📊 VERIFIED PRODUCTION METRICS:\n• 5,717+ ChromaDB Vector Chunks Shipped\n• <50ms Real-Time RAG Battlecard Latency\n• 100% On-Device Neural Model Execution\n• 250% Search Revenue Surge Driven\n• 10+ Production AI & Full-Stack Systems Built',
+          text: `📊 VERIFIED PRODUCTION METRICS & BENCHMARKS:
+• 5,717+ ChromaDB Vector Chunks Shipped in Production
+• <50ms Real-Time RAG Battlecard Retrieval Latency
+• 100% On-Device Neural Model Execution (Whisper INT8 + MarianMT)
+• 250% Search Revenue Surge Driven at Bit Build
+• 10+ Production AI, Embedded Vision & Full-Stack Systems Deployed
+• 94%+ F1 Benchmark Accuracy on Regional NLP Models`,
           type: 'output'
         });
         break;
 
       case 'skills':
         newHistory.push({
-          text: '⚡ TECH MATRIX & ARSENAL:\n• AI/LLMs: Gemini 3.7 Flash, ChromaDB, FastEmbed ONNX, LangChain, Ollama\n• Deep Learning: PyTorch, TensorFlow, Whisper INT8, MarianMT, YOLOv8, OpenCV\n• Full-Stack: FastAPI (Async), React 19/18, WebSockets, WebRTC, Jetpack Compose, SQLite WAL, Docker',
+          text: `⚡ TECHNICAL MASTERY & TOOL ARSENAL:
+• Generative AI & RAG: Gemini 3.7 Flash, ChromaDB, FastEmbed ONNX, LangChain, LlamaIndex, Ollama
+• Deep Learning & Edge AI: PyTorch, TensorFlow, Whisper INT8, MarianMT, YOLOv8 .tflite, OpenCV, ONNX Runtime
+• Full-Stack & Systems: FastAPI (Async), React 19/18, WebSockets, WebRTC, SSE, Jetpack Compose, SQLite WAL, Docker
+• Databases & Storage: PostgreSQL, SQLite WAL, Redis Caching, Room SQLite`,
           type: 'output'
         });
         break;
 
       case 'whoami':
         newHistory.push({
-          text: 'Muhammad Okasha | AI Solutions Architect & Machine Learning Engineer based in Islamabad, Pakistan. B.E. Computer Systems Engineering from UET Peshawar. Specializing in enterprise GenAI, on-device edge neural models, and scalable architectures.',
+          text: `Muhammad Okasha | AI Solutions Architect & Machine Learning Engineer
+• Base: Islamabad, Pakistan (PKT UTC+5)
+• Education: B.E. Computer Systems Engineering, UET Peshawar (2022 – Present)
+• Specialization: Enterprise Multimodal RAG, On-Device Edge AI, High-Throughput Distributed Microservices
+• Track Record: 10+ Production systems shipped, 250% search revenue surge delivered`,
           type: 'output'
         });
         break;
