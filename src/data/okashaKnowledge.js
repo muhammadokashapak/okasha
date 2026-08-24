@@ -2,7 +2,7 @@
  * ============================================================================
  * OKASHA NEURAL KNOWLEDGE BASE & CONVERSATIONAL INTELLIGENCE ROUTER
  * ============================================================================
- * Comprehensive document, indexed semantic chunks, and intent-driven conversational engine.
+ * Comprehensive document, indexed semantic chunks, and clean natural text engine (No asterisks).
  */
 
 export const OKASHA_PROFILE_DOCUMENT = `
@@ -14,39 +14,39 @@ Muhammad Okasha is an AI Solutions Architect, Machine Learning Engineer, and Ful
 Muhammad operates at the intersection of deep neural algorithms, on-device edge AI, and high-concurrency distributed software systems. His core philosophy is to build production-grade, zero-compromise systems that translate complex mathematical models into intuitive, real-time products.
 
 ## 2. Core Production Systems & Architectures
-1. **GoHighLevel (GHL) Enterprise RAG & Multimodal AI Platform**:
+1. GoHighLevel (GHL) Enterprise RAG & Multimodal AI Platform:
    Enterprise ChatGPT-Grade AI Cockpit built with Gemini 3.7 Flash, FastAPI, and ChromaDB vector store indexing 5,717 chunks of official GoHighLevel REST API v2, OAuth 2.0, and documentation. Runs FastEmbed ONNX (nomic-embed-text-v1.5) with sub-150ms retrieval latency, Reciprocal Rank Fusion (RRF), clipboard OCR screenshot inspection, voice notes, and real-time Server-Sent Events (SSE) token typewriter streaming.
 
-2. **Sales Voice Co-Pilot & Real-Time RAG**:
+2. Sales Voice Co-Pilot & Real-Time RAG:
    Sub-50ms local sales intelligence system capturing live browser audio from Google Meet and Zoom tabs via WebRTC and WebSockets. Transcribes audio in real time with local OpenAI Whisper STT, uses local Ollama LLMs for psychological client objection classification, and retrieves battlecards in <50ms with whisper audio cues and a floating transparent Zoom HUD.
 
-3. **Offline AI Video & Subtitle Translator (Android)**:
+3. Offline AI Video & Subtitle Translator (Android):
    100% On-Device native Android application built with Jetpack Compose Material 3 and Media3 ExoPlayer. Bundles quantized INT8 OpenAI Whisper with Voice Activity Detection (VAD) and MarianMT / OPUS-MT seq2seq neural translation models running on ONNX Runtime with Room SQLite caching. 0 KB cloud data used.
 
-4. **Apex Digital School Operating System**:
+4. Apex Digital School Operating System:
    Next-gen multi-role education ERP unifying 5 user portals (Student, Teacher, Parent, Admin, Finance) with Role-Based Access Control (RBAC), Socratic AI diagnostic tutors, automated quiz generators, live virtual broadcast studios with collaborative whiteboards, dynamic attendance analytics, and cryptographic PDF marksheet/transcript generation.
 
-5. **Clinical Care & Hospital Management ERP**:
+5. Clinical Care & Hospital Management ERP:
    Cross-platform clinical operating system and patient Electronic Health Records (EHR) ledger. Supports doctor scheduling, OPD/IPD ward management, bed occupancy logs, pharmacy point-of-sale inventory tracking with batch expiration warnings, compiled natively for Android and Desktop via Capacitor.
 
-6. **MedPrep Pro & FCPS Medical Licensure Exam Engine**:
+6. MedPrep Pro & FCPS Medical Licensure Exam Engine:
    AI-powered medical licensure engine featuring 10,000+ high-yield MBBS and FCPS clinical MCQs with comprehensive anatomical, pharmacological, and clinical rationales. Includes timed exam simulators with negative marking, custom revision filters, and native Windows EXE & Android APK distributions.
 
-7. **Med Connect Telemedicine Network**:
+7. Med Connect Telemedicine Network:
    Decentralized telehealth ecosystem connecting patients with verified medical specialists. Features appointment booking, digital prescription issuance, automated medicine reminders, and an encrypted health records vault.
 
-8. **CHASHM AI Assistive Smart Headset**:
+8. CHASHM AI Assistive Smart Headset:
    Hybrid edge-computing vision headset for the visually impaired. Integrates an ESP32-CAM module streaming ultra-low latency MJPEG video over WebSockets to a custom INT8 quantized YOLO model, performing sub-30ms obstacle detection and generating 3D spatial directional Text-to-Speech audio navigation feedback.
 
-9. **Shina NLP Linguistic Deep Learning Engine**:
+9. Shina NLP Linguistic Deep Learning Engine:
    Pioneering linguistic preservation and deep learning classification system for the regional endangered Shina language. Built using custom N-gram tokenizers, word embeddings, and hybrid Bidirectional LSTM + 1D-CNN architectures, achieving 94%+ F1 benchmark classification accuracy.
 
-10. **Toxicity Sentinel & NLP Moderation Engine**:
+10. Toxicity Sentinel & NLP Moderation Engine:
     High-throughput content safety engine processing live social streams. Utilizes TF-IDF vectorization, lemmatization, and multi-label classifiers to detect insults, threats, and hate speech with 98.2% accuracy at 10,000 req/sec inference capacity.
 
 ## 3. Experience & Leadership
-- **BIT BUILD (Oct 2025 – Feb 2026)**: Artificial Intelligence Intern — Acted as strategic partner to senior leadership, engineered automated reporting pipelines visualizing 20+ global campaigns, delivered actionable C-suite insights, and fueled a 250% surge in search revenue.
-- **NAVTTC (Mar 2025 – Jun 2025)**: Deep Learning BootCamp — Hands-on architecture and deployment of end-to-end CNN/LSTM deep learning pipelines, data preprocessing, and model quantization.
+- BIT BUILD (Oct 2025 – Feb 2026): Artificial Intelligence Intern — Acted as strategic partner to senior leadership, engineered automated reporting pipelines visualizing 20+ global campaigns, delivered actionable C-suite insights, and fueled a 250% surge in search revenue.
+- NAVTTC (Mar 2025 – Jun 2025): Deep Learning BootCamp — Hands-on architecture and deployment of end-to-end CNN/LSTM deep learning pipelines, data preprocessing, and model quantization.
 
 ## 4. Contact & Availability
 - Email: muhammad.okasha2146@gmail.com
@@ -62,13 +62,13 @@ export const OKASHA_KNOWLEDGE_CHUNKS = [
     title: "Muhammad Okasha — Background & Architectural Philosophy",
     keywords: ["who", "okasha", "muhammad", "about", "bio", "background", "engineer", "philosophy", "location", "islamabad", "uet", "peshawar", "kon", "kya", "profile"],
     summary: "AI Solutions Architect & Machine Learning Engineer based in Islamabad, Pakistan.",
-    content: `**Muhammad Okasha** is an **AI Solutions Architect & Machine Learning Engineer** based in Islamabad, Pakistan. 
+    content: `Muhammad Okasha is an AI Solutions Architect & Machine Learning Engineer based in Islamabad, Pakistan.
 
-He holds a **B.E. in Computer Systems Engineering from UET Peshawar** and has engineered **10+ production-grade systems** spanning:
-• **Enterprise Multimodal RAG Platforms** with 5,700+ indexed vector chunks
-• **100% On-Device Edge AI** (Whisper INT8, MarianMT seq2seq on Android)
-• **Real-Time Voice AI Sales Intelligence** (<50ms battlecard retrieval)
-• **Clinical Care ERPs, Digital School OS & Telemedicine Networks**
+He holds a B.E. in Computer Systems Engineering from UET Peshawar and has engineered 10+ production-grade systems spanning:
+• Enterprise Multimodal RAG Platforms with 5,700+ indexed vector chunks
+• 100% On-Device Edge AI (Whisper INT8, MarianMT seq2seq on Android)
+• Real-Time Voice AI Sales Intelligence (<50ms battlecard retrieval)
+• Clinical Care ERPs, Digital School OS & Telemedicine Networks
 
 Muhammad operates at the intersection of deep neural algorithms and scalable full-stack software architecture.`,
     actionChips: [
@@ -83,12 +83,12 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "⚡ GoHighLevel (GHL) Enterprise RAG & Multimodal AI Platform",
     keywords: ["ghl", "gohighlevel", "rag", "vector", "chromadb", "gemini", "multimodal", "fastembed", "onnx", "chunks", "5717", "tokens", "oauth", "api"],
     summary: "Enterprise ChatGPT-Grade GHL RAG Platform with Gemini 3.7 & ChromaDB (5,717 chunks).",
-    content: `**GoHighLevel (GHL) Enterprise RAG & Multimodal AI Platform**:
-• **Vector Store**: **5,717 chunks** of official GHL REST API v2 & OAuth 2.0 specs indexed in ChromaDB.
-• **Embedding Engine**: **FastEmbed ONNX** (\`nomic-embed-text-v1.5\`) with sub-150ms vectorization latency.
-• **LLM Core**: **Gemini 3.7 Flash** with multimodal vision (clipboard paste screenshots OCR) and voice notes.
-• **Interface**: 1:1 ChatGPT Dark cockpit with Server-Sent Events (SSE) token typewriter streaming.
-• **High Accuracy**: Delivers custom frontend deliverables, workflow workarounds, and API integrations with zero hallucination fallback.`,
+    content: `GoHighLevel (GHL) Enterprise RAG & Multimodal AI Platform:
+• Vector Store: 5,717 chunks of official GHL REST API v2 & OAuth 2.0 specs indexed in ChromaDB.
+• Embedding Engine: FastEmbed ONNX (nomic-embed-text-v1.5) with sub-150ms vectorization latency.
+• LLM Core: Gemini 3.7 Flash with multimodal vision (clipboard paste screenshots OCR) and voice notes.
+• Interface: 1:1 ChatGPT Dark cockpit with Server-Sent Events (SSE) token typewriter streaming.
+• High Accuracy: Delivers custom frontend deliverables, workflow workarounds, and API integrations with zero hallucination fallback.`,
     actionChips: [
       { label: "🔬 Deep-Dive GHL RAG", href: "#projects" },
       { label: "GitHub Profile", href: "https://github.com/muhammadokashapak", external: true }
@@ -100,12 +100,12 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🎙️ Sales Voice Co-Pilot & Real-Time RAG",
     keywords: ["sales", "copilot", "voice", "meeting", "zoom", "meet", "webrtc", "whisper", "ollama", "latency", "50ms", "battlecard", "hud", "objection"],
     summary: "Sub-50ms Real-Time Voice Sales Intelligence & Intent Decider.",
-    content: `**Sales Voice Co-Pilot & Real-Time RAG**:
-• **Live Audio Capture**: Streams audio from Google Meet and Zoom tabs via WebRTC & WebSockets.
-• **Speech-to-Text**: Local **OpenAI Whisper STT** with noise suppression and zero cloud latency.
-• **Psychological Intent Decider**: Local **Ollama LLM** classifies objections (Budget, Skepticism, Authority).
-• **Sub-50ms Retrieval**: Fetches enterprise sales battlecards in **<50ms** from ChromaDB vector store.
-• **Floating HUD**: Ultra-compact transparent overlay for screen shares with secret whisper TTS earphone cues.`,
+    content: `Sales Voice Co-Pilot & Real-Time RAG:
+• Live Audio Capture: Streams audio from Google Meet and Zoom tabs via WebRTC & WebSockets.
+• Speech-to-Text: Local OpenAI Whisper STT with noise suppression and zero cloud latency.
+• Psychological Intent Decider: Local Ollama LLM classifies objections (Budget, Skepticism, Authority).
+• Sub-50ms Retrieval: Fetches enterprise sales battlecards in <50ms from ChromaDB vector store.
+• Floating HUD: Ultra-compact transparent overlay for screen shares with secret whisper TTS earphone cues.`,
     actionChips: [
       { label: "🔬 Deep-Dive Sales Co-Pilot", href: "#projects" }
     ]
@@ -116,11 +116,11 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🎬 Offline AI Video & Audio Subtitle Translator (Android)",
     keywords: ["translator", "translate", "video", "subtitle", "offline", "android", "kotlin", "compose", "whisper", "int8", "marianmt", "seq2seq", "exoplayer", "on-device"],
     summary: "100% On-Device Neural Video Subtitling & Translation Android Application.",
-    content: `**Offline AI Video & Subtitle Translator**:
-• **100% On-Device AI**: Zero internet, zero cloud APIs, and zero subscription costs.
-• **Speech Recognition**: Quantized **INT8 OpenAI Whisper** running on ONNX Runtime with Voice Activity Detection (VAD).
-• **Neural Translation**: Autoregressive **MarianMT / OPUS-MT seq2seq** models translating English to Urdu, Spanish, etc.
-• **Modern Player**: Built on **Android Media3 / ExoPlayer** with Jetpack Compose Material 3 and Room SQLite caching.`,
+    content: `Offline AI Video & Subtitle Translator:
+• 100% On-Device AI: Zero internet, zero cloud APIs, and zero subscription costs.
+• Speech Recognition: Quantized INT8 OpenAI Whisper running on ONNX Runtime with Voice Activity Detection (VAD).
+• Neural Translation: Autoregressive MarianMT / OPUS-MT seq2seq models translating English to Urdu, Spanish, etc.
+• Modern Player: Built on Android Media3 / ExoPlayer with Jetpack Compose Material 3 and Room SQLite caching.`,
     actionChips: [
       { label: "🔬 Deep-Dive Offline Translator", href: "#projects" }
     ]
@@ -131,11 +131,11 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🎓 Apex Digital School Operating System",
     keywords: ["school", "apex", "education", "lms", "erp", "socratic", "quiz", "whiteboard", "transcript", "pdf", "portal", "student", "teacher"],
     summary: "5-Portal AI-Powered School Management ERP & Socratic Learning Engine.",
-    content: `**Apex Digital School Operating System**:
-• **5 Unified Portals**: Student, Teacher, Parent, Admin, and AI Education Engine with strict RBAC.
-• **AI Socratic Tutor**: Interactive diagnostic tutors and automated quiz generators.
-• **Live Classroom Studio**: Virtual broadcasts with real-time collaborative whiteboard and class chat.
-• **Official Marksheets**: Instant cryptographic PDF transcript and marksheet generation.`,
+    content: `Apex Digital School Operating System:
+• 5 Unified Portals: Student, Teacher, Parent, Admin, and AI Education Engine with strict RBAC.
+• AI Socratic Tutor: Interactive diagnostic tutors and automated quiz generators.
+• Live Classroom Studio: Virtual broadcasts with real-time collaborative whiteboard and class chat.
+• Official Marksheets: Instant cryptographic PDF transcript and marksheet generation.`,
     actionChips: [
       { label: "🔬 Deep-Dive Digital School", href: "#projects" }
     ]
@@ -146,11 +146,11 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🏥 Clinical Care & Hospital Management ERP",
     keywords: ["hospital", "clinical", "ehr", "medical", "patient", "doctor", "opd", "ipd", "pharmacy", "capacitor", "billing"],
     summary: "Enterprise Hospital Administration, Electronic Health Records & Clinical Care System.",
-    content: `**Clinical Care & Hospital Management ERP**:
-• **Centralized EHR Ledger**: Sanitized patient medical history, prescriptions, and lab findings.
-• **Inpatient & Outpatient**: Real-time OPD/IPD bed allocation, nurse handover logs, and scheduling.
-• **Pharmacy POS**: Inventory tracking with batch expiration warnings and automated audits.
-• **Multi-Platform**: Native compilation for Android tablets and Windows desktop via Capacitor.`,
+    content: `Clinical Care & Hospital Management ERP:
+• Centralized EHR Ledger: Sanitized patient medical history, prescriptions, and lab findings.
+• Inpatient & Outpatient: Real-time OPD/IPD bed allocation, nurse handover logs, and scheduling.
+• Pharmacy POS: Inventory tracking with batch expiration warnings and automated audits.
+• Multi-Platform: Native compilation for Android tablets and Windows desktop via Capacitor.`,
     actionChips: [
       { label: "🔬 Deep-Dive Hospital ERP", href: "#projects" }
     ]
@@ -161,11 +161,11 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🩺 MedPrep Pro & FCPS Medical Licensure Engine",
     keywords: ["medprep", "fcps", "mbbs", "mcq", "medical", "exam", "licensure", "rationale", "anatomy", "physiology", "pathology"],
     summary: "AI-Powered Medical Licensure Exam Platform with 10k+ Clinical MCQs.",
-    content: `**MedPrep Pro & FCPS Medical Exam Engine**:
-• **10,000+ Question Bank**: High-yield clinical MCQs covering Anatomy, Physiology, Pathology, Surgery, Medicine.
-• **Clinical Reasoning**: In-depth pathophysiological explanations and medical reference citations for every option.
-• **Timed Simulator**: Real-time examination mode with negative marking and percentile projection.
-• **Native Packages**: Standalone Windows .exe installer and Android APK.`,
+    content: `MedPrep Pro & FCPS Medical Exam Engine:
+• 10,000+ Question Bank: High-yield clinical MCQs covering Anatomy, Physiology, Pathology, Surgery, Medicine.
+• Clinical Reasoning: In-depth pathophysiological explanations and medical reference citations for every option.
+• Timed Simulator: Real-time examination mode with negative marking and percentile projection.
+• Native Packages: Standalone Windows .exe installer and Android APK.`,
     actionChips: [
       { label: "🔬 Deep-Dive MedPrep Pro", href: "#projects" }
     ]
@@ -176,10 +176,10 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🌐 Med Connect Telemedicine Network",
     keywords: ["medconnect", "telemedicine", "telehealth", "consultation", "prescription", "doctor", "booking", "vault"],
     summary: "Decentralized Telehealth & Doctor-Patient Consultation Network.",
-    content: `**Med Connect Telemedicine Network**:
-• **Doctor Discovery**: Specialist directory with verified credentials and availability calendar.
-• **Digital Prescriptions**: Automated digital prescription dispatch and medicine schedule synchronization.
-• **Encrypted Health Vault**: Secure patient diagnostic repository with permissioned physician access.`,
+    content: `Med Connect Telemedicine Network:
+• Doctor Discovery: Specialist directory with verified credentials and availability calendar.
+• Digital Prescriptions: Automated digital prescription dispatch and medicine schedule synchronization.
+• Encrypted Health Vault: Secure patient diagnostic repository with permissioned physician access.`,
     actionChips: [
       { label: "🔬 Deep-Dive Med Connect", href: "#projects" }
     ]
@@ -190,10 +190,10 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "👁️ CHASHM AI Assistive Smart Headset",
     keywords: ["chashm", "headset", "visually", "impaired", "blind", "esp32", "yolo", "tflite", "opencv", "spatial", "tts", "hardware", "camera"],
     summary: "Hybrid Edge-Computing Vision Headset for Visually Impaired with Spatial 3D Audio.",
-    content: `**CHASHM AI Assistive Smart Headset**:
-• **Edge Hardware**: Wireless ESP32-CAM module transmitting ultra-low latency MJPEG video over WebSockets.
-• **Neural Inference**: Custom **INT8 quantized YOLO** model running sub-30ms obstacle detection.
-• **Spatial Guidance**: Generates 3D directional Text-to-Speech audio navigation alerts for users.`,
+    content: `CHASHM AI Assistive Smart Headset:
+• Edge Hardware: Wireless ESP32-CAM module transmitting ultra-low latency MJPEG video over WebSockets.
+• Neural Inference: Custom INT8 quantized YOLO model running sub-30ms obstacle detection.
+• Spatial Guidance: Generates 3D directional Text-to-Speech audio navigation alerts for users.`,
     actionChips: [
       { label: "🔬 Deep-Dive CHASHM AI", href: "#projects" }
     ]
@@ -204,10 +204,10 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "📜 Shina NLP Linguistic Deep Learning Engine",
     keywords: ["shina", "nlp", "lstm", "cnn", "corpus", "linguistic", "language", "dialect", "embeddings", "preservation"],
     summary: "Hybrid LSTM/CNN Deep Learning Architecture for Regional Shina Language Preservation.",
-    content: `**Shina NLP Linguistic Deep Learning Engine**:
-• **Endangered Preservation**: Developed the first digital linguistic corpus and custom tokenizers for Shina language.
-• **Hybrid Architecture**: Combines Bidirectional LSTM and 1D-CNN layers for contextual representation.
-• **State-of-the-Art Results**: Achieved **94%+ F1 classification benchmark accuracy**.`,
+    content: `Shina NLP Linguistic Deep Learning Engine:
+• Endangered Preservation: Developed the first digital linguistic corpus and custom tokenizers for Shina language.
+• Hybrid Architecture: Combines Bidirectional LSTM and 1D-CNN layers for contextual representation.
+• State-of-the-Art Results: Achieved 94%+ F1 classification benchmark accuracy.`,
     actionChips: [
       { label: "🔬 Deep-Dive Shina NLP", href: "#projects" }
     ]
@@ -218,10 +218,10 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🛡️ Toxicity Sentinel & NLP Moderation Engine",
     keywords: ["toxicity", "sentinel", "moderation", "hate", "speech", "nlp", "tfidf", "lemmatization", "throughput", "10k"],
     summary: "High-Throughput Social Media Content Moderation & Hate Speech Detection.",
-    content: `**Toxicity Sentinel & NLP Moderation Engine**:
-• **High Throughput**: **10,000 requests/second** inference capacity for real-time social streams.
-• **NLP Preprocessing**: N-gram TF-IDF vectorization, lemmatization, and slang expansion.
-• **Accuracy**: **98.2% detection precision** across insults, threats, and toxic content.`,
+    content: `Toxicity Sentinel & NLP Moderation Engine:
+• High Throughput: 10,000 requests/second inference capacity for real-time social streams.
+• NLP Preprocessing: N-gram TF-IDF vectorization, lemmatization, and slang expansion.
+• Accuracy: 98.2% detection precision across insults, threats, and toxic content.`,
     actionChips: [
       { label: "🔬 Deep-Dive Toxicity Sentinel", href: "#projects" }
     ]
@@ -232,10 +232,10 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "🛠️ Technical Mastery & Core Arsenal",
     keywords: ["skills", "tech", "stack", "python", "pytorch", "tensorflow", "fastapi", "react", "chromadb", "ollama", "langchain", "android", "docker", "sql", "tools", "languages", "arsenal"],
     summary: "Comprehensive matrix of AI, Deep Learning, Vector DBs, and Full-Stack Technologies.",
-    content: `**Muhammad Okasha's Technical Arsenal**:
-• **Generative AI & LLMs**: Gemini 3.7 Flash, ChromaDB, FastEmbed ONNX, LangChain, LlamaIndex, Ollama, Semantic Hybrid Search, RRF Reranking.
-• **Deep Learning & Edge AI**: PyTorch, TensorFlow, OpenAI Whisper (INT8), MarianMT, YOLOv8 / .tflite, OpenCV, ONNX Runtime, ESP32 Embedded AI.
-• **Full-Stack & Systems**: FastAPI (Async), React 19/18, Vite, WebSockets, WebRTC, Server-Sent Events (SSE), Android Jetpack Compose, Capacitor, SQLite WAL, PostgreSQL.`,
+    content: `Muhammad Okasha's Technical Arsenal:
+• Generative AI & LLMs: Gemini 3.7 Flash, ChromaDB, FastEmbed ONNX, LangChain, LlamaIndex, Ollama, Semantic Hybrid Search, RRF Reranking.
+• Deep Learning & Edge AI: PyTorch, TensorFlow, OpenAI Whisper (INT8), MarianMT, YOLOv8 / .tflite, OpenCV, ONNX Runtime, ESP32 Embedded AI.
+• Full-Stack & Systems: FastAPI (Async), React 19/18, Vite, WebSockets, WebRTC, Server-Sent Events (SSE), Android Jetpack Compose, Capacitor, SQLite WAL, PostgreSQL.`,
     actionChips: [
       { label: "View Skills Matrix", href: "#skills" }
     ]
@@ -246,9 +246,9 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "💼 Professional Experience & Milestones",
     keywords: ["experience", "bit", "build", "intern", "navttc", "revenue", "250%", "campaigns", "work", "history", "job", "career"],
     summary: "Track record at BIT BUILD and NAVTTC Deep Learning BootCamp.",
-    content: `**Professional Milestones**:
-• **BIT BUILD (Oct 2025 – Feb 2026)**: Artificial Intelligence Intern — Partnered with senior leadership, deployed automated reporting pipelines for 20+ global campaigns, delivered C-suite insights that fueled a **250% search revenue surge**.
-• **NAVTTC (Mar 2025 – Jun 2025)**: Deep Learning BootCamp — Built and deployed CNN/LSTM neural models, optimized end-to-end pipelines, and mastered model quantization.`,
+    content: `Professional Milestones:
+• BIT BUILD (Oct 2025 – Feb 2026): Artificial Intelligence Intern — Partnered with senior leadership, deployed automated reporting pipelines for 20+ global campaigns, delivered C-suite insights that fueled a 250% search revenue surge.
+• NAVTTC (Mar 2025 – Jun 2025): Deep Learning BootCamp — Built and deployed CNN/LSTM neural models, optimized end-to-end pipelines, and mastered model quantization.`,
     actionChips: [
       { label: "View Experience Section", href: "#experience" }
     ]
@@ -259,12 +259,12 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
     title: "📫 Contact Channels, Resume & Hiring",
     keywords: ["contact", "email", "phone", "whatsapp", "resume", "cv", "hire", "interview", "call", "reach", "gmail", "number", "kahan", "rabta"],
     summary: "Direct communication channels, resume PDF, and collaboration booking.",
-    content: `**Direct Contact & Availability**:
-• 📧 **Email**: [muhammad.okasha2146@gmail.com](mailto:muhammad.okasha2146@gmail.com)
-• 📞 **Phone / WhatsApp**: [+92 3495696659](tel:+923495696659)
-• 📍 **Location**: Islamabad, Pakistan (PKT UTC+5)
-• 📄 **Resume PDF**: Ready for instant download.
-• 💼 **Status**: Open for AI Solutions Architect & Senior Engineering roles globally.`,
+    content: `Direct Contact & Availability:
+• Email: muhammad.okasha2146@gmail.com
+• Phone / WhatsApp: +92 3495696659
+• Location: Islamabad, Pakistan (PKT UTC+5)
+• Resume PDF: Ready for instant download.
+• Status: Open for AI Solutions Architect & Senior Engineering roles globally.`,
     actionChips: [
       { label: "📄 Download Resume PDF", href: "/Muhammad_Okasha_Resume.pdf", download: true },
       { label: "📫 Go to Contact Form", href: "#contact" }
@@ -273,7 +273,7 @@ Muhammad operates at the intersection of deep neural algorithms and scalable ful
 ];
 
 /**
- * High-Precision Conversational & Semantic Query Router
+ * High-Precision Conversational & Semantic Query Router (Zero raw asterisks)
  */
 export function queryKnowledgeBase(userQuery) {
   if (!userQuery || !userQuery.trim()) {
@@ -300,9 +300,9 @@ export function queryKnowledgeBase(userQuery) {
       source: "Conversational Greeting Engine",
       answer: `Hello there! 👋 Great to meet you!
 
-I am **Okasha AI**, Muhammad's personal executive knowledge assistant. I'm connected to his complete portfolio of **10 production AI systems**, **on-device neural models**, and **experience**.
+I am Okasha AI, Muhammad's personal executive knowledge assistant. I'm connected to his complete portfolio of 10 production AI systems, on-device neural models, and experience.
 
-How can I assist you today? Here are a few things you can ask:`,
+How can I assist you today? Here are a few things you can explore:`,
       actionChips: [
         { label: "⚡ GoHighLevel RAG System", prompt: "Tell me about GHL RAG architecture" },
         { label: "🎙️ Sales Voice Co-Pilot", prompt: "How does Sales Voice Co-Pilot work?" },
@@ -317,7 +317,7 @@ How can I assist you today? Here are a few things you can ask:`,
     return {
       chunk: null,
       source: "Conversational Assistant",
-      answer: `I'm operating at peak neural performance with sub-second response times! 🚀 
+      answer: `I'm operating at peak neural performance with sub-second response times! 🚀
 
 Ready to walk you through Muhammad's AI architectures, deep learning models, or career milestones. What would you like to explore?`,
       actionChips: [
@@ -333,9 +333,9 @@ Ready to walk you through Muhammad's AI architectures, deep learning models, or 
     return {
       chunk: null,
       source: "Assistant Identity",
-      answer: `I am **Okasha AI**, an interactive portfolio assistant built by **Muhammad Okasha**. 
+      answer: `I am Okasha AI, an interactive portfolio assistant built by Muhammad Okasha.
 
-My purpose is to provide immediate, technical, and architectural insights into his **10 production systems**, **RAG pipelines (5,717 vector chunks)**, **on-device Whisper/MarianMT Android apps**, and **full-stack engineering stack**.`,
+My purpose is to provide immediate, technical, and architectural insights into his 10 production systems, RAG pipelines (5,717 vector chunks), on-device Whisper/MarianMT Android apps, and full-stack engineering stack.`,
       actionChips: [
         { label: "⚡ Explore Projects", href: "#projects" },
         { label: "📄 View Resume", href: "/Muhammad_Okasha_Resume.pdf", download: true }
@@ -348,7 +348,7 @@ My purpose is to provide immediate, technical, and architectural insights into h
     return {
       chunk: null,
       source: "Conversational Assistant",
-      answer: `You're very welcome! 😊 It's a real pleasure showcasing Muhammad's engineering systems. 
+      answer: `You're very welcome! 😊 It's a real pleasure showcasing Muhammad's engineering systems.
 
 Feel free to ask if you'd like deep-dive architectural specifications for any project, or connect with him directly for collaboration!`,
       actionChips: [
@@ -363,9 +363,9 @@ Feel free to ask if you'd like deep-dive architectural specifications for any pr
     return {
       chunk: null,
       source: "Conversational Assistant",
-      answer: `Goodbye! 👋 Thank you for checking out Muhammad Okasha's portfolio. 
+      answer: `Goodbye! 👋 Thank you for checking out Muhammad Okasha's portfolio.
 
-Have a wonderful day, and feel free to connect on [LinkedIn](https://linkedin.com/in/muhammad-okasha23) or drop an email anytime!`,
+Have a wonderful day, and feel free to connect on LinkedIn or drop an email anytime!`,
       actionChips: [
         { label: "LinkedIn Profile", href: "https://linkedin.com/in/muhammad-okasha23", external: true },
         { label: "📫 Send an Email", href: "mailto:muhammad.okasha2146@gmail.com" }
@@ -486,14 +486,14 @@ Have a wonderful day, and feel free to connect on [LinkedIn](https://linkedin.co
     source: "Okasha Knowledge Index",
     answer: `Here is a quick overview regarding your inquiry:
 
-Muhammad Okasha is an **AI Solutions Architect & Machine Learning Engineer** (B.E. Computer Systems, UET Peshawar). He has delivered 10+ production systems spanning **Enterprise Multimodal RAG**, **100% On-Device Edge AI**, **Clinical ERPs**, and **Real-Time Voice AI**.
+Muhammad Okasha is an AI Solutions Architect & Machine Learning Engineer (B.E. Computer Systems, UET Peshawar). He has delivered 10+ production systems spanning Enterprise Multimodal RAG, 100% On-Device Edge AI, Clinical ERPs, and Real-Time Voice AI.
 
 You can ask me specifically about any of his systems:
-• **"GHL RAG"** — 5,717 vector chunks with Gemini 3.7 & FastEmbed ONNX
-• **"Sales Voice Co-Pilot"** — Real-time objection battlecards in <50ms
-• **"Offline Translator"** — Whisper INT8 Android App
-• **"Skills & Stack"** — AI, Deep Learning & Full-Stack Arsenal
-• **"Resume / Contact"** — Direct download & contact channels`,
+• "GHL RAG" — 5,717 vector chunks with Gemini 3.7 & FastEmbed ONNX
+• "Sales Voice Co-Pilot" — Real-time objection battlecards in <50ms
+• "Offline Translator" — Whisper INT8 Android App
+• "Skills & Stack" — AI, Deep Learning & Full-Stack Arsenal
+• "Resume / Contact" — Direct download & contact channels`,
     actionChips: [
       { label: "⚡ View All 10 Projects", href: "#projects" },
       { label: "📄 Download Resume PDF", href: "/Muhammad_Okasha_Resume.pdf", download: true },

@@ -31,13 +31,18 @@ const QUICK_PROMPTS = [
   "📄 How can I download his resume or contact him?"
 ];
 
+const cleanText = (txt) => {
+  if (!txt) return '';
+  return txt.replace(/\*\*/g, '').replace(/\*/g, '').replace(/`/g, '');
+};
+
 export default function AiChatbot() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState([
     {
       id: 'welcome',
       sender: 'ai',
-      text: "👋 **Hello! I'm Okasha AI**, Muhammad's personal executive knowledge assistant.\n\nI have instant access to his **10 production systems**, **RAG architectures**, **on-device neural models**, and **experience**. What would you like to explore?",
+      text: "👋 Hello! I'm Okasha AI, Muhammad's personal executive knowledge assistant.\n\nI have instant access to his 10 production systems, RAG architectures, on-device neural models, and experience. What would you like to explore?",
       source: "System Knowledge Base",
       actions: [
         { label: "⚡ GHL RAG (5.7k Chunks)", prompt: "Tell me about GHL RAG architecture" },
@@ -75,8 +80,8 @@ export default function AiChatbot() {
       const aiMsg = {
         id: Date.now() + 1,
         sender: 'ai',
-        text: retrieved.answer,
-        source: retrieved.chunk ? retrieved.chunk.title : "Okasha Neural Context Index",
+        text: cleanText(retrieved.answer),
+        source: cleanText(retrieved.chunk ? retrieved.chunk.title : (retrieved.source || "Okasha Neural Index")),
         actions: retrieved.actionChips || []
       };
 
@@ -91,7 +96,7 @@ export default function AiChatbot() {
       {
         id: 'welcome',
         sender: 'ai',
-        text: "👋 **Chat refreshed!** Ask me anything about Muhammad's AI architectures, deep learning models, full-stack systems, or credentials.",
+        text: "👋 Chat refreshed! Ask me anything about Muhammad's AI architectures, deep learning models, full-stack systems, or credentials.",
         source: "System Knowledge Base",
         actions: [
           { label: "Explore 10 Projects", href: "#projects" },
