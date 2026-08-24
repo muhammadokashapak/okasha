@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, X, CornerDownLeft, Sparkles, Gamepad2 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
@@ -22,11 +23,21 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
 
   useEffect(() => {
     if (isOpen) {
+      document.body.style.overflow = 'hidden';
       bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, [history, isOpen]);
 
   const handleKeyDown = (e) => {
+    if (e.key === 'Escape') {
+      playSound('close');
+      onClose();
+      return;
+    }
+
     // Arrow Up / Down for command history
     if (e.key === 'ArrowUp') {
       e.preventDefault();
@@ -282,27 +293,44 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
 
   if (!isOpen) return null;
 
-  return (
+  const modalContent = (
     <AnimatePresence>
       <div
         className="modal-backdrop"
+        style={{
+          position: 'fixed',
+          inset: 0,
+          zIndex: 99999,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '16px',
+          background: 'rgba(3, 3, 10, 0.88)',
+          backdropFilter: 'blur(25px)',
+          WebkitBackdropFilter: 'blur(25px)'
+        }}
         onClick={() => {
           playSound('close');
           onClose();
         }}
       >
         <motion.div
-          className="modal-dialog crt-scanlines"
+          className="modal-dialog terminal-modal-dialog crt-scanlines"
           onClick={(e) => e.stopPropagation()}
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ duration: 0.3 }}
           style={{
-            background: 'rgba(5, 7, 16, 0.97)',
-            border: '1px solid rgba(0, 255, 204, 0.4)',
-            maxWidth: '840px',
-            boxShadow: '0 0 60px rgba(0, 255, 204, 0.3), 0 0 35px rgba(139, 92, 246, 0.25)'
+            position: 'relative',
+            width: '100%',
+            maxWidth: '860px',
+            maxHeight: '85vh',
+            borderRadius: '24px',
+            padding: '20px 24px',
+            display: 'flex',
+            flexDirection: 'column',
+            zIndex: 100000
           }}
         >
           {/* Terminal Window Header */}
@@ -311,7 +339,7 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
               display: 'flex',
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderBottom: '1px solid rgba(0, 255, 204, 0.2)',
+              borderBottom: '1px solid rgba(0, 255, 204, 0.25)',
               paddingBottom: '0.8rem',
               marginBottom: '1rem'
             }}
@@ -320,7 +348,7 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }} />
-              <span style={{ fontSize: '0.82rem', fontFamily: 'JetBrains Mono, monospace', color: 'var(--accent-color)', marginLeft: '8px' }}>
+              <span style={{ fontSize: '0.82rem', fontFamily: 'JetBrains Mono, monospace', color: '#00ffcc', marginLeft: '8px', fontWeight: 600 }}>
                 okasha@neural-terminal: ~ (bash v4.2)
               </span>
             </div>
@@ -331,17 +359,23 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
                 onClose();
               }}
               style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#fff',
+                background: 'rgba(255, 255, 255, 0.08)',
+                border: '1px solid rgba(255, 255, 255, 0.15)',
+                color: '#f8fafc',
+                borderRadius: '50%',
+                width: '32px',
+                height: '32px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                transition: 'all 0.2s'
               }}
-              title="Close Terminal"
+              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(244, 63, 94, 0.3)'}
+              onMouseLeave={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.08)'}
+              title="Close Terminal (Esc)"
             >
-              <X size={18} />
+              <X size={16} />
             </button>
           </div>
 
@@ -352,38 +386,39 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
               overflowY: 'auto',
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: '0.86rem',
-              lineHeight: 1.6,
-              color: '#d1d5db',
+              lineHeight: 1.65,
+              color: '#f1f5f9',
               display: 'flex',
               flexDirection: 'column',
-              gap: '6px'
+              gap: '6px',
+              paddingRight: '8px'
             }}
           >
             {history.map((item, idx) => {
               if (item.type === 'input') {
                 return (
-                  <div key={idx} style={{ color: 'var(--accent-color)', fontWeight: 600 }}>
+                  <div key={idx} style={{ color: '#38bdf8', fontWeight: 600 }}>
                     {item.text}
                   </div>
                 );
               }
               if (item.type === 'system') {
                 return (
-                  <div key={idx} style={{ color: 'var(--accent-cyan)', fontWeight: 600, whiteSpace: 'pre-line' }}>
+                  <div key={idx} style={{ color: '#fbbf24', fontWeight: 600, whiteSpace: 'pre-line' }}>
                     {item.text}
                   </div>
                 );
               }
               if (item.type === 'error') {
                 return (
-                  <div key={idx} style={{ color: 'var(--accent-rose)', whiteSpace: 'pre-line' }}>
+                  <div key={idx} style={{ color: '#f43f5e', whiteSpace: 'pre-line' }}>
                     {item.text}
                   </div>
                 );
               }
               if (item.type === 'info') {
                 return (
-                  <div key={idx} style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-line' }}>
+                  <div key={idx} style={{ color: '#94a3b8', whiteSpace: 'pre-line' }}>
                     {item.text}
                   </div>
                 );
@@ -405,13 +440,13 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
-              borderTop: '1px solid rgba(0, 255, 204, 0.15)',
-              paddingTop: '0.8rem',
+              borderTop: '1px solid rgba(0, 255, 204, 0.2)',
+              paddingTop: '0.9rem',
               marginTop: '1rem',
               fontFamily: 'JetBrains Mono, monospace'
             }}
           >
-            <span style={{ color: 'var(--accent-color)', fontSize: '0.9rem', flexShrink: 0 }}>
+            <span style={{ color: '#00ffcc', fontSize: '0.9rem', flexShrink: 0, fontWeight: 700 }}>
               okasha@ai-core:~$
             </span>
             <input
@@ -425,24 +460,26 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
                 flex: 1,
                 background: 'transparent',
                 border: 'none',
-                color: '#fff',
+                color: '#ffffff',
                 fontFamily: 'JetBrains Mono, monospace',
                 fontSize: '0.9rem',
-                outline: 'none'
+                outline: 'none',
+                caretColor: '#00ffcc'
               }}
             />
             <button
               type="submit"
               style={{
                 background: 'rgba(0, 255, 204, 0.15)',
-                border: '1px solid var(--accent-color)',
-                color: 'var(--accent-color)',
+                border: '1px solid #00ffcc',
+                color: '#00ffcc',
                 borderRadius: '8px',
-                padding: '4px 8px',
+                padding: '5px 10px',
                 cursor: 'pointer',
                 display: 'flex',
                 alignItems: 'center'
               }}
+              title="Execute Command"
             >
               <CornerDownLeft size={14} />
             </button>
@@ -451,4 +488,6 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
       </div>
     </AnimatePresence>
   );
+
+  return createPortal(modalContent, document.body);
 }
