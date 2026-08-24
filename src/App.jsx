@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, Terminal, Sun, Moon, Volume2, VolumeX, Sparkles, Zap, Award } from 'lucide-react';
+import { Menu, X, FileText, Terminal, Sun, Moon, Volume2, VolumeX, Sparkles, Zap, Award, Mic } from 'lucide-react';
 import Hero from './components/Hero';
 import Expertise from './components/Expertise';
 import About from './components/About';
@@ -14,6 +14,11 @@ import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
 import TerminalModal from './components/TerminalModal';
 import RecruiterModal from './components/RecruiterModal';
+import VoiceCommandOverlay from './components/VoiceCommandOverlay';
+import RoiCalculator from './components/RoiCalculator';
+import TelemetryRadar from './components/TelemetryRadar';
+import TensorVisualizer from './components/TensorVisualizer';
+import CompetencyRadar from './components/CompetencyRadar';
 import AiChatbot from './components/AiChatbot';
 import MatrixRain from './components/MatrixRain';
 import { playSound, isSoundMuted, setSoundMuted } from './utils/soundFx';
@@ -22,6 +27,7 @@ function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [recruiterOpen, setRecruiterOpen] = useState(false);
+  const [voiceOpen, setVoiceOpen] = useState(false);
   const [matrixActive, setMatrixActive] = useState(false);
   const [soundMuted, setSoundMutedState] = useState(() => isSoundMuted());
   const [theme, setTheme] = useState(() => {
@@ -69,7 +75,8 @@ function App() {
     { label: 'Topology', href: '#architecture-graph' },
     { label: 'Systems', href: '#projects' },
     { label: 'RAG Lab', href: '#rag-simulator' },
-    { label: 'Benchmarks', href: '#benchmarks' },
+    { label: 'Quantization', href: '#tensor-visualizer' },
+    { label: 'ROI Calculator', href: '#roi-calculator' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -88,6 +95,14 @@ function App() {
       <RecruiterModal
         isOpen={recruiterOpen}
         onClose={() => setRecruiterOpen(false)}
+      />
+      <VoiceCommandOverlay
+        isOpen={voiceOpen}
+        onClose={() => setVoiceOpen(false)}
+        onOpenRecruiter={() => setRecruiterOpen(true)}
+        onOpenTerminal={() => setTerminalOpen(true)}
+        onToggleTheme={toggleTheme}
+        currentTheme={theme}
       />
       <AiChatbot />
 
@@ -114,6 +129,24 @@ function App() {
             ))}
 
             <div style={{ width: '1px', height: '20px', background: 'var(--card-border)', margin: '0 4px' }} />
+
+            {/* Voice Command Button */}
+            <button
+              onClick={() => {
+                playSound('open');
+                setVoiceOpen(true);
+              }}
+              className="sound-toggle-btn"
+              style={{
+                background: 'rgba(0, 255, 204, 0.12)',
+                border: '1px solid var(--accent-color)',
+                color: 'var(--accent-color)'
+              }}
+              title="Voice Control Mode (Speak Commands)"
+              aria-label="Voice Command Mode"
+            >
+              <Mic size={15} />
+            </button>
 
             {/* Recruiter Fast-Track Header Pill */}
             <button
@@ -221,6 +254,17 @@ function App() {
             <button
               onClick={() => {
                 playSound('open');
+                setVoiceOpen(true);
+              }}
+              className="sound-toggle-btn"
+              style={{ marginRight: '6px', color: 'var(--accent-color)' }}
+              title="Voice Control Mode"
+            >
+              <Mic size={15} />
+            </button>
+            <button
+              onClick={() => {
+                playSound('open');
                 setRecruiterOpen(true);
               }}
               style={{
@@ -283,6 +327,29 @@ function App() {
             ))}
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
+              <button
+                onClick={() => {
+                  playSound('open');
+                  setMobileMenuOpen(false);
+                  setVoiceOpen(true);
+                }}
+                style={{
+                  background: 'rgba(0, 255, 204, 0.15)',
+                  border: '1px solid var(--accent-color)',
+                  color: 'var(--accent-color)',
+                  padding: '10px',
+                  borderRadius: '12px',
+                  fontWeight: 800,
+                  fontSize: '0.88rem',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <Mic size={16} /> 🎙️ Voice Control Mode
+              </button>
+
               <button
                 onClick={() => {
                   playSound('open');
@@ -363,12 +430,16 @@ function App() {
           onOpenRecruiter={() => setRecruiterOpen(true)}
           theme={theme}
         />
+        <TelemetryRadar />
         <About />
         <ArchitectureGraph />
+        <CompetencyRadar />
         <Expertise />
         <Projects />
         <RagSimulator />
+        <TensorVisualizer />
         <BenchmarkMatrix />
+        <RoiCalculator />
         <Experience />
         <AiPlayground />
         <Skills />
