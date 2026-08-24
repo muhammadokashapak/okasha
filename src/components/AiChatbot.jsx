@@ -55,16 +55,18 @@ export default function AiChatbot() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const chatBottomRef = useRef(null);
-  const lastAiMessageRef = useRef(null);
+  const lastUserMessageRef = useRef(null);
 
   useEffect(() => {
     if (!isOpen) return;
 
     const lastMsg = messages[messages.length - 1];
     if (lastMsg && lastMsg.sender === 'ai' && messages.length > 1) {
-      // Align the START of the new AI answer cleanly to the top of the viewport
+      // Align the START of the USER's QUESTION cleanly to the top of the viewport
       setTimeout(() => {
-        lastAiMessageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (lastUserMessageRef.current) {
+          lastUserMessageRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }, 50);
     } else {
       chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -282,18 +284,20 @@ export default function AiChatbot() {
                 gap: '14px'
               }}
             >
-              {messages.map((m, idx) => (
-                <div
-                  key={m.id}
-                  ref={idx === messages.length - 1 && m.sender === 'ai' ? lastAiMessageRef : null}
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: m.sender === 'user' ? 'flex-end' : 'flex-start',
-                    maxWidth: '100%',
-                    scrollMarginTop: '10px'
-                  }}
-                >
+              {messages.map((m, idx) => {
+                const isLastUser = m.sender === 'user' && idx === messages.map(x => x.sender).lastIndexOf('user');
+                return (
+                  <div
+                    key={m.id}
+                    ref={isLastUser ? lastUserMessageRef : null}
+                    style={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: m.sender === 'user' ? 'flex-end' : 'flex-start',
+                      maxWidth: '100%',
+                      scrollMarginTop: '12px'
+                    }}
+                  >
                   {/* Source Attribution Tag (For AI answers) */}
                   {m.sender === 'ai' && m.source && (
                     <div style={{
@@ -396,7 +400,8 @@ export default function AiChatbot() {
                     </div>
                   )}
                 </div>
-              ))}
+              );
+            })}
 
               {isTyping && (
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', padding: '8px 12px' }}>
