@@ -3,8 +3,9 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Float, MeshDistortMaterial } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 import { motion } from 'framer-motion';
-import { FileText, Terminal, Zap, Sparkles, MessageSquare } from 'lucide-react';
+import { FileText, Terminal, Zap, Sparkles, MessageSquare, Code2 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
+import AudioPitchPlayer from './AudioPitchPlayer';
 
 function Starfield({ color = "#00ffcc", ...props }) {
   const ref = useRef();
@@ -101,7 +102,7 @@ function NeuralFloatingCore({ color1 = "#00ffcc", color2 = "#8b5cf6" }) {
   );
 }
 
-export default function Hero({ onOpenTerminal, onOpenChat, theme = 'dark' }) {
+export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, theme = 'dark' }) {
   const isLight = theme === 'light';
   const starColor1 = isLight ? "#0284c7" : "#00ffcc";
   const starColor2 = isLight ? "#7c3aed" : "#8b5cf6";
@@ -234,12 +235,30 @@ export default function Hero({ onOpenTerminal, onOpenChat, theme = 'dark' }) {
               pointerEvents: 'auto'
             }}
           >
+            {/* VIP Recruiter Fast-Track Button */}
+            <button
+              onClick={() => {
+                playSound('open');
+                if (onOpenRecruiter) onOpenRecruiter();
+              }}
+              className="btn-primary"
+              style={{
+                background: 'linear-gradient(135deg, #00ffcc 0%, #38bdf8 50%, #8b5cf6 100%)',
+                color: '#030308',
+                fontWeight: 800,
+                boxShadow: '0 0 25px rgba(0, 255, 204, 0.45)',
+                border: 'none'
+              }}
+            >
+              <Zap size={18} /> ⚡ Recruiter 30s Brief
+            </button>
+
             <a 
               href="#projects" 
-              className="btn-primary"
+              className="btn-secondary"
               onClick={() => playSound('click')}
             >
-              <Zap size={18} /> View Featured Work
+              <Code2 size={18} color="var(--accent-color)" /> View Systems (10)
             </a>
 
             <a
@@ -248,8 +267,8 @@ export default function Hero({ onOpenTerminal, onOpenChat, theme = 'dark' }) {
               className="btn-secondary"
               onClick={() => playSound('click')}
             >
-              <FileText size={18} color="var(--accent-color)" />
-              Download Resume
+              <FileText size={18} color="var(--accent-cyan)" />
+              Resume PDF
             </a>
 
             <button
@@ -268,6 +287,11 @@ export default function Hero({ onOpenTerminal, onOpenChat, theme = 'dark' }) {
               &gt;_ Matrix CLI
             </button>
           </motion.div>
+
+          {/* Interactive 15-Second Executive Audio Pitch */}
+          <div style={{ pointerEvents: 'auto', width: '100%' }}>
+            <AudioPitchPlayer />
+          </div>
 
           {/* Live Impact Counters Strip */}
           <motion.div

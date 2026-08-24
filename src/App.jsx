@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, Terminal, Sun, Moon, Volume2, VolumeX, Sparkles } from 'lucide-react';
+import { Menu, X, FileText, Terminal, Sun, Moon, Volume2, VolumeX, Sparkles, Zap, Award } from 'lucide-react';
 import Hero from './components/Hero';
 import Expertise from './components/Expertise';
 import About from './components/About';
+import ArchitectureGraph from './components/ArchitectureGraph';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import RagSimulator from './components/RagSimulator';
+import BenchmarkMatrix from './components/BenchmarkMatrix';
 import AiPlayground from './components/AiPlayground';
 import Skills from './components/Skills';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
 import TerminalModal from './components/TerminalModal';
+import RecruiterModal from './components/RecruiterModal';
 import AiChatbot from './components/AiChatbot';
 import MatrixRain from './components/MatrixRain';
 import { playSound, isSoundMuted, setSoundMuted } from './utils/soundFx';
@@ -17,6 +21,7 @@ import { playSound, isSoundMuted, setSoundMuted } from './utils/soundFx';
 function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
+  const [recruiterOpen, setRecruiterOpen] = useState(false);
   const [matrixActive, setMatrixActive] = useState(false);
   const [soundMuted, setSoundMutedState] = useState(() => isSoundMuted());
   const [theme, setTheme] = useState(() => {
@@ -61,10 +66,12 @@ function App() {
 
   const navItems = [
     { label: 'About', href: '#about' },
+    { label: 'Topology', href: '#architecture-graph' },
     { label: 'Expertise', href: '#expertise' },
-    { label: 'Experience', href: '#experience' },
     { label: 'Projects', href: '#projects' },
-    { label: 'Neural Lab', href: '#ai-playground' },
+    { label: 'RAG Lab', href: '#rag-simulator' },
+    { label: 'Benchmarks', href: '#benchmarks' },
+    { label: 'Experience', href: '#experience' },
     { label: 'Skills', href: '#skills' },
     { label: 'Contact', href: '#contact' },
   ];
@@ -80,6 +87,10 @@ function App() {
           setTerminalOpen(false);
           setMatrixActive(true);
         }}
+      />
+      <RecruiterModal
+        isOpen={recruiterOpen}
+        onClose={() => setRecruiterOpen(false)}
       />
       <AiChatbot />
 
@@ -104,6 +115,32 @@ function App() {
                 {item.label}
               </a>
             ))}
+
+            {/* Recruiter Fast-Track Header Pill */}
+            <button
+              onClick={() => {
+                playSound('open');
+                setRecruiterOpen(true);
+              }}
+              style={{
+                background: 'linear-gradient(135deg, rgba(0,255,204,0.15) 0%, rgba(56,189,248,0.15) 100%)',
+                border: '1px solid var(--accent-color)',
+                color: 'var(--accent-color)',
+                padding: '6px 14px',
+                borderRadius: '20px',
+                fontSize: '0.8rem',
+                fontWeight: 800,
+                cursor: 'pointer',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                boxShadow: '0 0 15px rgba(0,255,204,0.25)',
+                transition: 'all 0.2s'
+              }}
+              title="Open Recruiter 30-Second Executive Fast-Track"
+            >
+              <Zap size={14} /> ⚡ Recruiter Brief
+            </button>
 
             {/* Audio Sound Effects Toggle */}
             <button
@@ -177,6 +214,24 @@ function App() {
           {/* Mobile Actions (Theme + Audio + Hamburger) */}
           <div style={{ display: 'none' }} className="mobile-actions-wrapper">
             <button
+              onClick={() => {
+                playSound('open');
+                setRecruiterOpen(true);
+              }}
+              style={{
+                background: 'rgba(0,255,204,0.15)',
+                border: '1px solid var(--accent-color)',
+                color: 'var(--accent-color)',
+                padding: '5px 10px',
+                borderRadius: '14px',
+                fontSize: '0.75rem',
+                fontWeight: 800,
+                marginRight: '6px'
+              }}
+            >
+              ⚡ Brief
+            </button>
+            <button
               onClick={toggleSound}
               className="sound-toggle-btn"
               style={{ marginRight: '6px' }}
@@ -221,21 +276,20 @@ function App() {
               </a>
             ))}
             
-            <div style={{ display: 'flex', gap: '10px', marginTop: '8px' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
               <button
                 onClick={() => {
                   playSound('open');
                   setMobileMenuOpen(false);
-                  setTerminalOpen(true);
+                  setRecruiterOpen(true);
                 }}
                 style={{
-                  flex: 1,
-                  background: 'rgba(139, 92, 246, 0.15)',
-                  border: '1px solid var(--accent-alt)',
-                  color: 'var(--accent-alt)',
-                  padding: '10px',
-                  borderRadius: '10px',
-                  fontWeight: 700,
+                  background: 'linear-gradient(135deg, #00ffcc 0%, #38bdf8 100%)',
+                  color: '#030308',
+                  border: 'none',
+                  padding: '12px',
+                  borderRadius: '12px',
+                  fontWeight: 800,
                   fontSize: '0.9rem',
                   display: 'flex',
                   alignItems: 'center',
@@ -243,29 +297,55 @@ function App() {
                   gap: '6px'
                 }}
               >
-                <Terminal size={16} /> &gt;_ CLI
+                <Zap size={16} /> ⚡ Recruiter 30s Fast-Track Brief
               </button>
 
-              <a
-                href="/Muhammad_Okasha_Resume.pdf"
-                download="Muhammad_Okasha_Resume.pdf"
-                onClick={() => playSound('click')}
-                style={{
-                  flex: 1,
-                  background: 'var(--accent-gradient)',
-                  color: '#fff',
-                  padding: '10px',
-                  borderRadius: '10px',
-                  fontWeight: 700,
-                  fontSize: '0.9rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  gap: '6px'
-                }}
-              >
-                <FileText size={16} /> Resume
-              </a>
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button
+                  onClick={() => {
+                    playSound('open');
+                    setMobileMenuOpen(false);
+                    setTerminalOpen(true);
+                  }}
+                  style={{
+                    flex: 1,
+                    background: 'rgba(139, 92, 246, 0.15)',
+                    border: '1px solid var(--accent-alt)',
+                    color: 'var(--accent-alt)',
+                    padding: '10px',
+                    borderRadius: '10px',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <Terminal size={16} /> &gt;_ CLI
+                </button>
+
+                <a
+                  href="/Muhammad_Okasha_Resume.pdf"
+                  download="Muhammad_Okasha_Resume.pdf"
+                  onClick={() => playSound('click')}
+                  style={{
+                    flex: 1,
+                    background: 'var(--accent-gradient)',
+                    color: '#fff',
+                    padding: '10px',
+                    borderRadius: '10px',
+                    fontWeight: 700,
+                    fontSize: '0.9rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '6px'
+                  }}
+                >
+                  <FileText size={16} /> Resume
+                </a>
+              </div>
             </div>
           </div>
         )}
@@ -274,12 +354,16 @@ function App() {
       <main>
         <Hero
           onOpenTerminal={() => setTerminalOpen(true)}
+          onOpenRecruiter={() => setRecruiterOpen(true)}
           theme={theme}
         />
         <About />
+        <ArchitectureGraph />
         <Expertise />
-        <Experience />
         <Projects />
+        <RagSimulator />
+        <BenchmarkMatrix />
+        <Experience />
         <AiPlayground />
         <Skills />
         <Contact />
