@@ -108,32 +108,8 @@ function App() {
 
       <nav className="glass-nav">
         <div className="nav-content">
-          <a
-            href="#home"
-            className="nav-brand"
-            onClick={() => playSound('click')}
-            style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
-          >
-            <div style={{
-              width: '28px',
-              height: '28px',
-              borderRadius: '8px',
-              background: 'var(--accent-gradient)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              boxShadow: '0 0 12px rgba(0, 255, 204, 0.4)',
-              flexShrink: 0
-            }}>
-              <Sparkles size={16} color="#fff" />
-            </div>
-            <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.3px', whiteSpace: 'nowrap' }}>
-              Muhammad Okasha
-            </span>
-          </a>
-
           {/* Desktop Nav Links */}
-          <div className="nav-links nav-links-desktop" style={{ alignItems: 'center', gap: '4px' }}>
+          <div className="nav-links nav-links-desktop" style={{ alignItems: 'center', gap: '4px', flex: 1 }}>
             {navItems.map((item) => (
               <a
                 key={item.label}
