@@ -22,6 +22,7 @@ import CompetencyRadar from './components/CompetencyRadar';
 import AiChatbot from './components/AiChatbot';
 import MatrixRain from './components/MatrixRain';
 import LanguageSelector from './components/LanguageSelector';
+import IntroGreetings from './components/IntroGreetings';
 import { playSound, isSoundMuted, setSoundMuted } from './utils/soundFx';
 import { useLanguage } from './context/LanguageContext';
 
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <>
+      <IntroGreetings />
       <CustomCursor />
       <MatrixRain isActive={matrixActive} onClose={() => setMatrixActive(false)} />
       <TerminalModal
