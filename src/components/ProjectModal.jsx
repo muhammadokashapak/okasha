@@ -183,7 +183,7 @@ export default function ProjectModal({ project, onClose }) {
           {project.metrics && project.metrics.length > 0 && (
             <div className="modal-metrics-grid" style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))',
               gap: '12px',
               marginBottom: '1.8rem'
             }}>
@@ -339,7 +339,7 @@ export default function ProjectModal({ project, onClose }) {
           {/* Tab 2: Key Features & Engineering Highlights */}
           {activeTab === 'features' && (
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.3 }}>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '12px', marginBottom: '1.2rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '12px', marginBottom: '1.2rem' }}>
                 {project.features && project.features.map((feat, i) => (
                   <div key={i} style={{
                     display: 'flex',

@@ -67,7 +67,7 @@ export default function Skills() {
         </div>
 
         {/* Bento Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: 'clamp(1.4rem, 3vw, 2rem)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))', gap: 'clamp(1.4rem, 3vw, 2rem)' }}>
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}

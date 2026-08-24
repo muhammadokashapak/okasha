@@ -308,8 +308,8 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
             style={{
               marginTop: 'clamp(2.5rem, 6vw, 4.5rem)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))',
-              gap: '14px',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))',
+              gap: '12px',
               maxWidth: '900px',
               width: '100%',
               pointerEvents: 'auto'

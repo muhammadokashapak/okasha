@@ -92,7 +92,7 @@
 }
 
 /* ==========================================================================
-   GLOBAL RESET & FOUNDATION (ANTI-OVERFLOW)
+   GLOBAL RESET & FOUNDATION (ANTI-OVERFLOW & MOBILE-FIRST VIP)
    ========================================================================== */
 
 * {
@@ -101,7 +101,11 @@
   padding: 0;
 }
 
-html, body {
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
   width: 100%;
   max-width: 100vw;
   min-height: 100%;
@@ -109,6 +113,7 @@ html, body {
   scroll-behavior: smooth;
   background-color: var(--bg-color);
   transition: background-color 0.4s ease, color 0.4s ease;
+  position: relative;
 }
 
 body {
@@ -125,6 +130,26 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   position: relative;
+}
+
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+  box-sizing: border-box;
+}
+
+button, a, input, select, textarea {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Touch-friendly scrolling for horizontal tables/cards */
+.table-responsive {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
 }
 
 /* Futuristic Background Grid Overlay */
@@ -398,11 +423,14 @@ ul {
   .glass-nav {
     width: calc(100% - 16px);
     top: 8px;
-    padding: 6px 12px;
+    padding: 6px 10px;
     border-radius: 30px;
   }
   .nav-brand {
-    font-size: 1.25rem !important;
+    font-size: 1.15rem !important;
+  }
+  .mobile-hide-small {
+    display: none !important;
   }
 }
 
@@ -630,41 +658,46 @@ ul {
    ========================================================================== */
 
 .hero-status-badge {
-  max-width: 95%;
+  max-width: 100%;
   word-break: break-word;
   line-height: 1.4;
+  white-space: normal;
+  text-align: center;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 640px) {
   .hero-status-badge {
     padding: 6px 12px !important;
-    font-size: 0.78rem !important;
+    font-size: 0.76rem !important;
   }
   .hero-cta-group {
     flex-direction: column !important;
     width: 100% !important;
-    gap: 0.8rem !important;
+    gap: 0.75rem !important;
   }
   .hero-cta-group a,
   .hero-cta-group button {
     width: 100% !important;
-    max-width: 320px !important;
+    max-width: 100% !important;
   }
-}
-
-@media (max-width: 640px) {
   .hero-metrics-grid {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
+    gap: 8px !important;
   }
   .hero-metric-card {
-    padding: 12px 8px !important;
+    padding: 10px 8px !important;
   }
   .stats-row {
     grid-template-columns: repeat(2, 1fr) !important;
-    gap: 10px !important;
+    gap: 8px !important;
   }
   .education-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .hero-metrics-grid {
     grid-template-columns: 1fr !important;
   }
 }
@@ -683,7 +716,7 @@ ul {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  padding: clamp(14px, 3vw, 32px) !important;
+  padding: clamp(10px, 3vw, 32px) !important;
   overflow-y: auto !important;
 }
 
@@ -702,23 +735,24 @@ ul {
   box-shadow: var(--modal-shadow) !important;
   position: relative !important;
   z-index: 100000 !important;
-  padding: clamp(1.4rem, 4vw, 2.6rem) !important;
+  padding: clamp(1.2rem, 4vw, 2.6rem) !important;
   margin: auto !important;
 }
 
 @media (max-width: 600px) {
   .modal-backdrop {
-    padding: 10px !important;
+    padding: 8px !important;
   }
   .modal-dialog {
-    padding: 16px 14px !important;
-    border-radius: 20px !important;
-    max-height: 92vh !important;
+    padding: 16px 12px !important;
+    border-radius: 18px !important;
+    max-height: 94vh !important;
+    width: 100% !important;
   }
   .modal-header-row {
     flex-direction: column !important;
     position: relative !important;
-    padding-right: 42px !important;
+    padding-right: 38px !important;
   }
   .modal-header-row button {
     position: absolute !important;

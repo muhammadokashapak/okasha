@@ -228,7 +228,7 @@ Architect: Muhammad Okasha (muhammad.okasha2146@gmail.com | +92 3495696659)`;
               </div>
 
               {/* 3 Metric Cards */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '8px', marginBottom: '1.2rem' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 90px), 1fr))', gap: '8px', marginBottom: '1.2rem' }}>
                 <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '14px', padding: '10px', textAlign: 'center' }}>
                   <div style={{ fontSize: '0.68rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>VELOCITY</div>
                   <div style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--accent-amber)', marginTop: '2px' }}>

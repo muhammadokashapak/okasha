@@ -101,7 +101,7 @@ export default function Expertise() {
           </p>
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(290px, 1fr))', gap: 'clamp(1.2rem, 3vw, 1.8rem)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))', gap: 'clamp(1.2rem, 3vw, 1.8rem)' }}>
           {expertiseItems.map((item, index) => (
             <motion.div
               key={index}

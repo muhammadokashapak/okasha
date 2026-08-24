@@ -185,7 +185,7 @@ Portfolio: https://github.com/muhammadokashapak/okasha`;
           {/* Target Role & Clearance Grid */}
           <div style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 180px), 1fr))',
             gap: '10px',
             marginBottom: '1.4rem'
           }}>
@@ -217,7 +217,7 @@ Portfolio: https://github.com/muhammadokashapak/okasha`;
               <Award size={18} color="var(--accent-amber)" /> Top 3 Quantifiable Production Wins
             </h4>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '10px' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 240px), 1fr))', gap: '10px' }}>
               <div style={{
                 background: 'rgba(0, 255, 204, 0.04)',
                 border: '1px solid rgba(0, 255, 204, 0.25)',
@@ -309,52 +309,51 @@ Portfolio: https://github.com/muhammadokashapak/okasha`;
             borderTop: '1px solid var(--card-border)',
             paddingTop: '1.4rem'
           }}>
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', width: '100%', maxWidth: '100%' }}>
               <a
                 href="/Muhammad_Okasha_Resume.pdf"
                 download="Muhammad_Okasha_Resume.pdf"
                 onClick={() => playSound('click')}
                 className="btn-primary"
-                style={{ padding: '10px 20px', fontSize: '0.88rem' }}
+                style={{ padding: '9px 16px', fontSize: '0.84rem', flex: '1 1 auto', minWidth: 'min(100%, 200px)' }}
               >
-                <Download size={16} /> Download Official Resume PDF
+                <Download size={15} /> Download Official Resume PDF
               </a>
 
               <button
                 onClick={handleCopyDossier}
                 className="btn-secondary"
-                style={{ padding: '10px 18px', fontSize: '0.88rem' }}
+                style={{ padding: '9px 14px', fontSize: '0.84rem', flex: '1 1 auto' }}
               >
-                {copiedDossier ? <Check size={16} color="var(--accent-emerald)" /> : <Copy size={16} />}
-                <span>{copiedDossier ? 'Dossier Copied!' : 'Copy Candidate Dossier'}</span>
+                {copiedDossier ? <Check size={15} color="var(--accent-emerald)" /> : <Copy size={15} />}
+                <span>{copiedDossier ? 'Dossier Copied!' : 'Copy Dossier'}</span>
               </button>
-            </div>
 
-            <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
               <a
                 href="https://wa.me/923495696659"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => playSound('click')}
                 className="btn-secondary"
-                style={{ padding: '10px 16px', fontSize: '0.88rem' }}
+                style={{ padding: '9px 14px', fontSize: '0.84rem', flex: '1 1 auto' }}
               >
-                <Phone size={15} color="var(--accent-emerald)" /> WhatsApp Call
+                <Phone size={14} color="var(--accent-emerald)" /> WhatsApp
               </a>
 
               <button
                 onClick={handleSendEmail}
                 className="btn-secondary"
                 style={{
-                  padding: '10px 16px',
-                  fontSize: '0.88rem',
+                  padding: '9px 14px',
+                  fontSize: '0.84rem',
                   cursor: 'pointer',
+                  flex: '1 1 auto',
                   border: copiedEmail ? '1px solid var(--accent-emerald)' : '1px solid var(--btn-sec-border)',
                   color: copiedEmail ? 'var(--accent-emerald)' : 'var(--text-primary)'
                 }}
               >
-                {copiedEmail ? <Check size={15} color="var(--accent-emerald)" /> : <Mail size={15} color="var(--accent-cyan)" />}
-                <span>{copiedEmail ? 'Email Copied & Gmail Opened!' : 'Email Interview Invitation'}</span>
+                {copiedEmail ? <Check size={14} color="var(--accent-emerald)" /> : <Mail size={14} color="var(--accent-cyan)" />}
+                <span>{copiedEmail ? 'Email Copied!' : 'Email Invitation'}</span>
               </button>
             </div>
           </div>

@@ -198,24 +198,24 @@ export default function AiPlayground() {
         </div>
 
         {/* Lab Mode Tabs */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginBottom: '2rem' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', flexWrap: 'wrap', marginBottom: '2rem' }}>
           <button
             onClick={() => {
               playSound('click');
               setActiveTab('vector');
             }}
             style={{
-              padding: '10px 22px',
+              padding: '8px 18px',
               borderRadius: '30px',
               border: activeTab === 'vector' ? '1px solid var(--accent-color)' : '1px solid var(--card-border)',
               background: activeTab === 'vector' ? 'rgba(0, 255, 204, 0.12)' : 'rgba(255, 255, 255, 0.03)',
               color: activeTab === 'vector' ? 'var(--accent-color)' : 'var(--text-secondary)',
               fontWeight: 700,
-              fontSize: '0.9rem',
+              fontSize: '0.86rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              gap: '6px'
             }}
           >
             <Compass size={16} /> 2D Vector Embedding Space
@@ -227,17 +227,17 @@ export default function AiPlayground() {
               setActiveTab('nlp');
             }}
             style={{
-              padding: '10px 22px',
+              padding: '8px 18px',
               borderRadius: '30px',
               border: activeTab === 'nlp' ? '1px solid var(--accent-color)' : '1px solid var(--card-border)',
               background: activeTab === 'nlp' ? 'rgba(0, 255, 204, 0.12)' : 'rgba(255, 255, 255, 0.03)',
               color: activeTab === 'nlp' ? 'var(--accent-color)' : 'var(--text-secondary)',
               fontWeight: 700,
-              fontSize: '0.9rem',
+              fontSize: '0.86rem',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
-              gap: '8px'
+              gap: '6px'
             }}
           >
             <ShieldCheck size={16} /> NLP Sentinel Classifier
@@ -625,7 +625,7 @@ export default function AiPlayground() {
 
                 {/* Multi-Label Breakdown Badges */}
                 {result.subLabels && (
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '10px' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 65px), 1fr))', gap: '6px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '10px' }}>
                     <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '10px', padding: '6px', textAlign: 'center' }}>
                       <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>TOXIC</div>
                       <div style={{ fontSize: '0.86rem', fontWeight: 800, color: result.subLabels.toxic > 50 ? '#ef4444' : 'var(--accent-color)' }}>

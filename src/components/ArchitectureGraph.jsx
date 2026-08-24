@@ -118,7 +118,7 @@ export default function ArchitectureGraph() {
         {/* Node Selection Track */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 140px), 1fr))',
           gap: '10px',
           marginBottom: '2rem'
         }}>
@@ -224,7 +224,7 @@ export default function ArchitectureGraph() {
       {/* Enterprise Security & System Reliability Badges */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
         gap: '14px',
         maxWidth: '1100px',
         margin: '0 auto'

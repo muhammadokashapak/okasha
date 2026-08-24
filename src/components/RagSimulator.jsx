@@ -189,7 +189,7 @@ export default function RagSimulator() {
             placeholder="Type your question (e.g. How does CHASHM AI work? What is GHL vector architecture?)..."
             style={{
               flex: 1,
-              minWidth: '220px',
+              minWidth: 'min(100%, 160px)',
               background: 'transparent',
               border: 'none',
               color: 'var(--text-primary)',
@@ -268,7 +268,7 @@ export default function RagSimulator() {
           gap: '1rem',
           flexWrap: 'wrap'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: '240px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: 'min(100%, 160px)' }}>
             <Sparkles size={18} color="var(--accent-color)" />
             <div>
               <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Active Test Query Ingestion</div>
@@ -293,15 +293,15 @@ export default function RagSimulator() {
               gap: '6px'
             }}
           >
-            <RefreshCw size={13} className={isRunning ? 'animate-spin' : ''} />
-            <span>{isRunning ? 'Executing...' : 'Re-Execute'}</span>
+            <RotateCcw size={14} className={isRunning ? 'animate-spin' : ''} />
+            <span>Re-Execute Pipeline</span>
           </button>
         </div>
 
         {/* 4-Step Animated Visual Pipeline Grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 200px), 1fr))',
           gap: '12px',
           marginBottom: '1.8rem'
         }}>

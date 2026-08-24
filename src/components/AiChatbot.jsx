@@ -513,6 +513,14 @@ export default function AiChatbot() {
           border-color: var(--accent-color) !important;
           color: var(--accent-color) !important;
         }
+        @media (max-width: 480px) {
+          .ai-widget-trigger-btn {
+            bottom: 14px !important;
+            right: 14px !important;
+            padding: 9px 14px !important;
+            font-size: 0.82rem !important;
+          }
+        }
       `}</style>
     </>
   );

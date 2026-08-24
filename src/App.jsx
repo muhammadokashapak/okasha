@@ -265,46 +265,50 @@ function App() {
                 playSound('open');
                 setVoiceOpen(true);
               }}
-              className="sound-toggle-btn"
-              style={{ marginRight: '6px', color: 'var(--accent-color)' }}
+              className="sound-toggle-btn mobile-hide-small"
+              style={{ marginRight: '6px', color: 'var(--accent-color)', width: '32px', height: '32px' }}
               title="Voice Control Mode"
+              aria-label="Voice Control Mode"
             >
-              <Mic size={15} />
+              <Mic size={14} />
             </button>
             <button
               onClick={() => {
                 playSound('open');
                 setRecruiterOpen(true);
               }}
+              className="mobile-hide-small"
               style={{
                 background: 'rgba(0,255,204,0.15)',
                 border: '1px solid var(--accent-color)',
                 color: 'var(--accent-color)',
-                padding: '5px 10px',
+                padding: '4px 8px',
                 borderRadius: '14px',
-                fontSize: '0.75rem',
+                fontSize: '0.72rem',
                 fontWeight: 800,
                 marginRight: '6px',
-                whiteSpace: 'nowrap'
+                whiteSpace: 'nowrap',
+                cursor: 'pointer'
               }}
+              title="Recruiter Fast-Track"
             >
               ⚡ Brief
             </button>
             <button
               onClick={toggleSound}
               className="sound-toggle-btn"
-              style={{ marginRight: '6px' }}
+              style={{ marginRight: '6px', width: '32px', height: '32px' }}
               aria-label="Toggle Sound Effects"
             >
-              {soundMuted ? <VolumeX size={15} color="var(--text-muted)" /> : <Volume2 size={15} color="var(--accent-color)" />}
+              {soundMuted ? <VolumeX size={14} color="var(--text-muted)" /> : <Volume2 size={14} color="var(--accent-color)" />}
             </button>
             <button
               onClick={toggleTheme}
               className="theme-toggle-btn"
-              style={{ marginRight: '8px' }}
+              style={{ marginRight: '6px', width: '32px', height: '32px' }}
               aria-label="Toggle Theme"
             >
-              {theme === 'dark' ? <Sun size={16} color="#fbbf24" /> : <Moon size={16} color="#7c3aed" />}
+              {theme === 'dark' ? <Sun size={15} color="#fbbf24" /> : <Moon size={15} color="#7c3aed" />}
             </button>
             <button
               className="nav-toggle"
@@ -313,8 +317,9 @@ function App() {
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
               aria-label="Toggle navigation menu"
+              style={{ padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              {mobileMenuOpen ? <X size={24} color="var(--accent-color)" /> : <Menu size={24} />}
+              {mobileMenuOpen ? <X size={22} color="var(--accent-color)" /> : <Menu size={22} />}
             </button>
           </div>
         </div>
