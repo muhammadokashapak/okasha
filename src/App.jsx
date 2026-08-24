@@ -107,21 +107,29 @@ function App() {
       <AiChatbot />
 
       <nav className="glass-nav">
-        <div className="nav-content">
-          {/* Desktop Nav Links */}
-          <div className="nav-links nav-links-desktop" style={{ alignItems: 'center', gap: '4px', flex: 1 }}>
+        <div className="nav-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '10px' }}>
+          {/* Left/Center Group: Primary Section Links */}
+          <div className="nav-links nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             {navItems.map((item) => (
               <a
                 key={item.label}
                 href={item.href}
                 onClick={() => playSound('hover')}
+                style={{
+                  padding: '7px 12px',
+                  borderRadius: '12px',
+                  fontSize: '0.84rem',
+                  fontWeight: 600,
+                  whiteSpace: 'nowrap'
+                }}
               >
                 {item.label}
               </a>
             ))}
+          </div>
 
-            <div style={{ width: '1px', height: '20px', background: 'var(--card-border)', margin: '0 4px' }} />
-
+          {/* Right Group: Action Suite */}
+          <div className="nav-links nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {/* Voice Command Button */}
             <button
               onClick={() => {
@@ -130,11 +138,18 @@ function App() {
               }}
               className="sound-toggle-btn"
               style={{
+                width: '34px',
+                height: '34px',
+                borderRadius: '50%',
                 background: 'rgba(0, 255, 204, 0.12)',
                 border: '1px solid var(--accent-color)',
-                color: 'var(--accent-color)'
+                color: 'var(--accent-color)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer'
               }}
-              title="Voice Control Mode (Speak Commands)"
+              title="Voice Control Mode"
               aria-label="Voice Command Mode"
             >
               <Mic size={15} />
@@ -147,31 +162,31 @@ function App() {
                 setRecruiterOpen(true);
               }}
               style={{
+                height: '34px',
                 background: 'linear-gradient(135deg, rgba(0,255,204,0.14) 0%, rgba(56,189,248,0.14) 100%)',
                 border: '1px solid var(--accent-color)',
                 color: 'var(--accent-color)',
-                padding: '6px 13px',
+                padding: '0 14px',
                 borderRadius: '20px',
-                fontSize: '0.8rem',
+                fontSize: '0.82rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '6px',
                 whiteSpace: 'nowrap',
-                flexShrink: 0,
-                boxShadow: '0 0 15px rgba(0,255,204,0.22)',
-                transition: 'all 0.2s'
+                boxShadow: '0 0 15px rgba(0,255,204,0.22)'
               }}
               title="Open Recruiter 30-Second Executive Fast-Track"
             >
-              <Zap size={13} style={{ flexShrink: 0 }} /> <span>⚡ Recruiter Brief</span>
+              <Zap size={14} /> <span>Recruiter Brief</span>
             </button>
 
             {/* Audio Sound Effects Toggle */}
             <button
               onClick={toggleSound}
               className="sound-toggle-btn"
+              style={{ width: '34px', height: '34px', borderRadius: '50%' }}
               title={soundMuted ? "Unmute Sci-Fi UI Sounds" : "Mute Sci-Fi UI Sounds"}
               aria-label="Toggle Sound Effects"
             >
@@ -182,6 +197,7 @@ function App() {
             <button
               onClick={toggleTheme}
               className="theme-toggle-btn"
+              style={{ width: '34px', height: '34px', borderRadius: '50%' }}
               title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
               aria-label="Toggle Theme"
             >
@@ -199,22 +215,22 @@ function App() {
                 setTerminalOpen(true);
               }}
               style={{
+                height: '34px',
                 background: 'rgba(139, 92, 246, 0.12)',
                 border: '1px solid rgba(139, 92, 246, 0.4)',
                 color: 'var(--accent-alt)',
-                padding: '6px 12px',
+                padding: '0 12px',
                 borderRadius: '20px',
-                fontSize: '0.8rem',
+                fontSize: '0.82rem',
                 fontWeight: 700,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '5px',
-                whiteSpace: 'nowrap',
-                flexShrink: 0
+                gap: '6px',
+                whiteSpace: 'nowrap'
               }}
             >
-              <Terminal size={13} style={{ flexShrink: 0 }} /> <span>&gt;_ CLI</span>
+              <Terminal size={14} /> <span>CLI</span>
             </button>
 
             {/* Resume Download */}
@@ -223,22 +239,22 @@ function App() {
               download="Muhammad_Okasha_Resume.pdf"
               onClick={() => playSound('click')}
               style={{
+                height: '34px',
                 background: 'var(--accent-gradient)',
                 color: '#fff',
-                padding: '6px 14px',
+                padding: '0 16px',
                 borderRadius: '20px',
-                fontSize: '0.8rem',
+                fontSize: '0.82rem',
                 fontWeight: 700,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '5px',
+                gap: '6px',
                 whiteSpace: 'nowrap',
-                flexShrink: 0,
-                boxShadow: '0 4px 14px rgba(0, 255, 204, 0.25)'
+                boxShadow: '0 4px 14px rgba(0, 255, 204, 0.25)',
+                textDecoration: 'none'
               }}
             >
-              <FileText size={13} style={{ flexShrink: 0 }} /> <span>Resume</span>
-            </a>
+              <FileText size={14} /> <span>Resume</span>
           </div>
 
           {/* Mobile Actions (Theme + Audio + Hamburger) */}
