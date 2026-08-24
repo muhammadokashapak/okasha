@@ -47,16 +47,49 @@ export default function AudioPitchPlayer() {
     if (!voices || voices.length === 0) return null;
 
     const englishVoices = voices.filter(v => v.lang.startsWith('en'));
-    if (englishVoices.length === 0) return voices[0];
+    const pool = englishVoices.length > 0 ? englishVoices : voices;
 
-    // Prioritize natural, confident Executive Male Neural voices
-    const naturalMale = englishVoices.find(v => 
-      (v.name.includes('Guy') || v.name.includes('Christopher') || v.name.includes('David') || v.name.includes('Natural') || v.name.includes('Google US') || v.name.includes('Male')) &&
-      !v.name.includes('Aria') && !v.name.includes('Jenny') && !v.name.includes('Zira') && !v.name.includes('Female')
-    );
-    if (naturalMale) return naturalMale;
+    const FEMALE_BLOCKLIST = [
+      'female', 'zira', 'aria', 'jenny', 'samantha', 'victoria', 'karen', 'moira',
+      'fiona', 'tessa', 'susan', 'hazel', 'heera', 'veena', 'linda', 'catherine',
+      'stephanie', 'sonia', 'natasha', 'neerja', 'emily', 'libby', 'mia', 'ava',
+      'ana', 'clara', 'elena', 'hannah', 'ivy', 'joanna', 'kendra', 'kimberly',
+      'salli', 'nicole', 'olivia', 'emma', 'sophia', 'julie', 'marie'
+    ];
 
-    return englishVoices[0];
+    const isNonFemale = (v) => {
+      const lower = v.name.toLowerCase();
+      return !FEMALE_BLOCKLIST.some(bad => lower.includes(bad));
+    };
+
+    // Priority 1: Young, energetic American/British Natural neural male voices
+    const tier1 = pool.find(v => {
+      const n = v.name.toLowerCase();
+      return isNonFemale(v) && (
+        n.includes('guy') || 
+        n.includes('christopher') || 
+        n.includes('brian') || 
+        n.includes('eric') || 
+        n.includes('ryan') ||
+        n.includes('alex') ||
+        n.includes('oliver') ||
+        n.includes('daniel')
+      );
+    });
+    if (tier1) return tier1;
+
+    // Priority 2: Google Male & explicit Male tagged voices
+    const tier2 = pool.find(v => {
+      const n = v.name.toLowerCase();
+      return isNonFemale(v) && (n.includes('male') || n.includes('david') || n.includes('mark') || n.includes('george'));
+    });
+    if (tier2) return tier2;
+
+    // Priority 3: First available verified non-female voice
+    const tier3 = pool.find(v => isNonFemale(v));
+    if (tier3) return tier3;
+
+    return pool[0];
   };
 
   const togglePlay = () => {
@@ -76,9 +109,10 @@ export default function AudioPitchPlayer() {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(SPOKEN_SCRIPT);
         
-        // Deep, confident, executive cadence
-        utterance.rate = 0.98;
-        utterance.pitch = 0.96;
+        // Tuned specifically for an energetic, confident 20-year-old male voice
+        utterance.rate = 1.03;  // Articulate, fresh, modern tech-founder pace
+        utterance.pitch = 1.05; // Youthful 20yo male vocal resonance
+        utterance.volume = 1.0;
         
         const selectedVoice = getBestMaleVoice();
         if (selectedVoice) {
@@ -98,8 +132,8 @@ export default function AudioPitchPlayer() {
         window.speechSynthesis.speak(utterance);
       }
 
-      // Smooth progress bar over 15 seconds
-      const totalDuration = 14500;
+      // Smooth progress bar over 14.5 seconds
+      const totalDuration = 14200;
       const step = 100;
       let elapsed = 0;
       intervalRef.current = setInterval(() => {
