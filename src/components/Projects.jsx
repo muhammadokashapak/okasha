@@ -17,6 +17,7 @@ import {
   ArrowUpRight
 } from 'lucide-react';
 import ProjectModal from './ProjectModal';
+import { useLanguage } from '../context/LanguageContext';
 
 const GithubIcon = ({ size = 16 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -328,17 +329,18 @@ export const allProjects = [
   }
 ];
 
-const categories = [
-  "All Projects",
-  "GenAI & RAG",
-  "Vision & On-Device AI",
-  "Full-Stack & Systems",
-  "HealthTech & EdTech"
-];
-
 export default function Projects() {
+  const { t } = useLanguage();
   const [selectedCategory, setSelectedCategory] = useState("All Projects");
   const [activeModalProject, setActiveModalProject] = useState(null);
+
+  const categories = [
+    { key: "All Projects", label: t('proj_filter_all', 'All Systems') },
+    { key: "GenAI & RAG", label: t('proj_filter_rag', 'GenAI & RAG') },
+    { key: "Vision & On-Device AI", label: t('proj_filter_edge', 'Edge AI & IoT') },
+    { key: "Full-Stack & Systems", label: "Full-Stack & Systems" },
+    { key: "HealthTech & EdTech", label: t('proj_filter_health', 'Healthcare & Vision') }
+  ];
 
   const filteredProjects = selectedCategory === "All Projects"
     ? allProjects
@@ -354,13 +356,14 @@ export default function Projects() {
 
       <div className="section-header">
         <div className="section-tag">
-          <Sparkles size={14} /> Production Portfolio
+          <Sparkles size={14} /> {t('proj_tag', 'Production Work')}
         </div>
         <h2 className="section-title">
-          Featured <span className="gradient-text">Engineering Systems</span>
+          {t('proj_title_pre', 'Featured')}{' '}
+          <span className="gradient-text">{t('proj_title_highlight', 'Systems & Deployments')}</span>
         </h2>
         <p className="section-subtitle">
-          Cutting-edge AI architectures, enterprise RAG platforms, on-device neural engines, and scalable full-stack applications.
+          {t('proj_subtitle', 'Explore 10 end-to-end production AI platforms, edge neural pipelines, and mission-critical applications.')}
         </p>
       </div>
 
@@ -368,11 +371,11 @@ export default function Projects() {
       <div className="filter-tabs">
         {categories.map((cat) => (
           <button
-            key={cat}
-            className={`filter-btn ${selectedCategory === cat ? 'active' : ''}`}
-            onClick={() => setSelectedCategory(cat)}
+            key={cat.key}
+            className={`filter-btn ${selectedCategory === cat.key ? 'active' : ''}`}
+            onClick={() => setSelectedCategory(cat.key)}
           >
-            {cat}
+            {cat.label}
           </button>
         ))}
       </div>

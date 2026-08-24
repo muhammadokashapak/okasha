@@ -21,9 +21,12 @@ import TensorVisualizer from './components/TensorVisualizer';
 import CompetencyRadar from './components/CompetencyRadar';
 import AiChatbot from './components/AiChatbot';
 import MatrixRain from './components/MatrixRain';
+import LanguageSelector from './components/LanguageSelector';
 import { playSound, isSoundMuted, setSoundMuted } from './utils/soundFx';
+import { useLanguage } from './context/LanguageContext';
 
 function App() {
+  const { t, isRTL } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [terminalOpen, setTerminalOpen] = useState(false);
   const [recruiterOpen, setRecruiterOpen] = useState(false);
@@ -71,13 +74,13 @@ function App() {
   };
 
   const navItems = [
-    { label: 'About', href: '#about' },
-    { label: 'Topology', href: '#architecture-graph' },
-    { label: 'Systems', href: '#projects' },
-    { label: 'RAG Lab', href: '#rag-simulator' },
-    { label: 'Quantization', href: '#tensor-visualizer' },
-    { label: 'ROI Calculator', href: '#roi-calculator' },
-    { label: 'Contact', href: '#contact' },
+    { label: t('nav_about', 'About'), href: '#about' },
+    { label: t('nav_topology', 'Topology'), href: '#architecture-graph' },
+    { label: t('nav_systems', 'Systems'), href: '#projects' },
+    { label: t('nav_rag_lab', 'RAG Lab'), href: '#rag-simulator' },
+    { label: t('nav_quantization', 'Quantization'), href: '#tensor-visualizer' },
+    { label: t('nav_roi_calc', 'ROI Calculator'), href: '#roi-calculator' },
+    { label: t('nav_contact', 'Contact'), href: '#contact' },
   ];
 
   return (
@@ -132,7 +135,7 @@ function App() {
           <div className="nav-links nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             {navItems.map((item) => (
               <a
-                key={item.label}
+                key={item.href}
                 href={item.href}
                 onClick={() => playSound('hover')}
                 style={{
@@ -150,6 +153,9 @@ function App() {
 
           {/* Desktop Right Group: Action Suite */}
           <div className="nav-links nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            {/* Multilingual Selector */}
+            <LanguageSelector />
+
             {/* Voice Command Button */}
             <button
               onClick={() => {
@@ -187,7 +193,7 @@ function App() {
               }}
               title="Open Recruiter 30-Second Executive Fast-Track"
             >
-              <Zap size={14} /> <span>Recruiter Brief</span>
+              <Zap size={14} /> <span>{t('nav_recruiter_brief', 'Recruiter Brief')}</span>
             </button>
 
             {/* Audio Sound Effects Toggle */}
@@ -236,7 +242,7 @@ function App() {
                 whiteSpace: 'nowrap'
               }}
             >
-              <Terminal size={14} /> <span>CLI</span>
+              <Terminal size={14} /> <span>{t('nav_cli', 'CLI')}</span>
             </button>
 
             {/* Resume Download */}
@@ -260,12 +266,13 @@ function App() {
                 textDecoration: 'none'
               }}
             >
-              <FileText size={14} /> <span>Resume</span>
+              <FileText size={14} /> <span>{t('nav_resume', 'Resume')}</span>
             </a>
           </div>
 
-          {/* Mobile Actions (Theme + Audio + Hamburger) */}
+          {/* Mobile Actions (Language + Theme + Audio + Hamburger) */}
           <div style={{ display: 'none' }} className="mobile-actions-wrapper">
+            <LanguageSelector isMobile={true} />
             <button
               onClick={toggleSound}
               className="sound-toggle-btn"
@@ -300,7 +307,7 @@ function App() {
           <div className="nav-mobile-menu">
             {navItems.map((item) => (
               <a
-                key={item.label}
+                key={item.href}
                 href={item.href}
                 onClick={() => {
                   playSound('hover');
@@ -358,7 +365,7 @@ function App() {
                   cursor: 'pointer'
                 }}
               >
-                <Zap size={16} /> <span>Recruiter 30s Fast-Track</span>
+                <Zap size={16} /> <span>{t('hero_cta_recruiter', 'Recruiter 30s Fast-Track')}</span>
               </button>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -383,7 +390,7 @@ function App() {
                     cursor: 'pointer'
                   }}
                 >
-                  <Terminal size={15} /> <span>CLI</span>
+                  <Terminal size={15} /> <span>{t('nav_cli', 'CLI')}</span>
                 </button>
 
                 <a
@@ -404,7 +411,7 @@ function App() {
                     textDecoration: 'none'
                   }}
                 >
-                  <FileText size={15} /> <span>Resume</span>
+                  <FileText size={15} /> <span>{t('nav_resume', 'Resume')}</span>
                 </a>
               </div>
             </div>
@@ -459,7 +466,7 @@ function App() {
                 </span>
               </div>
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', marginTop: '6px', maxWidth: '460px', lineHeight: 1.5 }}>
-                Muhammad Okasha — AI Solutions Architect &amp; Machine Learning Engineer (B.E. Computer Systems, UET Peshawar).
+                {t('footer_text', 'Designed & engineered by Muhammad Okasha. Built for enterprise AI resilience & edge performance.')}
               </p>
             </div>
 
@@ -467,7 +474,7 @@ function App() {
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(8px, 2vw, 14px)', alignItems: 'center' }}>
               {navItems.map((item) => (
                 <a
-                  key={item.label}
+                  key={item.href}
                   href={item.href}
                   onClick={() => playSound('hover')}
                   style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', fontWeight: 600, transition: 'color 0.2s', padding: '3px 0' }}
@@ -529,6 +536,7 @@ function App() {
           .mobile-actions-wrapper {
             display: flex !important;
             align-items: center;
+            gap: 6px;
           }
         }
       `}</style>

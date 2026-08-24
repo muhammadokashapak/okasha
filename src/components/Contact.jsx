@@ -10,16 +10,14 @@ import {
   Copy, 
   Sparkles, 
   MessageSquare,
-  Clock,
-  ArrowUpRight,
   ExternalLink,
-  ShieldCheck,
-  CheckCircle2,
   Download
 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Contact() {
+  const { t } = useLanguage();
   const [copiedEmail, setCopiedEmail] = useState(false);
   const [copiedPhone, setCopiedPhone] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
@@ -84,13 +82,14 @@ export default function Contact() {
           {/* Header */}
           <div className="section-header" style={{ marginBottom: 'clamp(2rem, 4vw, 3.5rem)', padding: '0 8px' }}>
             <div className="section-tag">
-              <Sparkles size={14} /> Get In Touch
+              <Sparkles size={14} /> {t('contact_tag', 'Initiate Transmission')}
             </div>
             <h2 className="section-title">
-              Let's <span className="gradient-text">Build Together</span>
+              {t('contact_title_pre', "Let's Build")}{' '}
+              <span className="gradient-text">{t('contact_title_highlight', 'Something Extraordinary')}</span>
             </h2>
             <p className="section-subtitle">
-              Have an ambitious AI project, enterprise RAG pipeline, or systems architecture requirement? Let's connect and make it reality.
+              {t('contact_subtitle', 'Available for full-time AI/ML Engineer roles, high-impact architectural consulting, and collaborative research.')}
             </p>
           </div>
 
@@ -110,7 +109,7 @@ export default function Contact() {
               
               {/* Primary Direct Card: Email */}
               <div 
-                className="card contact-action-card" 
+                className="card contact-action-card spotlight-card" 
                 style={{
                   padding: 'clamp(1.1rem, 3vw, 1.4rem)',
                   display: 'flex',
@@ -186,7 +185,7 @@ export default function Contact() {
 
               {/* Direct Phone / WhatsApp Card */}
               <div 
-                className="card contact-action-card" 
+                className="card contact-action-card spotlight-card" 
                 style={{
                   padding: 'clamp(1.1rem, 3vw, 1.4rem)',
                   display: 'flex',
@@ -215,19 +214,21 @@ export default function Contact() {
                   </div>
                   <div style={{ minWidth: 0, flex: 1 }}>
                     <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                      Phone / WhatsApp
+                      Direct Phone / WhatsApp
                     </div>
                     <a 
-                      href="tel:+923495696659" 
+                      href="https://wa.me/923495696659" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
                       style={{ 
                         color: 'var(--text-primary)', 
                         fontWeight: 700, 
-                        fontSize: 'clamp(0.88rem, 2.4vw, 1rem)',
+                        fontSize: 'clamp(0.85rem, 2.4vw, 0.96rem)',
                         display: 'block',
                         marginTop: '2px'
                       }}
                     >
-                      +92 3495696659
+                      +92 349 5696659
                     </a>
                   </div>
                 </div>
@@ -260,7 +261,7 @@ export default function Contact() {
 
               {/* Resume Card (High-Impact VIP Glow) */}
               <div 
-                className="card contact-action-card" 
+                className="card contact-action-card spotlight-card" 
                 style={{
                   padding: 'clamp(1.1rem, 3vw, 1.4rem)',
                   display: 'flex',
@@ -318,7 +319,7 @@ export default function Contact() {
 
               {/* Interactive Live Google Maps Location Card */}
               <div 
-                className="card" 
+                className="card spotlight-card" 
                 style={{
                   padding: 'clamp(1rem, 3vw, 1.3rem)',
                   display: 'flex',
@@ -415,7 +416,7 @@ export default function Contact() {
 
             {/* ── Right Column: Direct Message Dispatch Cockpit ── */}
             <div
-              className="card"
+              className="card spotlight-card"
               style={{
                 padding: 'clamp(1.2rem, 3.5vw, 2.2rem)',
                 borderRadius: '24px',
@@ -441,19 +442,19 @@ export default function Contact() {
                   <MessageSquare size={17} />
                 </div>
                 <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.25rem)', color: 'var(--text-primary)', fontWeight: 800, letterSpacing: '-0.3px' }}>
-                  Send a Direct Message
+                  {t('contact_tag', 'Direct Message Transmission')}
                 </h3>
               </div>
 
               <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', marginBottom: '1.2rem', lineHeight: 1.5 }}>
-                Fill out the brief scope below to immediately transmit your project specs to my primary inbox.
+                {t('contact_subtitle', 'Fill out the brief scope below to immediately transmit your project specs to my primary inbox.')}
               </p>
 
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', boxSizing: 'border-box' }}>
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', width: '100%' }} className="contact-form-row">
                   <div style={{ width: '100%' }}>
                     <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                      YOUR NAME *
+                      {t('contact_name_label', 'YOUR NAME *')}
                     </label>
                     <input
                       type="text"
@@ -480,7 +481,7 @@ export default function Contact() {
 
                   <div style={{ width: '100%' }}>
                     <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                      YOUR EMAIL *
+                      {t('contact_email_label', 'YOUR EMAIL *')}
                     </label>
                     <input
                       type="email"
@@ -508,7 +509,7 @@ export default function Contact() {
 
                 <div style={{ width: '100%' }}>
                   <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                    PROJECT SCOPE / TOPIC
+                    {t('contact_msg_label', 'PROJECT SCOPE / TOPIC')}
                   </label>
                   <input
                     type="text"
@@ -534,7 +535,7 @@ export default function Contact() {
 
                 <div style={{ width: '100%' }}>
                   <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
-                    MESSAGE DETAILS *
+                    {t('contact_msg_label', 'MESSAGE DETAILS *')}
                   </label>
                   <textarea
                     placeholder="Describe your vision, timeline, or technical requirements..."
@@ -576,11 +577,11 @@ export default function Contact() {
                 >
                   {sentStatus ? (
                     <>
-                      <Check size={17} /> Opening Mail Client...
+                      <Check size={17} /> {t('contact_sending', 'Opening Mail Client...')}
                     </>
                   ) : (
                     <>
-                      <Send size={17} /> Send Inquiry via Mail
+                      <Send size={17} /> {t('contact_submit', 'Transmit Message')}
                     </>
                   )}
                 </button>

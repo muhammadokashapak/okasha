@@ -22,8 +22,10 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function RecruiterModal({ isOpen, onClose }) {
+  const { t } = useLanguage();
   const [copiedDossier, setCopiedDossier] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
 

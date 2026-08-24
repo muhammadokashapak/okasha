@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Bot, Cpu, Database, Layout, Sparkles, Layers, ShieldCheck, Terminal } from 'lucide-react';
+import { Bot, Cpu, Database, Layout, Sparkles } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const skillCategories = [
   {
@@ -38,7 +39,7 @@ const skillCategories = [
     title: "Full-Stack & Systems Architecture",
     description: "High-concurrency microservices, desktop EXE & native mobile apps",
     skills: [
-      "FastAPI (Async Gateway)", "React 18 & Vite", "WebSockets & WebRTC",
+      "FastAPI (Async Gateway)", "React 19 & Vite", "WebSockets & WebRTC",
       "Server-Sent Events (SSE)", "Android Jetpack Compose", "Capacitor Mobile / Desktop",
       "SQLite WAL & Turso", "PostgreSQL", "REST API v2 & OAuth 2.0"
     ]
@@ -46,6 +47,8 @@ const skillCategories = [
 ];
 
 export default function Skills() {
+  const { t } = useLanguage();
+
   return (
     <section id="skills" className="section-container">
       <motion.div
@@ -56,74 +59,69 @@ export default function Skills() {
       >
         <div className="section-header">
           <div className="section-tag">
-            <Sparkles size={14} /> Core Competencies
+            <Sparkles size={14} /> {t('skills_tag', 'Technical Arsenal')}
           </div>
           <h2 className="section-title">
-            Technical <span className="gradient-text">Skills &amp; Mastery</span>
+            {t('skills_title_pre', 'Skills &')}{' '}
+            <span className="gradient-text">{t('skills_title_highlight', 'Technology Stack')}</span>
           </h2>
           <p className="section-subtitle">
-            A comprehensive matrix of AI engineering, deep learning algorithms, edge inference, and distributed system architectures.
+            {t('skills_subtitle', 'Full-spectrum competencies across deep learning, backend pipelines, edge hardware, and modern full-stack engineering.')}
           </p>
         </div>
 
-        {/* Bento Grid */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 270px), 1fr))', gap: 'clamp(1.4rem, 3vw, 2rem)' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 280px), 1fr))', gap: 'clamp(1.2rem, 3vw, 1.8rem)' }}>
           {skillCategories.map((category, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 25 }}
+              className="card spotlight-card"
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ y: -6 }}
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                borderRadius: '24px',
+                padding: 'clamp(1.4rem, 3vw, 1.8rem)'
+              }}
             >
-              <div className="card" style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', marginBottom: '0.8rem' }}>
-                  <div style={{
-                    background: 'rgba(255, 255, 255, 0.04)',
-                    padding: '10px',
-                    borderRadius: '12px',
-                    border: '1px solid var(--card-border)'
-                  }}>
-                    {category.icon}
-                  </div>
-                  <div>
-                    <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', fontWeight: 700 }}>
-                      {category.title}
-                    </h3>
-                    <p style={{ fontSize: '0.78rem', color: 'var(--text-secondary)' }}>
-                      {category.description}
-                    </p>
-                  </div>
-                </div>
-
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '1rem' }}>
                 <div style={{
-                  height: '1px',
-                  background: 'linear-gradient(90deg, rgba(0,255,204,0.2), transparent)',
-                  margin: '0.8rem 0 1.2rem'
-                }} />
-
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: 'auto' }}>
-                  {category.skills.map((skill, i) => (
-                    <motion.span
-                      key={i}
-                      whileHover={{ scale: 1.05, backgroundColor: 'rgba(0, 255, 204, 0.15)', borderColor: 'var(--accent-color)' }}
-                      style={{
-                        background: 'rgba(255, 255, 255, 0.03)',
-                        border: '1px solid rgba(255, 255, 255, 0.08)',
-                        padding: '6px 13px',
-                        borderRadius: '8px',
-                        color: 'var(--text-secondary)',
-                        fontSize: '0.82rem',
-                        fontWeight: 500,
-                        cursor: 'default',
-                        transition: 'all 0.2s ease'
-                      }}
-                    >
-                      {skill}
-                    </motion.span>
-                  ))}
+                  background: 'rgba(255, 255, 255, 0.04)',
+                  padding: '10px',
+                  borderRadius: '14px',
+                  border: '1px solid var(--card-border)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}>
+                  {category.icon}
                 </div>
+                <h3 style={{ fontSize: '1.15rem', color: 'var(--text-primary)', fontWeight: 700 }}>
+                  {category.title}
+                </h3>
+              </div>
+
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', marginBottom: '1.2rem', lineHeight: 1.5 }}>
+                {category.description}
+              </p>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px', marginTop: 'auto' }}>
+                {category.skills.map((skill, idx) => (
+                  <span
+                    key={idx}
+                    className="badge-neon"
+                    style={{
+                      fontSize: '0.74rem',
+                      padding: '4px 9px',
+                      borderRadius: '8px'
+                    }}
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </motion.div>
           ))}

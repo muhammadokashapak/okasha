@@ -959,3 +959,50 @@ ul {
   transform: scale(1.08);
 }
 
+/* Multilingual Language Selector Styling */
+.lang-selector-btn:hover {
+  background: rgba(0, 255, 204, 0.1) !important;
+  border-color: var(--accent-color) !important;
+  transform: translateY(-1px);
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* RTL Layout Enhancements for Urdu & Arabic */
+body.rtl-layout {
+  direction: rtl;
+  text-align: right;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body.rtl-layout .section-header {
+  text-align: right;
+}
+
+body.rtl-layout .hero-status-badge {
+  flex-direction: row-reverse;
+}
+
+body.rtl-layout .exp-card {
+  border-left: none !important;
+  border-right: 3px solid var(--accent-color);
+}
+
+body.rtl-layout .card.hero-metric-card {
+  text-align: center;
+}
+
+body.rtl-layout .nav-links {
+  flex-direction: row-reverse;
+}
+
+

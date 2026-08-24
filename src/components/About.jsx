@@ -1,35 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, MapPin, Calendar, Sparkles, Award, Code2, Cpu, Clock, CheckCircle2, Zap, Layers, Globe } from 'lucide-react';
+import { GraduationCap, MapPin, Sparkles, Cpu, Clock, Zap, Layers, Globe } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
-
-const stats = [
-  { value: "5,700+", label: "Vector Chunks Indexed", desc: "FastEmbed ONNX & ChromaDB" },
-  { value: "10+", label: "Production AI Systems", desc: "Enterprise RAG & Edge ML" },
-  { value: "100%", label: "On-Device Neural Models", desc: "Whisper INT8 + MarianMT" },
-  { value: "250%", label: "Search Revenue Surge", desc: "Automated Intent Routing" }
-];
-
-const education = [
-  {
-    degree: "B.E. Computer Systems Engineering",
-    school: "UET Peshawar",
-    period: "Oct 2022 – Present",
-    icon: "🎓",
-    badge: "Major in AI & Systems",
-    highlights: "Deep Learning, Edge Inference & Distributed Architectures"
-  },
-  {
-    degree: "Intermediate in Pre-Engineering",
-    school: "APSACS Secretariat, Attock",
-    period: "Aug 2020 – Jun 2022",
-    icon: "📚",
-    badge: "Top Academic Tier",
-    highlights: "Advanced Mathematics & Analytical Physics"
-  }
-];
+import { useLanguage } from '../context/LanguageContext';
 
 export default function About() {
+  const { t } = useLanguage();
   const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
@@ -49,6 +25,32 @@ export default function About() {
     return () => clearInterval(interval);
   }, []);
 
+  const stats = [
+    { value: "5,700+", label: t('hero_metric_1_label', 'Vector Chunks Indexed'), desc: t('about_stat_1_desc', 'FastEmbed ONNX & ChromaDB') },
+    { value: "10+", label: t('proj_title_highlight', 'Production AI Systems'), desc: t('about_stat_2_desc', 'Enterprise RAG & Edge ML') },
+    { value: "100%", label: t('hero_metric_3_label', 'On-Device Neural Models'), desc: t('about_stat_3_desc', 'Whisper INT8 + MarianMT') },
+    { value: "250%", label: t('hero_metric_4_label', 'Search Revenue Surge'), desc: t('about_stat_4_desc', 'Automated Intent Routing') }
+  ];
+
+  const education = [
+    {
+      degree: t('about_edu_1_degree', 'B.E. Computer Systems Engineering'),
+      school: t('about_edu_1_school', 'UET Peshawar'),
+      period: t('about_edu_1_period', 'Oct 2022 – Present'),
+      icon: "🎓",
+      badge: t('about_edu_1_badge', 'Major in AI & Systems'),
+      highlights: t('about_edu_1_highlights', 'Deep Learning, Edge Inference & Distributed Architectures')
+    },
+    {
+      degree: t('about_edu_2_degree', 'Intermediate in Pre-Engineering'),
+      school: t('about_edu_2_school', 'APSACS Secretariat, Attock'),
+      period: t('about_edu_2_period', 'Aug 2020 – Jun 2022'),
+      icon: "📚",
+      badge: t('about_edu_2_badge', 'Top Academic Tier'),
+      highlights: t('about_edu_2_highlights', 'Advanced Mathematics & Analytical Physics')
+    }
+  ];
+
   return (
     <section id="about" className="section-container">
       <motion.div
@@ -59,13 +61,14 @@ export default function About() {
       >
         <div className="section-header">
           <div className="section-tag">
-            <Sparkles size={14} /> Background &amp; Vision
+            <Sparkles size={14} /> {t('about_tag', 'Background & Vision')}
           </div>
           <h2 className="section-title">
-            About <span className="gradient-text">Muhammad Okasha</span>
+            {t('about_title_pre', 'About')}{' '}
+            <span className="gradient-text">{t('about_title_post', 'Muhammad Okasha')}</span>
           </h2>
           <p className="section-subtitle">
-            Bridging cutting-edge Generative AI research, on-device edge intelligence, and resilient software systems.
+            {t('about_subtitle', 'Bridging cutting-edge Generative AI research, on-device edge intelligence, and resilient software systems.')}
           </p>
         </div>
 
@@ -135,25 +138,26 @@ export default function About() {
             className="about-bio-container"
           >
             <h3 style={{ fontSize: 'clamp(1.6rem, 4vw, 2.2rem)', marginBottom: '0.3rem', fontFamily: 'var(--font-display)', fontWeight: 800 }}>
-              Muhammad Okasha
+              {t('hero_name', 'Muhammad Okasha')}
             </h3>
             <p style={{ color: 'var(--accent-color)', fontWeight: 700, fontSize: 'clamp(0.95rem, 2.5vw, 1.15rem)', marginBottom: '1.2rem', letterSpacing: '0.5px' }}>
-              AI Solutions Architect &amp; Machine Learning Engineer
+              {t('hero_role_1', 'AI Solutions Architect')} &amp; {t('hero_role_2', 'Machine Learning Engineer')}
             </p>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.02rem', lineHeight: 1.8, maxWidth: '680px' }}>
-              I engineer production AI systems that translate theoretical machine learning into resilient, real-time software. 
-              From deploying <span style={{ color: 'var(--accent-color)', fontWeight: 600 }}>multimodal RAG platforms with 5,700+ vector chunks</span> to compiling 
-              <span style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}> INT8 quantized neural models for 100% offline edge devices</span>, my work bridges raw technical depth with pristine user experience.
+              {t('about_bio_p1', 'I am a Computer Systems Engineer specializing in Enterprise Generative AI, Multimodal RAG Architectures, and On-Device Neural Edge Inference.')}
+            </p>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '1.02rem', lineHeight: 1.8, maxWidth: '680px', marginTop: '0.8rem' }}>
+              {t('about_bio_p2', 'From building ChatGPT-grade enterprise RAG engines indexing 5,700+ vector chunks to deploying quantized INT8 Whisper models and YOLO vision systems on edge microcontrollers, I design architectures that translate complex ML research into high-impact production systems.')}
             </p>
 
             <div className="about-badges" style={{ display: 'flex', gap: '1.4rem', marginTop: '1.5rem', flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                 <MapPin size={16} color="var(--accent-color)" />
-                Islamabad, Pakistan
+                {t('about_status_loc', 'Islamabad / Peshawar, PK')}
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                 <Globe size={16} color="var(--accent-cyan)" />
-                UTC+5 (Asia/Karachi)
+                {t('about_local_time', 'Local Time (PKT)')}
               </div>
             </div>
           </motion.div>
@@ -170,27 +174,27 @@ export default function About() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '1rem' }}>
               <Zap size={20} color="var(--accent-color)" />
               <h3 style={{ fontSize: '1.25rem', fontWeight: 700, margin: 0, color: 'var(--text-primary)' }}>
-                Architectural DNA &amp; Core Focus
+                {t('exp_tag', 'Architectural DNA & Core Focus')}
               </h3>
             </div>
             <p style={{ color: 'var(--text-secondary)', fontSize: '0.94rem', lineHeight: 1.7, marginBottom: '1.2rem' }}>
-              Specialized in high-throughput enterprise pipelines and on-device neural acceleration. Designed for mission-critical reliability across healthcare, conversational voice, and automated intelligence.
+              {t('exp_subtitle', 'Specialized in high-throughput enterprise pipelines and on-device neural acceleration. Designed for mission-critical reliability across healthcare, conversational voice, and automated intelligence.')}
             </p>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '12px' }}>
               <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '12px' }}>
                 <div style={{ color: 'var(--accent-color)', fontWeight: 700, fontSize: '0.86rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Layers size={14} /> Multimodal RAG
+                  <Layers size={14} /> {t('exp_1_title', 'Multimodal RAG')}
                 </div>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '4px' }}>
-                  Hybrid dense/sparse embeddings, ChromaDB, FastEmbed &amp; RRF ranking.
+                  {t('exp_1_desc', 'Hybrid dense/sparse embeddings, ChromaDB, FastEmbed & RRF ranking.')}
                 </div>
               </div>
               <div style={{ background: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--card-border)', borderRadius: '12px', padding: '12px' }}>
                 <div style={{ color: 'var(--accent-cyan)', fontWeight: 700, fontSize: '0.86rem', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <Cpu size={14} /> Edge Neural ML
+                  <Cpu size={14} /> {t('exp_2_title', 'Edge Neural ML')}
                 </div>
                 <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', marginTop: '4px' }}>
-                  Quantized INT8 weights, offline Whisper &amp; MarianMT on Android/ESP32.
+                  {t('exp_2_desc', 'Quantized INT8 weights, offline Whisper & MarianMT on Android/ESP32.')}
                 </div>
               </div>
             </div>
@@ -205,7 +209,7 @@ export default function About() {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
                 <span style={{ fontSize: '0.82rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                  Local Time
+                  {t('about_local_time', 'Local Time (PKT)')}
                 </span>
                 <Clock size={16} color="var(--accent-color)" />
               </div>
@@ -221,11 +225,11 @@ export default function About() {
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <span style={{ width: '10px', height: '10px', borderRadius: '50%', background: '#10b981', boxShadow: '0 0 10px #10b981' }} />
                 <span style={{ color: '#10b981', fontSize: '0.86rem', fontWeight: 700 }}>
-                  Ready for Global Hire
+                  {t('hero_status', 'Available for AI / ML Roles')}
                 </span>
               </div>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem', marginTop: '4px' }}>
-                Open to Full-Time AI &amp; Software Roles
+                Full-Time &amp; Enterprise Architecture
               </div>
             </div>
           </div>
@@ -281,7 +285,7 @@ export default function About() {
               }}
             >
               <GraduationCap color="var(--accent-color)" size={24} />
-              Academic Foundations &amp; Degrees
+              {t('about_edu_title', 'Academic Foundations & Credentials')}
             </h3>
 
             <div className="education-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.2rem' }}>

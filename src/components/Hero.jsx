@@ -1,11 +1,12 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, Float, MeshDistortMaterial } from '@react-three/drei';
+import { Points, PointMaterial } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 import { motion } from 'framer-motion';
-import { FileText, Terminal, Zap, Sparkles, MessageSquare, Code2 } from 'lucide-react';
+import { FileText, Terminal, Zap, Code2 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
 import AudioPitchPlayer from './AudioPitchPlayer';
+import { useLanguage } from '../context/LanguageContext';
 
 function Starfield({ color = "#00ffcc", ...props }) {
   const ref = useRef();
@@ -13,8 +14,8 @@ function Starfield({ color = "#00ffcc", ...props }) {
 
   useFrame((state, delta) => {
     if (ref.current) {
-      ref.current.rotation.x -= delta / 15;
-      ref.current.rotation.y -= delta / 22;
+      ref.current.rotation.x -= delta / 20;
+      ref.current.rotation.y -= delta / 30;
     }
   });
 
@@ -24,10 +25,10 @@ function Starfield({ color = "#00ffcc", ...props }) {
         <PointMaterial
           transparent
           color={color}
-          size={0.004}
+          size={0.0035}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.75}
+          opacity={0.65}
         />
       </Points>
     </group>
@@ -40,8 +41,8 @@ function StarfieldViolet({ color = "#8b5cf6", ...props }) {
 
   useFrame((state, delta) => {
     if (ref.current) {
-      ref.current.rotation.x += delta / 18;
-      ref.current.rotation.y += delta / 25;
+      ref.current.rotation.x += delta / 25;
+      ref.current.rotation.y += delta / 35;
     }
   });
 
@@ -51,94 +52,53 @@ function StarfieldViolet({ color = "#8b5cf6", ...props }) {
         <PointMaterial
           transparent
           color={color}
-          size={0.0045}
+          size={0.004}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.65}
+          opacity={0.55}
         />
       </Points>
     </group>
   );
 }
 
-function NeuralFloatingCore({ color1 = "#00ffcc", color2 = "#8b5cf6" }) {
-  const meshRef = useRef();
-  const outerRef = useRef();
-
-  useFrame((state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x += delta * 0.25;
-      meshRef.current.rotation.y += delta * 0.35;
-    }
-    if (outerRef.current) {
-      outerRef.current.rotation.x -= delta * 0.15;
-      outerRef.current.rotation.z += delta * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={2} rotationIntensity={0.8} floatIntensity={1.2}>
-      <group position={[0, 0, -0.2]}>
-        {/* Inner Glowing Wireframe Core */}
-        <mesh ref={meshRef} scale={0.48}>
-          <icosahedronGeometry args={[1, 2]} />
-          <meshStandardMaterial
-            color={color1}
-            wireframe
-            transparent
-            opacity={0.35}
-            emissive={color1}
-            emissiveIntensity={0.6}
-          />
-        </mesh>
-
-        {/* Outer Orbit Synapse Ring */}
-        <mesh ref={outerRef} scale={0.7}>
-          <torusGeometry args={[1, 0.02, 16, 100]} />
-          <meshBasicMaterial color={color2} transparent opacity={0.4} />
-        </mesh>
-      </group>
-    </Float>
-  );
-}
-
 export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, theme = 'dark' }) {
+  const { t, isRTL } = useLanguage();
   const isLight = theme === 'light';
   const starColor1 = isLight ? "#0284c7" : "#00ffcc";
   const starColor2 = isLight ? "#7c3aed" : "#8b5cf6";
 
   const heroMetrics = [
-    { num: "5,700+", label: "Vector Embeddings Shipped" },
-    { num: "<50ms", label: "Real-Time RAG Latency" },
-    { num: "100%", label: "On-Device Neural Models" },
-    { num: "250%", label: "Search Revenue Surge" }
+    { num: "5,700+", label: t('hero_metric_1_label', 'Vector Embeddings Shipped') },
+    { num: "<50ms", label: t('hero_metric_2_label', 'Real-Time RAG Latency') },
+    { num: "100%", label: t('hero_metric_3_label', 'On-Device Neural Models') },
+    { num: "250%", label: t('hero_metric_4_label', 'Search Revenue Surge') }
   ];
 
   return (
     <section id="home" style={{ position: 'relative', minHeight: '100dvh', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      {/* 3D Cosmic Neural Canvas */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: isLight ? 0.65 : 1 }}>
+      {/* Subtle 3D Cosmic Particle Starfield Canvas (Clean background without obstructive core) */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: isLight ? 0.65 : 0.85, pointerEvents: 'none' }}>
         <Canvas camera={{ position: [0, 0, 1.2] }}>
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} />
           <Starfield color={starColor1} />
           <StarfieldViolet color={starColor2} />
-          <NeuralFloatingCore color1={starColor1} color2={starColor2} />
         </Canvas>
       </div>
 
-      {/* Radiant Background Aura */}
+      {/* Radiant Background Aura with refined opacity for maximum readability */}
       <div style={{ 
         position: 'absolute', 
         top: '40%', 
         left: '50%', 
         transform: 'translate(-50%, -50%)', 
-        width: 'min(750px, 92vw)', 
-        height: 'min(750px, 92vw)', 
+        width: 'min(700px, 90vw)', 
+        height: 'min(700px, 90vw)', 
         background: isLight
-          ? 'radial-gradient(circle, rgba(14,165,233,0.18) 0%, rgba(124,58,237,0.12) 40%, transparent 75%)'
-          : 'radial-gradient(circle, rgba(0,255,204,0.18) 0%, rgba(56,189,248,0.12) 30%, rgba(139,92,246,0.1) 60%, transparent 80%)', 
-        filter: 'blur(65px)', 
+          ? 'radial-gradient(circle, rgba(14,165,233,0.1) 0%, rgba(124,58,237,0.06) 45%, transparent 75%)'
+          : 'radial-gradient(circle, rgba(0,255,204,0.09) 0%, rgba(56,189,248,0.07) 35%, rgba(139,92,246,0.05) 60%, transparent 80%)', 
+        filter: 'blur(75px)', 
         zIndex: 0,
         pointerEvents: 'none'
       }} />
@@ -155,9 +115,9 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
         pointerEvents: 'none'
       }}>
         <motion.div
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={{ opacity: 0, scale: 0.94 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.9, ease: 'easeOut' }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           style={{ textAlign: 'center', maxWidth: '960px' }}
         >
           {/* Status Badge */}
@@ -173,13 +133,13 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
               borderRadius: '30px',
               marginBottom: '1.5rem',
               pointerEvents: 'auto',
-              backdropFilter: 'blur(10px)',
+              backdropFilter: 'blur(12px)',
               boxShadow: `0 0 20px ${isLight ? 'rgba(2, 132, 199, 0.15)' : 'rgba(0, 255, 204, 0.15)'}`
             }}
           >
             <span className="pulse-dot" />
-            <span style={{ color: 'var(--accent-color)', fontSize: '0.86rem', fontWeight: 700, letterSpacing: '0.4px' }}>
-              Available for AI / ML Engineer &amp; Solutions Architect Roles
+            <span style={{ color: 'var(--accent-color)', fontSize: '0.86rem', fontWeight: 700, letterSpacing: '0.3px' }}>
+              {t('hero_status', 'Available for AI / ML Engineer & Solutions Architect Roles')}
             </span>
           </div>
 
@@ -187,11 +147,12 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
           <h1 style={{ 
             fontSize: 'clamp(2.1rem, 7vw, 4.8rem)', 
             marginBottom: '1.2rem', 
-            textShadow: isLight ? '0 4px 20px rgba(0,0,0,0.06)' : '0 10px 40px rgba(0,0,0,0.6)', 
+            textShadow: isLight ? '0 4px 20px rgba(0,0,0,0.06)' : '0 10px 40px rgba(0,0,0,0.7)', 
             wordBreak: 'break-word',
             letterSpacing: '-1px'
           }}>
-            Hi, I'm <span className="gradient-text">Muhammad Okasha</span>
+            {t('hero_greeting_pre', "Hi, I'm")}{' '}
+            <span className="gradient-text">{t('hero_name', 'Muhammad Okasha')}</span>
           </h1>
 
           {/* Subtitle / Roles */}
@@ -201,29 +162,29 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
             fontWeight: 400, 
             letterSpacing: '0.4px', 
             lineHeight: 1.4,
-            maxWidth: '800px',
+            maxWidth: '820px',
             margin: '0 auto'
           }}>
-            <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>AI Solutions Architect</span> &bull;{' '}
-            <span style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>Machine Learning Engineer</span> &bull;{' '}
-            <span style={{ color: 'var(--accent-alt)', fontWeight: 600 }}>Full-Stack Systems Specialist</span>
+            <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>{t('hero_role_1', 'AI Solutions Architect')}</span> &bull;{' '}
+            <span style={{ color: 'var(--accent-cyan)', fontWeight: 600 }}>{t('hero_role_2', 'Machine Learning Engineer')}</span> &bull;{' '}
+            <span style={{ color: 'var(--accent-alt)', fontWeight: 600 }}>{t('hero_role_3', 'Full-Stack Systems Specialist')}</span>
           </h2>
 
           <p style={{
             color: 'var(--text-muted)',
-            fontSize: 'clamp(0.88rem, 2vw, 1.05rem)',
-            maxWidth: '680px',
-            margin: '1.2rem auto 0',
-            lineHeight: 1.6
+            fontSize: 'clamp(0.92rem, 2vw, 1.08rem)',
+            maxWidth: '720px',
+            margin: '1.3rem auto 0',
+            lineHeight: 1.65
           }}>
-            Architecting enterprise RAG pipelines, on-device neural edge models, and ultra-high performance AI ecosystems that turn complex intelligence into seamless reality.
+            {t('hero_bio', 'Architecting enterprise RAG pipelines, on-device neural edge models, and ultra-high performance AI ecosystems that turn complex intelligence into seamless reality.')}
           </p>
 
           {/* Action CTAs */}
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
             className="hero-cta-group"
             style={{
               marginTop: 'clamp(2rem, 5vw, 2.8rem)',
@@ -253,7 +214,7 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
                 gap: '8px'
               }}
             >
-              <Zap size={18} /> Recruiter 30s Brief
+              <Zap size={18} /> {t('hero_cta_recruiter', 'Recruiter 30s Brief')}
             </button>
 
             <a 
@@ -261,7 +222,7 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
               className="btn-secondary"
               onClick={() => playSound('click')}
             >
-              <Code2 size={18} color="var(--accent-color)" /> View Systems (10)
+              <Code2 size={18} color="var(--accent-color)" /> {t('hero_cta_systems', 'View Systems (10)')}
             </a>
 
             <a
@@ -271,7 +232,7 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
               onClick={() => playSound('click')}
             >
               <FileText size={18} color="var(--accent-cyan)" />
-              Resume PDF
+              {t('hero_cta_resume', 'Resume PDF')}
             </a>
 
             <button
@@ -290,7 +251,7 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
               }}
             >
               <Terminal size={18} color="var(--accent-alt)" />
-              Matrix CLI
+              {t('hero_cta_cli', 'Matrix CLI')}
             </button>
           </motion.div>
 
@@ -303,7 +264,7 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
           <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.7, duration: 0.8 }}
+            transition={{ delay: 0.5, duration: 0.8 }}
             className="hero-metrics-grid"
             style={{
               marginTop: 'clamp(2.5rem, 6vw, 4.5rem)',
