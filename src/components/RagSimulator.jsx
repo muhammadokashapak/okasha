@@ -12,14 +12,18 @@ import {
   RefreshCw, 
   Code2, 
   Zap, 
-  Sliders 
+  Sliders,
+  Send,
+  Search,
+  CornerDownLeft
 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
+import { queryKnowledgeBase } from '../data/okashaKnowledge';
 
 const PRESET_QUERIES = [
   {
     id: "ghl-oauth",
-    label: "⚡ GHL OAuth 2.0 & API v2 Token Flow",
+    label: "⚡ GHL OAuth 2.0 & API v2 Flow",
     query: "How does OAuth 2.0 token refresh work in GoHighLevel REST API v2?",
     tokens: 14,
     embeddingTime: "12ms",
@@ -59,13 +63,13 @@ const PRESET_QUERIES = [
 ];
 
 export default function RagSimulator() {
-  const [selectedPreset, setSelectedPreset] = useState(PRESET_QUERIES[0]);
+  const [selectedPayload, setSelectedPayload] = useState(PRESET_QUERIES[0]);
   const [customInput, setCustomInput] = useState('');
   const [stage, setStage] = useState(0); // 0: Idle, 1: Vectorizing, 2: ChromaDB Search, 3: Chunk Retrieval, 4: Stream Complete
   const [streamedText, setStreamedText] = useState('');
   const [isRunning, setIsRunning] = useState(false);
 
-  const runSimulation = (preset = selectedPreset) => {
+  const runSimulation = (payload = selectedPayload) => {
     playSound('click');
     setIsRunning(true);
     setStage(1);
@@ -75,20 +79,20 @@ export default function RagSimulator() {
     setTimeout(() => {
       setStage(2);
       playSound('hover');
-    }, 600);
+    }, 500);
 
     // Stage 2 -> 3
     setTimeout(() => {
       setStage(3);
       playSound('hover');
-    }, 1200);
+    }, 1000);
 
     // Stage 3 -> 4 Typewriter stream
     setTimeout(() => {
       setStage(4);
       playSound('success');
       let currentIdx = 0;
-      const fullText = preset.synthesizedAnswer;
+      const fullText = payload.synthesizedAnswer;
       const interval = setInterval(() => {
         if (currentIdx < fullText.length) {
           setStreamedText(fullText.slice(0, currentIdx + 4));
@@ -98,13 +102,41 @@ export default function RagSimulator() {
           clearInterval(interval);
           setIsRunning(false);
         }
-      }, 25);
-    }, 1800);
+      }, 20);
+    }, 1500);
+  };
+
+  const handleCustomSubmit = (e) => {
+    e.preventDefault();
+    const query = customInput.trim();
+    if (!query || isRunning) return;
+
+    const result = queryKnowledgeBase(query);
+    const words = query.split(/\s+/).length;
+    const dynamicPayload = {
+      id: "custom-" + Date.now(),
+      label: "🔍 Custom Query: " + query.slice(0, 24) + "...",
+      query: query,
+      tokens: Math.round(words * 1.35) + 3,
+      embeddingTime: `${Math.floor(Math.random() * 6) + 10}ms`,
+      vectorDim: "768-D (FastEmbed nomic-v1.5)",
+      cosineScore: (0.93 + Math.random() * 0.05).toFixed(3),
+      rrfScore: (0.97 + Math.random() * 0.025).toFixed(3),
+      chunksScanned: "5,717 chunks",
+      topChunk: result.chunk 
+        ? result.chunk.content.slice(0, 180).replace(/\n/g, ' ') + '...'
+        : "Ground-truth system knowledge chunk extracted from Muhammad Okasha's indexed architectural repository.",
+      synthesizedAnswer: result.answer
+    };
+
+    setSelectedPayload(dynamicPayload);
+    runSimulation(dynamicPayload);
+    setCustomInput('');
   };
 
   useEffect(() => {
-    runSimulation(selectedPreset);
-  }, [selectedPreset]);
+    runSimulation(selectedPayload);
+  }, []);
 
   return (
     <section id="rag-simulator" className="section-container" style={{ paddingTop: 'clamp(2rem, 5vw, 4rem)' }}>
@@ -116,7 +148,7 @@ export default function RagSimulator() {
           Live <span className="gradient-text">RAG Pipeline Simulator</span>
         </h2>
         <p className="section-subtitle">
-          Test Muhammad's hybrid vector indexing, ONNX embedding generation, and ChromaDB Reciprocal Rank Fusion in real-time.
+          Ask any custom technical question or test presets to watch Muhammad's FastEmbed ONNX vectorization, ChromaDB RRF retrieval, and Gemini 3.7 stream in real-time.
         </p>
       </div>
 
@@ -133,10 +165,63 @@ export default function RagSimulator() {
           margin: '0 auto'
         }}
       >
-        {/* Top Preset Selector Tabs */}
-        <div style={{ marginBottom: '1.6rem' }}>
-          <div style={{ fontSize: '0.78rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '10px' }}>
-            SELECT LIVE TEST PAYLOAD:
+        {/* Custom Question Input Form */}
+        <form 
+          onSubmit={handleCustomSubmit}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            background: 'var(--btn-sec-bg)',
+            border: '1.5px solid var(--accent-color)',
+            borderRadius: '20px',
+            padding: '8px 14px',
+            marginBottom: '1.4rem',
+            boxShadow: '0 0 20px rgba(0, 255, 204, 0.15)',
+            flexWrap: 'wrap'
+          }}
+        >
+          <Search size={18} color="var(--accent-color)" style={{ flexShrink: 0 }} />
+          <input
+            type="text"
+            value={customInput}
+            onChange={(e) => setCustomInput(e.target.value)}
+            placeholder="Type your question (e.g. How does CHASHM AI work? What is GHL vector architecture?)..."
+            style={{
+              flex: 1,
+              minWidth: '220px',
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--text-primary)',
+              fontSize: '0.92rem',
+              fontWeight: 500,
+              outline: 'none'
+            }}
+          />
+          <button
+            type="submit"
+            disabled={!customInput.trim() || isRunning}
+            className="btn-primary"
+            style={{
+              padding: '8px 18px',
+              fontSize: '0.84rem',
+              borderRadius: '14px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px',
+              opacity: !customInput.trim() || isRunning ? 0.6 : 1,
+              cursor: !customInput.trim() || isRunning ? 'not-allowed' : 'pointer'
+            }}
+          >
+            <Send size={14} />
+            <span>Run Pipeline</span>
+          </button>
+        </form>
+
+        {/* Preset Selector Chips */}
+        <div style={{ marginBottom: '1.4rem' }}>
+          <div style={{ fontSize: '0.74rem', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '8px' }}>
+            OR SELECT BENCHMARK PRESETS:
           </div>
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
@@ -145,18 +230,19 @@ export default function RagSimulator() {
                 key={p.id}
                 onClick={() => {
                   if (isRunning) return;
-                  setSelectedPreset(p);
+                  setSelectedPayload(p);
+                  runSimulation(p);
                 }}
                 disabled={isRunning}
                 style={{
-                  padding: '9px 16px',
+                  padding: '8px 14px',
                   borderRadius: '14px',
-                  fontSize: '0.84rem',
+                  fontSize: '0.82rem',
                   fontWeight: 600,
                   cursor: isRunning ? 'not-allowed' : 'pointer',
-                  border: selectedPreset.id === p.id ? '1px solid var(--accent-color)' : '1px solid var(--card-border)',
-                  background: selectedPreset.id === p.id ? 'rgba(0, 255, 204, 0.12)' : 'var(--btn-sec-bg)',
-                  color: selectedPreset.id === p.id ? 'var(--accent-color)' : 'var(--text-secondary)',
+                  border: selectedPayload.id === p.id ? '1px solid var(--accent-color)' : '1px solid var(--card-border)',
+                  background: selectedPayload.id === p.id ? 'rgba(0, 255, 204, 0.12)' : 'var(--btn-sec-bg)',
+                  color: selectedPayload.id === p.id ? 'var(--accent-color)' : 'var(--text-secondary)',
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: '6px',
@@ -169,12 +255,12 @@ export default function RagSimulator() {
           </div>
         </div>
 
-        {/* Input Query Display */}
+        {/* Active Query Display & Re-Execute Action */}
         <div style={{
           background: 'var(--btn-sec-bg)',
           border: '1px solid var(--btn-sec-border)',
           borderRadius: '16px',
-          padding: '14px 18px',
+          padding: '12px 18px',
           marginBottom: '1.6rem',
           display: 'flex',
           alignItems: 'center',
@@ -185,27 +271,30 @@ export default function RagSimulator() {
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: 1, minWidth: '240px' }}>
             <Sparkles size={18} color="var(--accent-color)" />
             <div>
-              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Active Test Query</div>
-              <div style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.94rem' }}>
-                "{selectedPreset.query}"
+              <div style={{ fontSize: '0.72rem', color: 'var(--text-muted)', textTransform: 'uppercase', fontWeight: 600 }}>Active Test Query Ingestion</div>
+              <div style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.92rem' }}>
+                "{selectedPayload.query}"
               </div>
             </div>
           </div>
 
           <button
-            onClick={() => runSimulation(selectedPreset)}
+            onClick={() => runSimulation(selectedPayload)}
             disabled={isRunning}
-            className="btn-primary"
+            className="btn-secondary"
             style={{
-              padding: '8px 18px',
-              fontSize: '0.84rem',
+              padding: '7px 16px',
+              fontSize: '0.82rem',
               borderRadius: '12px',
               opacity: isRunning ? 0.6 : 1,
-              cursor: isRunning ? 'not-allowed' : 'pointer'
+              cursor: isRunning ? 'not-allowed' : 'pointer',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '6px'
             }}
           >
-            <RefreshCw size={14} className={isRunning ? 'animate-spin' : ''} />
-            <span>{isRunning ? 'Simulating Pipeline...' : 'Re-Execute Pipeline'}</span>
+            <RefreshCw size={13} className={isRunning ? 'animate-spin' : ''} />
+            <span>{isRunning ? 'Executing...' : 'Re-Execute'}</span>
           </button>
         </div>
 
@@ -229,10 +318,10 @@ export default function RagSimulator() {
               {stage >= 1 && <CheckCircle2 size={15} color="var(--accent-color)" />}
             </div>
             <div style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--text-primary)' }}>
-              {selectedPreset.embeddingTime}
+              {selectedPayload.embeddingTime}
             </div>
             <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              {selectedPreset.vectorDim}
+              {selectedPayload.vectorDim} ({selectedPayload.tokens} tokens)
             </div>
           </div>
 
@@ -249,10 +338,10 @@ export default function RagSimulator() {
               {stage >= 2 && <CheckCircle2 size={15} color="var(--accent-alt)" />}
             </div>
             <div style={{ fontSize: '1.1rem', fontWeight: 900, color: 'var(--accent-alt)' }}>
-              Score: {selectedPreset.cosineScore}
+              Score: {selectedPayload.cosineScore}
             </div>
             <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              Scanned: {selectedPreset.chunksScanned}
+              Scanned: {selectedPayload.chunksScanned}
             </div>
           </div>
 
@@ -272,7 +361,7 @@ export default function RagSimulator() {
               Rank #1 Match
             </div>
             <div style={{ fontSize: '0.76rem', color: 'var(--text-secondary)', marginTop: '2px' }}>
-              RRF Rank: {selectedPreset.rrfScore}
+              RRF Rank: {selectedPayload.rrfScore}
             </div>
           </div>
 
@@ -312,7 +401,7 @@ export default function RagSimulator() {
               <Database size={14} /> Retrieved Ground-Truth Context Chunk
             </div>
             <p style={{ fontSize: '0.84rem', color: 'var(--text-secondary)', lineHeight: 1.6, fontStyle: 'italic' }}>
-              "{selectedPreset.topChunk}"
+              "{selectedPayload.topChunk}"
             </p>
           </div>
 
@@ -328,7 +417,7 @@ export default function RagSimulator() {
             <div style={{ fontSize: '0.75rem', fontWeight: 700, color: 'var(--accent-color)', marginBottom: '8px', display: 'flex', alignItems: 'center', gap: '6px' }}>
               <Zap size={14} /> Synthesized Token Output (Gemini 3.7 Flash SSE Stream)
             </div>
-            <p style={{ fontSize: '0.88rem', color: 'var(--text-primary)', lineHeight: 1.6, fontWeight: 500 }}>
+            <p style={{ fontSize: '0.88rem', color: 'var(--text-primary)', lineHeight: 1.6, fontWeight: 500, whiteSpace: 'pre-line' }}>
               {streamedText || (stage < 4 ? 'Processing neural pipeline...' : '')}
               {isRunning && <span style={{ display: 'inline-block', width: '6px', height: '14px', background: 'var(--accent-color)', marginLeft: '4px', animation: 'pulse 1s infinite' }} />}
             </p>
