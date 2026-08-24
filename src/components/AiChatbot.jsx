@@ -55,9 +55,18 @@ export default function AiChatbot() {
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
   const chatBottomRef = useRef(null);
+  const lastAiMessageRef = useRef(null);
 
   useEffect(() => {
-    if (isOpen) {
+    if (!isOpen) return;
+
+    const lastMsg = messages[messages.length - 1];
+    if (lastMsg && lastMsg.sender === 'ai' && messages.length > 1) {
+      // Align the START of the new AI answer cleanly to the top of the viewport
+      setTimeout(() => {
+        lastAiMessageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    } else {
       chatBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages, isOpen, isTyping]);
@@ -273,14 +282,16 @@ export default function AiChatbot() {
                 gap: '14px'
               }}
             >
-              {messages.map((m) => (
+              {messages.map((m, idx) => (
                 <div
                   key={m.id}
+                  ref={idx === messages.length - 1 && m.sender === 'ai' ? lastAiMessageRef : null}
                   style={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: m.sender === 'user' ? 'flex-end' : 'flex-start',
-                    maxWidth: '100%'
+                    maxWidth: '100%',
+                    scrollMarginTop: '10px'
                   }}
                 >
                   {/* Source Attribution Tag (For AI answers) */}
