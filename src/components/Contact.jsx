@@ -59,7 +59,7 @@ export default function Contact() {
   };
 
   return (
-    <footer id="contact" style={{ position: 'relative', borderTop: '1px solid var(--card-border)', marginTop: 'clamp(4rem, 7vw, 7rem)', padding: 'clamp(3.5rem, 6vw, 6.5rem) 0 3rem 0', overflow: 'hidden' }}>
+    <section id="contact" style={{ position: 'relative', borderTop: '1px solid var(--card-border)', marginTop: 'clamp(3rem, 6vw, 6rem)', padding: 'clamp(2.5rem, 5vw, 5rem) 0 2rem 0', overflow: 'hidden', width: '100%', maxWidth: '100vw', boxSizing: 'border-box' }}>
       
       {/* Background Ambient Glow */}
       <div style={{
@@ -74,7 +74,7 @@ export default function Contact() {
         zIndex: 0
       }} />
 
-      <div className="section-container" style={{ position: 'relative', zIndex: 1, padding: '0 20px', maxWidth: '1240px' }}>
+      <div className="section-container" style={{ position: 'relative', zIndex: 1, padding: '0 clamp(12px, 3vw, 24px)', maxWidth: '1240px', width: '100%', boxSizing: 'border-box' }}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -82,7 +82,7 @@ export default function Contact() {
           transition={{ duration: 0.8 }}
         >
           {/* Header */}
-          <div className="section-header" style={{ marginBottom: 'clamp(2.5rem, 5vw, 4rem)' }}>
+          <div className="section-header" style={{ marginBottom: 'clamp(2rem, 4vw, 3.5rem)', padding: '0 8px' }}>
             <div className="section-tag">
               <Sparkles size={14} /> Get In Touch
             </div>
@@ -98,31 +98,36 @@ export default function Contact() {
           <div className="contact-bento-grid" style={{
             display: 'grid',
             gridTemplateColumns: '1.05fr 1.15fr',
-            gap: 'clamp(1.5rem, 3vw, 2.5rem)',
+            gap: 'clamp(1.2rem, 3vw, 2.2rem)',
             alignItems: 'stretch',
-            marginBottom: 'clamp(3rem, 6vw, 4.5rem)'
+            marginBottom: 'clamp(2rem, 4vw, 3.5rem)',
+            width: '100%',
+            boxSizing: 'border-box'
           }}>
 
             {/* ── Left Column: Direct Info & Quick Action Cards ── */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', height: '100%' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.9rem', height: '100%', width: '100%', boxSizing: 'border-box' }}>
               
               {/* Primary Direct Card: Email */}
               <div 
-                className="card" 
+                className="card contact-action-card" 
                 style={{
-                  padding: '1.4rem 1.6rem',
+                  padding: 'clamp(1.1rem, 3vw, 1.4rem)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1rem',
-                  borderRadius: '20px'
+                  gap: '0.85rem',
+                  flexWrap: 'wrap',
+                  borderRadius: '20px',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0, flex: '1 1 200px' }}>
                   <div style={{
                     background: 'rgba(0, 255, 204, 0.1)',
                     border: '1px solid rgba(0, 255, 204, 0.25)',
-                    padding: '12px',
+                    padding: '10px',
                     borderRadius: '14px',
                     color: 'var(--accent-color)',
                     display: 'flex',
@@ -130,10 +135,10 @@ export default function Contact() {
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <Mail size={22} />
+                    <Mail size={20} />
                   </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <div style={{ minWidth: 0, flex: 1, overflow: 'hidden' }}>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Primary Email
                     </div>
                     <a 
@@ -141,9 +146,10 @@ export default function Contact() {
                       style={{ 
                         color: 'var(--text-primary)', 
                         fontWeight: 700, 
-                        fontSize: 'clamp(0.88rem, 2vw, 1.02rem)',
+                        fontSize: 'clamp(0.8rem, 2.4vw, 0.96rem)',
                         display: 'block',
-                        wordBreak: 'break-word',
+                        wordBreak: 'break-all',
+                        overflowWrap: 'anywhere',
                         marginTop: '2px'
                       }}
                     >
@@ -154,6 +160,7 @@ export default function Contact() {
 
                 <button
                   onClick={() => handleCopy('muhammad.okasha2146@gmail.com', 'email')}
+                  className="contact-card-btn"
                   style={{
                     background: copiedEmail ? 'rgba(16, 185, 129, 0.18)' : 'var(--btn-sec-bg)',
                     border: `1px solid ${copiedEmail ? 'rgba(16, 185, 129, 0.4)' : 'var(--btn-sec-border)'}`,
@@ -161,38 +168,42 @@ export default function Contact() {
                     padding: '8px 14px',
                     borderRadius: '12px',
                     cursor: 'pointer',
-                    fontSize: '0.82rem',
+                    fontSize: '0.8rem',
                     fontWeight: 600,
                     display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: '6px',
                     transition: 'all 0.2s',
                     flexShrink: 0
                   }}
                   title="Copy Email"
                 >
-                  {copiedEmail ? <Check size={15} /> : <Copy size={15} />}
+                  {copiedEmail ? <Check size={14} /> : <Copy size={14} />}
                   <span>{copiedEmail ? 'Copied!' : 'Copy'}</span>
                 </button>
               </div>
 
               {/* Direct Phone / WhatsApp Card */}
               <div 
-                className="card" 
+                className="card contact-action-card" 
                 style={{
-                  padding: '1.4rem 1.6rem',
+                  padding: 'clamp(1.1rem, 3vw, 1.4rem)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1rem',
-                  borderRadius: '20px'
+                  gap: '0.85rem',
+                  flexWrap: 'wrap',
+                  borderRadius: '20px',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', minWidth: 0 }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0, flex: '1 1 200px' }}>
                   <div style={{
                     background: 'rgba(56, 189, 248, 0.1)',
                     border: '1px solid rgba(56, 189, 248, 0.25)',
-                    padding: '12px',
+                    padding: '10px',
                     borderRadius: '14px',
                     color: 'var(--accent-cyan)',
                     display: 'flex',
@@ -200,10 +211,10 @@ export default function Contact() {
                     justifyContent: 'center',
                     flexShrink: 0
                   }}>
-                    <Phone size={22} />
+                    <Phone size={20} />
                   </div>
-                  <div style={{ minWidth: 0 }}>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <div style={{ minWidth: 0, flex: 1 }}>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Phone / WhatsApp
                     </div>
                     <a 
@@ -211,7 +222,7 @@ export default function Contact() {
                       style={{ 
                         color: 'var(--text-primary)', 
                         fontWeight: 700, 
-                        fontSize: 'clamp(0.92rem, 2vw, 1.05rem)',
+                        fontSize: 'clamp(0.88rem, 2.4vw, 1rem)',
                         display: 'block',
                         marginTop: '2px'
                       }}
@@ -223,6 +234,7 @@ export default function Contact() {
 
                 <button
                   onClick={() => handleCopy('+923495696659', 'phone')}
+                  className="contact-card-btn"
                   style={{
                     background: copiedPhone ? 'rgba(16, 185, 129, 0.18)' : 'var(--btn-sec-bg)',
                     border: `1px solid ${copiedPhone ? 'rgba(16, 185, 129, 0.4)' : 'var(--btn-sec-border)'}`,
@@ -230,39 +242,43 @@ export default function Contact() {
                     padding: '8px 14px',
                     borderRadius: '12px',
                     cursor: 'pointer',
-                    fontSize: '0.82rem',
+                    fontSize: '0.8rem',
                     fontWeight: 600,
                     display: 'inline-flex',
                     alignItems: 'center',
+                    justifyContent: 'center',
                     gap: '6px',
                     transition: 'all 0.2s',
                     flexShrink: 0
                   }}
                   title="Copy Phone"
                 >
-                  {copiedPhone ? <Check size={15} /> : <Copy size={15} />}
+                  {copiedPhone ? <Check size={14} /> : <Copy size={14} />}
                   <span>{copiedPhone ? 'Copied!' : 'Copy'}</span>
                 </button>
               </div>
 
               {/* Resume Card (High-Impact VIP Glow) */}
               <div 
-                className="card" 
+                className="card contact-action-card" 
                 style={{
-                  padding: '1.4rem 1.6rem',
+                  padding: 'clamp(1.1rem, 3vw, 1.4rem)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'space-between',
-                  gap: '1rem',
+                  gap: '0.85rem',
+                  flexWrap: 'wrap',
                   borderRadius: '20px',
                   border: '1px solid rgba(0, 255, 204, 0.35)',
-                  background: 'rgba(0, 255, 204, 0.04)'
+                  background: 'rgba(0, 255, 204, 0.04)',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem', minWidth: 0, flex: '1 1 200px' }}>
                   <div style={{
                     background: 'var(--accent-gradient)',
-                    padding: '12px',
+                    padding: '10px',
                     borderRadius: '14px',
                     color: '#fff',
                     display: 'flex',
@@ -271,13 +287,13 @@ export default function Contact() {
                     flexShrink: 0,
                     boxShadow: '0 4px 15px rgba(0, 255, 204, 0.3)'
                   }}>
-                    <FileText size={22} color="#fff" />
+                    <FileText size={20} color="#fff" />
                   </div>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', fontWeight: 600, color: 'var(--accent-color)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                  <div style={{ minWidth: 0 }}>
+                    <div style={{ fontSize: '0.72rem', fontWeight: 600, color: 'var(--accent-color)', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                       Official Curriculum Vitae
                     </div>
-                    <div style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: '1rem', marginTop: '1px' }}>
+                    <div style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: '0.94rem', marginTop: '1px' }}>
                       Muhammad Okasha Resume
                     </div>
                   </div>
@@ -287,15 +303,16 @@ export default function Contact() {
                   href="/Muhammad_Okasha_Resume.pdf"
                   download="Muhammad_Okasha_Resume.pdf"
                   onClick={() => playSound('click')}
-                  className="btn-primary"
+                  className="btn-primary contact-card-btn"
                   style={{
-                    padding: '9px 18px',
-                    fontSize: '0.85rem',
+                    padding: '8px 16px',
+                    fontSize: '0.82rem',
                     borderRadius: '12px',
-                    flexShrink: 0
+                    flexShrink: 0,
+                    justifyContent: 'center'
                   }}
                 >
-                  <Download size={15} /> Download PDF
+                  <Download size={14} /> Download PDF
                 </a>
               </div>
 
@@ -303,18 +320,20 @@ export default function Contact() {
               <div 
                 className="card" 
                 style={{
-                  padding: '1.2rem 1.4rem',
+                  padding: 'clamp(1rem, 3vw, 1.3rem)',
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: '12px',
+                  gap: '10px',
                   borderRadius: '22px',
                   marginTop: 'auto',
                   border: '1px solid rgba(139, 92, 246, 0.35)',
-                  background: 'var(--btn-sec-bg)'
+                  background: 'var(--btn-sec-bg)',
+                  width: '100%',
+                  boxSizing: 'border-box'
                 }}
               >
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', minWidth: 0, flex: 1 }}>
                     <div style={{
                       background: 'rgba(139, 92, 246, 0.12)',
                       border: '1px solid rgba(139, 92, 246, 0.3)',
@@ -322,22 +341,23 @@ export default function Contact() {
                       borderRadius: '12px',
                       display: 'flex',
                       alignItems: 'center',
-                      justifyContent: 'center'
+                      justifyContent: 'center',
+                      flexShrink: 0
                     }}>
-                      <MapPin size={18} color="var(--accent-alt)" />
+                      <MapPin size={16} color="var(--accent-alt)" />
                     </div>
-                    <div>
-                      <div style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: '0.95rem' }}>
+                    <div style={{ minWidth: 0 }}>
+                      <div style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: '0.9rem', wordBreak: 'break-word' }}>
                         Ghauri Town, Islamabad, Pakistan
                       </div>
-                      <div style={{ color: 'var(--text-muted)', fontSize: '0.76rem', marginTop: '1px' }}>
-                        PKT (UTC+5) • Open for Global Remote &amp; On-Site Roles
+                      <div style={{ color: 'var(--text-muted)', fontSize: '0.72rem', marginTop: '1px' }}>
+                        PKT (UTC+5) • Open for Global Remote &amp; On-Site
                       </div>
                     </div>
                   </div>
 
-                  <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px' }}>
-                    <span className="pulse-dot" style={{ width: '6px', height: '6px' }} /> Live Coordinates
+                  <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '2px 7px', fontSize: '0.68rem', flexShrink: 0 }}>
+                    <span className="pulse-dot" style={{ width: '5px', height: '5px' }} /> Live Coordinates
                   </span>
                 </div>
 
@@ -345,7 +365,7 @@ export default function Contact() {
                 <div style={{
                   position: 'relative',
                   width: '100%',
-                  height: '175px',
+                  height: '160px',
                   borderRadius: '14px',
                   overflow: 'hidden',
                   border: '1px solid var(--card-border)',
@@ -367,8 +387,8 @@ export default function Contact() {
                 </div>
 
                 {/* Map Action Footer */}
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '2px' }}>
-                  <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '6px', paddingTop: '2px' }}>
+                  <span style={{ fontSize: '0.72rem', color: 'var(--text-muted)' }}>
                     Lat: 33.6261° N, Long: 73.1198° E
                   </span>
                   <a
@@ -377,7 +397,7 @@ export default function Contact() {
                     rel="noopener noreferrer"
                     onClick={() => playSound('click')}
                     style={{
-                      fontSize: '0.76rem',
+                      fontSize: '0.74rem',
                       fontWeight: 700,
                       color: 'var(--accent-alt)',
                       display: 'inline-flex',
@@ -397,14 +417,16 @@ export default function Contact() {
             <div
               className="card"
               style={{
-                padding: 'clamp(1.5rem, 3.5vw, 2.4rem)',
+                padding: 'clamp(1.2rem, 3.5vw, 2.2rem)',
                 borderRadius: '24px',
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'center'
+                justifyContent: 'center',
+                width: '100%',
+                boxSizing: 'border-box'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '0.4rem' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '0.3rem' }}>
                 <div style={{
                   background: 'rgba(139, 92, 246, 0.12)',
                   border: '1px solid rgba(139, 92, 246, 0.3)',
@@ -413,23 +435,24 @@ export default function Contact() {
                   color: 'var(--accent-alt)',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  flexShrink: 0
                 }}>
-                  <MessageSquare size={18} />
+                  <MessageSquare size={17} />
                 </div>
-                <h3 style={{ fontSize: '1.25rem', color: 'var(--text-primary)', fontWeight: 800, letterSpacing: '-0.3px' }}>
+                <h3 style={{ fontSize: 'clamp(1.1rem, 3vw, 1.25rem)', color: 'var(--text-primary)', fontWeight: 800, letterSpacing: '-0.3px' }}>
                   Send a Direct Message
                 </h3>
               </div>
 
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', marginBottom: '1.4rem', lineHeight: 1.5 }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', marginBottom: '1.2rem', lineHeight: 1.5 }}>
                 Fill out the brief scope below to immediately transmit your project specs to my primary inbox.
               </p>
 
-              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }} className="contact-form-row">
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '5px' }}>
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px', width: '100%', boxSizing: 'border-box' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', width: '100%' }} className="contact-form-row">
+                  <div style={{ width: '100%' }}>
+                    <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
                       YOUR NAME *
                     </label>
                     <input
@@ -443,19 +466,20 @@ export default function Contact() {
                         background: 'var(--btn-sec-bg)',
                         border: '1px solid var(--card-border)',
                         borderRadius: '12px',
-                        padding: '11px 14px',
+                        padding: '10px 12px',
                         color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
+                        fontSize: '0.88rem',
                         outline: 'none',
-                        transition: 'border-color 0.2s'
+                        transition: 'border-color 0.2s',
+                        boxSizing: 'border-box'
                       }}
                       onFocus={(e) => e.target.style.borderColor = 'var(--accent-color)'}
                       onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
                     />
                   </div>
 
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '5px' }}>
+                  <div style={{ width: '100%' }}>
+                    <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
                       YOUR EMAIL *
                     </label>
                     <input
@@ -469,11 +493,12 @@ export default function Contact() {
                         background: 'var(--btn-sec-bg)',
                         border: '1px solid var(--card-border)',
                         borderRadius: '12px',
-                        padding: '11px 14px',
+                        padding: '10px 12px',
                         color: 'var(--text-primary)',
-                        fontSize: '0.9rem',
+                        fontSize: '0.88rem',
                         outline: 'none',
-                        transition: 'border-color 0.2s'
+                        transition: 'border-color 0.2s',
+                        boxSizing: 'border-box'
                       }}
                       onFocus={(e) => e.target.style.borderColor = 'var(--accent-color)'}
                       onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
@@ -481,8 +506,8 @@ export default function Contact() {
                   </div>
                 </div>
 
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '5px' }}>
+                <div style={{ width: '100%' }}>
+                  <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
                     PROJECT SCOPE / TOPIC
                   </label>
                   <input
@@ -495,19 +520,20 @@ export default function Contact() {
                       background: 'var(--btn-sec-bg)',
                       border: '1px solid var(--card-border)',
                       borderRadius: '12px',
-                      padding: '11px 14px',
+                      padding: '10px 12px',
                       color: 'var(--text-primary)',
-                      fontSize: '0.9rem',
+                      fontSize: '0.88rem',
                       outline: 'none',
-                      transition: 'border-color 0.2s'
+                      transition: 'border-color 0.2s',
+                      boxSizing: 'border-box'
                     }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-color)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
                   />
                 </div>
 
-                <div>
-                  <label style={{ display: 'block', fontSize: '0.76rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '5px' }}>
+                <div style={{ width: '100%' }}>
+                  <label style={{ display: 'block', fontSize: '0.74rem', fontWeight: 600, color: 'var(--text-muted)', marginBottom: '4px' }}>
                     MESSAGE DETAILS *
                   </label>
                   <textarea
@@ -521,12 +547,13 @@ export default function Contact() {
                       background: 'var(--btn-sec-bg)',
                       border: '1px solid var(--card-border)',
                       borderRadius: '12px',
-                      padding: '11px 14px',
+                      padding: '10px 12px',
                       color: 'var(--text-primary)',
-                      fontSize: '0.9rem',
+                      fontSize: '0.88rem',
                       outline: 'none',
                       resize: 'vertical',
-                      transition: 'border-color 0.2s'
+                      transition: 'border-color 0.2s',
+                      boxSizing: 'border-box'
                     }}
                     onFocus={(e) => e.target.style.borderColor = 'var(--accent-color)'}
                     onBlur={(e) => e.target.style.borderColor = 'var(--card-border)'}
@@ -539,89 +566,26 @@ export default function Contact() {
                   style={{
                     width: '100%',
                     justifyContent: 'center',
-                    padding: '13px',
+                    padding: '12px',
                     borderRadius: '14px',
-                    fontSize: '0.95rem',
+                    fontSize: '0.92rem',
                     fontWeight: 700,
-                    marginTop: '4px'
+                    marginTop: '2px',
+                    boxSizing: 'border-box'
                   }}
                 >
                   {sentStatus ? (
                     <>
-                      <Check size={18} /> Opening Mail Client...
+                      <Check size={17} /> Opening Mail Client...
                     </>
                   ) : (
                     <>
-                      <Send size={18} /> Send Inquiry via Mail
+                      <Send size={17} /> Send Inquiry via Mail
                     </>
                   )}
                 </button>
               </form>
             </div>
-          </div>
-
-          {/* ── Social Hub Icons & Footer Tag ── */}
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            gap: '1.5rem',
-            borderTop: '1px solid rgba(255, 255, 255, 0.08)',
-            paddingTop: '2.5rem'
-          }}>
-            <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-              <a
-                href="https://github.com/muhammadokashapak"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => playSound('click')}
-                style={{
-                  background: 'var(--btn-sec-bg)',
-                  border: '1px solid var(--btn-sec-border)',
-                  color: 'var(--text-primary)',
-                  padding: '10px 18px',
-                  borderRadius: '14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.88rem',
-                  fontWeight: 600,
-                  transition: 'all 0.25s'
-                }}
-                className="social-hover-btn"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
-                <span>GitHub</span>
-              </a>
-
-              <a
-                href="https://linkedin.com/in/muhammad-okasha23"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => playSound('click')}
-                style={{
-                  background: 'var(--btn-sec-bg)',
-                  border: '1px solid var(--btn-sec-border)',
-                  color: 'var(--text-primary)',
-                  padding: '10px 18px',
-                  borderRadius: '14px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '8px',
-                  fontSize: '0.88rem',
-                  fontWeight: 600,
-                  transition: 'all 0.25s'
-                }}
-                className="social-hover-btn"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                <span>LinkedIn</span>
-              </a>
-            </div>
-
-            <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', textAlign: 'center' }}>
-              © {new Date().getFullYear()} Muhammad Okasha. Built with React 19, Three.js &amp; Advanced Multimodal AI Systems.
-            </p>
           </div>
         </motion.div>
       </div>
@@ -638,12 +602,20 @@ export default function Contact() {
             grid-template-columns: 1fr !important;
           }
         }
-        @media (max-width: 550px) {
+        @media (max-width: 640px) {
           .contact-form-row {
             grid-template-columns: 1fr !important;
           }
+          .contact-action-card {
+            flex-direction: column !important;
+            align-items: stretch !important;
+          }
+          .contact-card-btn {
+            width: 100% !important;
+            justify-content: center !important;
+          }
         }
       `}</style>
-    </footer>
+    </section>
   );
 }

@@ -246,6 +246,12 @@ ul {
   }
 }
 
+@media (max-width: 480px) {
+  .section-container {
+    padding: 45px 12px;
+  }
+}
+
 .section-header {
   text-align: center;
   margin-bottom: clamp(2rem, 5vw, 3.5rem);

@@ -466,33 +466,37 @@ function App() {
         zIndex: 1,
         borderTop: '1px solid var(--card-border)',
         background: 'var(--bg-color)',
-        padding: 'clamp(2.5rem, 6vw, 4rem) 20px 2.5rem',
-        marginTop: '2rem'
+        padding: 'clamp(2rem, 5vw, 3.5rem) clamp(12px, 3vw, 24px) 2rem',
+        marginTop: '2rem',
+        width: '100%',
+        maxWidth: '100vw',
+        boxSizing: 'border-box',
+        overflow: 'hidden'
       }}>
-        <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span className="nav-brand" style={{ fontSize: '1.4rem', fontWeight: 800 }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.8rem', width: '100%', boxSizing: 'border-box' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1.2rem', width: '100%' }}>
+            <div style={{ maxWidth: '100%' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                <span className="nav-brand" style={{ fontSize: 'clamp(1.15rem, 3.5vw, 1.4rem)', fontWeight: 800 }}>
                   Muhammad Okasha<span style={{ color: 'var(--accent-color)' }}>.</span>
                 </span>
-                <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px' }}>
+                <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '4px', padding: '3px 8px', fontSize: '0.72rem' }}>
                   <span className="pulse-dot" style={{ width: '6px', height: '6px' }} /> Available for Hire
                 </span>
               </div>
-              <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', marginTop: '6px', maxWidth: '460px' }}>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', marginTop: '6px', maxWidth: '460px', lineHeight: 1.5 }}>
                 Muhammad Okasha — AI Solutions Architect &amp; Machine Learning Engineer (B.E. Computer Systems, UET Peshawar).
               </p>
             </div>
 
             {/* Footer Navigation Links */}
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'clamp(8px, 2vw, 14px)', alignItems: 'center' }}>
               {navItems.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   onClick={() => playSound('hover')}
-                  style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', fontWeight: 600, transition: 'color 0.2s' }}
+                  style={{ color: 'var(--text-secondary)', fontSize: '0.84rem', fontWeight: 600, transition: 'color 0.2s', padding: '3px 0' }}
                 >
                   {item.label}
                 </a>
@@ -508,8 +512,8 @@ function App() {
                   border: '1px solid var(--btn-sec-border)',
                   color: 'var(--accent-color)',
                   borderRadius: '20px',
-                  padding: '6px 14px',
-                  fontSize: '0.8rem',
+                  padding: '5px 12px',
+                  fontSize: '0.78rem',
                   fontWeight: 700,
                   cursor: 'pointer',
                   display: 'inline-flex',
@@ -523,12 +527,12 @@ function App() {
             </div>
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderTop: '1px solid var(--card-border)', paddingTop: '1.5rem' }}>
-            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderTop: '1px solid var(--card-border)', paddingTop: '1.25rem', width: '100%' }}>
+            <div style={{ fontSize: '0.78rem', color: 'var(--text-muted)', maxWidth: '100%' }}>
               © 2026 Muhammad Okasha. Engineered with Neural Precision &amp; Distributed Architecture.
             </div>
 
-            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', gap: 'clamp(10px, 2.5vw, 16px)', alignItems: 'center', flexWrap: 'wrap' }}>
               <a href="https://github.com/muhammadokashapak" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 600 }}>
                 GitHub
               </a>
