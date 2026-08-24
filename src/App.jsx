@@ -446,6 +446,92 @@ function App() {
         <Contact />
       </main>
 
+      {/* ── Ultra-Luxury Executive Footer ── */}
+      <footer style={{
+        position: 'relative',
+        zIndex: 1,
+        borderTop: '1px solid var(--card-border)',
+        background: 'var(--bg-color)',
+        padding: 'clamp(2.5rem, 6vw, 4rem) 20px 2.5rem',
+        marginTop: '2rem'
+      }}>
+        <div style={{ maxWidth: '1240px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <span className="nav-brand" style={{ fontSize: '1.6rem' }}>
+                  MO<span style={{ color: 'var(--accent-color)' }}>.</span>
+                </span>
+                <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px' }}>
+                  <span className="pulse-dot" style={{ width: '6px', height: '6px' }} /> Available for Hire
+                </span>
+              </div>
+              <p style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', marginTop: '6px', maxWidth: '460px' }}>
+                Muhammad Okasha — AI Solutions Architect &amp; Machine Learning Engineer (B.E. Computer Systems, UET Peshawar).
+              </p>
+            </div>
+
+            {/* Footer Navigation Links */}
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => playSound('hover')}
+                  style={{ color: 'var(--text-secondary)', fontSize: '0.86rem', fontWeight: 600, transition: 'color 0.2s' }}
+                >
+                  {item.label}
+                </a>
+              ))}
+              
+              <button
+                onClick={() => {
+                  playSound('click');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                style={{
+                  background: 'var(--btn-sec-bg)',
+                  border: '1px solid var(--btn-sec-border)',
+                  color: 'var(--accent-color)',
+                  borderRadius: '20px',
+                  padding: '6px 14px',
+                  fontSize: '0.8rem',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '4px',
+                  transition: 'all 0.2s'
+                }}
+              >
+                ↑ Top
+              </button>
+            </div>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', borderTop: '1px solid var(--card-border)', paddingTop: '1.5rem' }}>
+            <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+              © 2026 Muhammad Okasha. Engineered with Neural Precision &amp; Distributed Architecture.
+            </div>
+
+            <div style={{ display: 'flex', gap: '14px', alignItems: 'center' }}>
+              <a href="https://github.com/muhammadokashapak" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 600 }}>
+                GitHub
+              </a>
+              <a href="https://linkedin.com/in/muhammad-okasha23" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-secondary)', fontSize: '0.82rem', fontWeight: 600 }}>
+                LinkedIn
+              </a>
+              <a href="https://wa.me/923495696659" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--accent-emerald)', fontSize: '0.82rem', fontWeight: 600 }}>
+                WhatsApp
+              </a>
+              <a href="mailto:muhammad.okasha2146@gmail.com" style={{ color: 'var(--accent-color)', fontSize: '0.82rem', fontWeight: 600 }}>
+                Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
       <style>{`
         @media (max-width: 1100px) {
           .mobile-actions-wrapper {
