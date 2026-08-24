@@ -112,8 +112,24 @@ function App() {
             href="#home"
             className="nav-brand"
             onClick={() => playSound('click')}
+            style={{ display: 'flex', alignItems: 'center', gap: '8px', textDecoration: 'none' }}
           >
-            MO<span style={{ color: 'var(--accent-color)' }}>.</span>
+            <div style={{
+              width: '28px',
+              height: '28px',
+              borderRadius: '8px',
+              background: 'var(--accent-gradient)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              boxShadow: '0 0 12px rgba(0, 255, 204, 0.4)',
+              flexShrink: 0
+            }}>
+              <Sparkles size={16} color="#fff" />
+            </div>
+            <span style={{ fontSize: '1rem', fontWeight: 800, color: 'var(--text-primary)', letterSpacing: '-0.3px', whiteSpace: 'nowrap' }}>
+              Muhammad Okasha
+            </span>
           </a>
 
           {/* Desktop Nav Links */}
@@ -459,8 +475,8 @@ function App() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span className="nav-brand" style={{ fontSize: '1.6rem' }}>
-                  MO<span style={{ color: 'var(--accent-color)' }}>.</span>
+                <span className="nav-brand" style={{ fontSize: '1.4rem', fontWeight: 800 }}>
+                  Muhammad Okasha<span style={{ color: 'var(--accent-color)' }}>.</span>
                 </span>
                 <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px' }}>
                   <span className="pulse-dot" style={{ width: '6px', height: '6px' }} /> Available for Hire

@@ -75,49 +75,106 @@ export default function AiPlayground() {
 
     setTimeout(() => {
       const lower = content.toLowerCase();
-      const toxicWords = ['terrible', 'useless', 'stupid', 'hate', 'bad', 'garbage', 'idiot', 'worst'];
-      const positiveWords = ['transforming', 'great', 'awesome', 'excellent', 'amazing', 'best', 'innovative', 'useful', 'smart'];
+
+      // Severe profanity, curses & slurs
+      const severeProfanities = [
+        'fuck', 'fucking', 'fucker', 'bitch', 'cunt', 'shit', 'bastard', 'asshole', 
+        'dick', 'pussy', 'slut', 'whore', 'nigger', 'faggot', 'chutiya', 'madarchod', 
+        'harami', 'kamina', 'kutta', 'bhenchod', 'gandu', 'retard'
+      ];
+
+      // Violent threats & physical harassment
+      const violentThreats = [
+        'kill you', 'murder', 'i will kill', 'i will fuck you', 'attack', 'threat', 
+        'destroy you', 'rape', 'beat you', 'stab', 'die', 'i will hurt', 'slit', 'shoot you', 'bomb'
+      ];
+
+      // Direct insults & degradation
+      const insults = [
+        'idiot', 'stupid', 'moron', 'loser', 'ugly', 'disgusting', 'scam', 'fraud', 
+        'trash', 'garbage', 'dumb', 'clown', 'worthless', 'fool', 'pathetic', 'hate you'
+      ];
+
+      // Negative sentiment
+      const negativeWords = [
+        'terrible', 'awful', 'worst', 'bad', 'fails', 'broken', 'useless', 'slow', 
+        'annoying', 'poor', 'horrible', 'disappointed', 'defective', 'glitchy', 'frustrating'
+      ];
+
+      // Positive sentiment
+      const positiveWords = [
+        'transforming', 'great', 'awesome', 'excellent', 'amazing', 'best', 'innovative', 
+        'useful', 'smart', 'love', 'brilliant', 'fast', 'genius', 'masterpiece', 'clean', 
+        'efficient', 'impressive', 'superb', 'wonderful', 'perfect'
+      ];
+
+      const hasSevereProfanity = severeProfanities.some(w => lower.includes(w));
+      const hasViolentThreat = violentThreats.some(w => lower.includes(w));
+      const hasInsult = insults.some(w => lower.includes(w));
+      const hasNegative = negativeWords.some(w => lower.includes(w));
+      const hasPositive = positiveWords.some(w => lower.includes(w));
 
       let isToxic = false;
-      let toxicScore = 0.05;
-      let sentiment = 'Neutral';
+      let sentiment = 'Neutral / Technical Informational';
+      let toxicScore = 6;
+      let confidence = 92;
+      let subLabels = {
+        toxic: 5,
+        insult: 4,
+        threat: 2,
+        profanity: 3
+      };
 
-      toxicWords.forEach((word) => {
-        if (lower.includes(word)) {
-          isToxic = true;
-          toxicScore += 0.45;
-        }
-      });
-
-      let posCount = 0;
-      positiveWords.forEach((word) => {
-        if (lower.includes(word)) {
-          posCount++;
-        }
-      });
-
-      if (isToxic) {
-        sentiment = 'Toxic / Negative';
-        toxicScore = Math.min(0.98, toxicScore);
-      } else if (posCount > 0) {
-        sentiment = 'Positive / Constructive';
-        toxicScore = 0.02;
+      if (hasViolentThreat || (hasSevereProfanity && lower.includes('you'))) {
+        isToxic = true;
+        sentiment = '🚨 Severe Threat & Harassment Policy Violation';
+        toxicScore = 98;
+        confidence = 99;
+        subLabels = { toxic: 98, insult: 94, threat: 96, profanity: 99 };
+      } else if (hasSevereProfanity) {
+        isToxic = true;
+        sentiment = '🚨 Profanity & Toxic Content Detected';
+        toxicScore = 94;
+        confidence = 98;
+        subLabels = { toxic: 95, insult: 88, threat: 45, profanity: 99 };
+      } else if (hasInsult) {
+        isToxic = true;
+        sentiment = '⚠️ Hostile / Insult Detected';
+        toxicScore = 82;
+        confidence = 94;
+        subLabels = { toxic: 82, insult: 90, threat: 28, profanity: 35 };
+      } else if (hasNegative) {
+        isToxic = true;
+        sentiment = '⚠️ Negative / Critical Sentiment';
+        toxicScore = 58;
+        confidence = 89;
+        subLabels = { toxic: 58, insult: 42, threat: 8, profanity: 6 };
+      } else if (hasPositive) {
+        isToxic = false;
+        sentiment = '✨ Positive / High Confidence';
+        toxicScore = 2;
+        confidence = 96;
+        subLabels = { toxic: 2, insult: 1, threat: 1, profanity: 1 };
       } else {
-        sentiment = 'Neutral / Informational';
-        toxicScore = 0.08;
+        isToxic = false;
+        sentiment = '🛡️ Neutral / Technical Informational';
+        toxicScore = 6;
+        confidence = 93;
+        subLabels = { toxic: 6, insult: 3, threat: 2, profanity: 2 };
       }
 
-      playSound('success');
+      playSound(isToxic ? 'open' : 'success');
       setResult({
         text: content,
         sentiment,
-        toxicScore: Math.round(toxicScore * 100),
+        toxicScore,
         isToxic,
-        confidence: Math.round(88 + Math.random() * 10)
+        confidence,
+        subLabels
       });
 
       setIsAnalyzing(false);
-    }, 400);
+    }, 350);
   };
 
   return (
@@ -546,10 +603,10 @@ export default function AiPlayground() {
                   </span>
                 </div>
 
-                <div style={{ marginBottom: '0.6rem' }}>
+                <div style={{ marginBottom: '0.8rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.8rem', color: 'var(--text-secondary)', marginBottom: '4px' }}>
-                    <span>Toxicity Index</span>
-                    <span>{result.toxicScore}%</span>
+                    <span>Overall Toxicity Severity Index</span>
+                    <strong style={{ color: result.isToxic ? '#ef4444' : 'var(--accent-color)' }}>{result.toxicScore}%</strong>
                   </div>
                   <div style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.08)', borderRadius: '4px', overflow: 'hidden' }}>
                     <div
@@ -565,6 +622,36 @@ export default function AiPlayground() {
                     />
                   </div>
                 </div>
+
+                {/* Multi-Label Breakdown Badges */}
+                {result.subLabels && (
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '6px', borderTop: '1px solid rgba(255,255,255,0.06)', paddingTop: '10px' }}>
+                    <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '10px', padding: '6px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>TOXIC</div>
+                      <div style={{ fontSize: '0.86rem', fontWeight: 800, color: result.subLabels.toxic > 50 ? '#ef4444' : 'var(--accent-color)' }}>
+                        {result.subLabels.toxic}%
+                      </div>
+                    </div>
+                    <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '10px', padding: '6px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>INSULT</div>
+                      <div style={{ fontSize: '0.86rem', fontWeight: 800, color: result.subLabels.insult > 50 ? '#ef4444' : 'var(--accent-alt)' }}>
+                        {result.subLabels.insult}%
+                      </div>
+                    </div>
+                    <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '10px', padding: '6px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>THREAT</div>
+                      <div style={{ fontSize: '0.86rem', fontWeight: 800, color: result.subLabels.threat > 50 ? '#ef4444' : 'var(--accent-cyan)' }}>
+                        {result.subLabels.threat}%
+                      </div>
+                    </div>
+                    <div style={{ background: 'var(--card-bg)', border: '1px solid var(--card-border)', borderRadius: '10px', padding: '6px', textAlign: 'center' }}>
+                      <div style={{ fontSize: '0.66rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>PROFANITY</div>
+                      <div style={{ fontSize: '0.86rem', fontWeight: 800, color: result.subLabels.profanity > 50 ? '#ef4444' : 'var(--accent-emerald)' }}>
+                        {result.subLabels.profanity}%
+                      </div>
+                    </div>
+                  </div>
+                )}
               </motion.div>
             )}
           </motion.div>
