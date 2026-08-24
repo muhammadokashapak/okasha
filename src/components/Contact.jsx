@@ -293,32 +293,97 @@ export default function Contact() {
                 </a>
               </div>
 
-              {/* Location & Timezone Pill */}
+              {/* Interactive Live Google Maps Location Card */}
               <div 
                 className="card" 
                 style={{
-                  padding: '1.2rem 1.6rem',
+                  padding: '1.2rem 1.4rem',
                   display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'space-between',
-                  borderRadius: '20px',
-                  marginTop: 'auto'
+                  flexDirection: 'column',
+                  gap: '12px',
+                  borderRadius: '22px',
+                  marginTop: 'auto',
+                  border: '1px solid rgba(139, 92, 246, 0.35)',
+                  background: 'var(--btn-sec-bg)'
                 }}
               >
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.85rem' }}>
-                  <MapPin size={20} color="var(--accent-alt)" />
-                  <div>
-                    <div style={{ color: 'var(--text-primary)', fontWeight: 700, fontSize: '0.92rem' }}>
-                      Islamabad, Pakistan
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '8px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                    <div style={{
+                      background: 'rgba(139, 92, 246, 0.12)',
+                      border: '1px solid rgba(139, 92, 246, 0.3)',
+                      padding: '8px',
+                      borderRadius: '12px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center'
+                    }}>
+                      <MapPin size={18} color="var(--accent-alt)" />
                     </div>
-                    <div style={{ color: 'var(--text-muted)', fontSize: '0.78rem' }}>
-                      PKT (UTC+5) • Open for Global Remote &amp; On-Site Roles
+                    <div>
+                      <div style={{ color: 'var(--text-primary)', fontWeight: 800, fontSize: '0.95rem' }}>
+                        Ghauri Town, Islamabad, Pakistan
+                      </div>
+                      <div style={{ color: 'var(--text-muted)', fontSize: '0.76rem', marginTop: '1px' }}>
+                        PKT (UTC+5) • Open for Global Remote &amp; On-Site Roles
+                      </div>
                     </div>
                   </div>
+
+                  <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px', padding: '3px 8px' }}>
+                    <span className="pulse-dot" style={{ width: '6px', height: '6px' }} /> Live Coordinates
+                  </span>
                 </div>
-                <span className="badge-neon" style={{ display: 'inline-flex', alignItems: 'center', gap: '5px' }}>
-                  <span className="pulse-dot" style={{ width: '6px', height: '6px' }} /> Active
-                </span>
+
+                {/* Embedded Interactive Google Map */}
+                <div style={{
+                  position: 'relative',
+                  width: '100%',
+                  height: '175px',
+                  borderRadius: '14px',
+                  overflow: 'hidden',
+                  border: '1px solid var(--card-border)',
+                  boxShadow: 'inset 0 0 20px rgba(0, 0, 0, 0.2)'
+                }}>
+                  <iframe
+                    title="Muhammad Okasha Location - Ghauri Town Islamabad"
+                    src="https://maps.google.com/maps?q=Ghauri%20Town%2C%20Islamabad%2C%20Pakistan&t=&z=14&ie=UTF8&iwloc=&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{
+                      border: 0,
+                      display: 'block'
+                    }}
+                    allowFullScreen=""
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                </div>
+
+                {/* Map Action Footer */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: '2px' }}>
+                  <span style={{ fontSize: '0.74rem', color: 'var(--text-muted)' }}>
+                    Lat: 33.6261° N, Long: 73.1198° E
+                  </span>
+                  <a
+                    href="https://maps.google.com/?q=Ghauri+Town+Islamabad+Pakistan"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => playSound('click')}
+                    style={{
+                      fontSize: '0.76rem',
+                      fontWeight: 700,
+                      color: 'var(--accent-alt)',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      transition: 'all 0.2s'
+                    }}
+                  >
+                    <span>Open in Google Maps</span>
+                    <ExternalLink size={12} />
+                  </a>
+                </div>
               </div>
             </div>
 
