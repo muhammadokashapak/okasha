@@ -247,10 +247,13 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
                 color: '#030308',
                 fontWeight: 800,
                 boxShadow: '0 0 25px rgba(0, 255, 204, 0.45)',
-                border: 'none'
+                border: 'none',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
               }}
             >
-              <Zap size={18} /> ⚡ Recruiter 30s Brief
+              <Zap size={18} /> Recruiter 30s Brief
             </button>
 
             <a 
@@ -280,11 +283,14 @@ export default function Hero({ onOpenTerminal, onOpenChat, onOpenRecruiter, them
               style={{
                 border: '1px solid rgba(139, 92, 246, 0.4)',
                 background: 'rgba(139, 92, 246, 0.08)',
-                color: 'var(--accent-alt)'
+                color: 'var(--accent-alt)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '8px'
               }}
             >
               <Terminal size={18} color="var(--accent-alt)" />
-              &gt;_ Matrix CLI
+              Matrix CLI
             </button>
           </motion.div>
 

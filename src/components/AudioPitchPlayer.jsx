@@ -11,7 +11,9 @@ import {
   ChevronUp,
   Headphones,
   CheckCircle2,
-  Download
+  Download,
+  User,
+  Sliders
 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
 
@@ -21,8 +23,52 @@ export default function AudioPitchPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [progress, setProgress] = useState(0);
   const [showTranscript, setShowTranscript] = useState(false);
+  const [gender, setGender] = useState('female'); // 'female' | 'male'
+  const [voices, setVoices] = useState([]);
   const intervalRef = useRef(null);
-  const speechRef = useRef(null);
+
+  // Load available system voices cleanly
+  useEffect(() => {
+    const loadVoices = () => {
+      if ('speechSynthesis' in window) {
+        const available = window.speechSynthesis.getVoices() || [];
+        setVoices(available);
+      }
+    };
+
+    loadVoices();
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.onvoiceschanged = loadVoices;
+    }
+  }, []);
+
+  const getBestVoice = (chosenGender) => {
+    if (!voices || voices.length === 0) return null;
+
+    const englishVoices = voices.filter(v => v.lang.startsWith('en'));
+    if (englishVoices.length === 0) return voices[0];
+
+    if (chosenGender === 'female') {
+      // Prioritize modern Natural / Neural Female voices
+      const naturalFemale = englishVoices.find(v => 
+        (v.name.includes('Aria') || v.name.includes('Jenny') || v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('Samantha') || v.name.includes('Zira') || v.name.includes('Female')) &&
+        !v.name.includes('Guy') && !v.name.includes('David') && !v.name.includes('Male')
+      );
+      if (naturalFemale) return naturalFemale;
+      
+      const anyFemale = englishVoices.find(v => v.name.includes('Female') || v.name.includes('Zira') || v.name.includes('Samantha'));
+      if (anyFemale) return anyFemale;
+    } else {
+      // Prioritize modern Natural / Neural Male voices
+      const naturalMale = englishVoices.find(v => 
+        (v.name.includes('Guy') || v.name.includes('Christopher') || v.name.includes('Natural') || v.name.includes('David') || v.name.includes('Male')) &&
+        !v.name.includes('Aria') && !v.name.includes('Jenny') && !v.name.includes('Zira')
+      );
+      if (naturalMale) return naturalMale;
+    }
+
+    return englishVoices[0];
+  };
 
   const togglePlay = () => {
     playSound('click');
@@ -40,13 +86,15 @@ export default function AudioPitchPlayer() {
       if ('speechSynthesis' in window) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(PITCH_TRANSCRIPT);
-        utterance.rate = 1.05;
-        utterance.pitch = 1.0;
         
-        // Find English voice
-        const voices = window.speechSynthesis.getVoices();
-        const englishVoice = voices.find(v => v.lang.startsWith('en') && (v.name.includes('Natural') || v.name.includes('Google') || v.name.includes('David') || v.name.includes('Male')));
-        if (englishVoice) utterance.voice = englishVoice;
+        // Natural human speech cadence & warm tone
+        utterance.rate = gender === 'female' ? 0.96 : 0.98;
+        utterance.pitch = gender === 'female' ? 1.05 : 0.95;
+        
+        const selectedVoice = getBestVoice(gender);
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+        }
 
         utterance.onend = () => {
           setIsPlaying(false);
@@ -61,7 +109,7 @@ export default function AudioPitchPlayer() {
         window.speechSynthesis.speak(utterance);
       }
 
-      // Simulate progress bar over 15 seconds
+      // Smooth progress bar over 15 seconds
       const totalDuration = 15000;
       const step = 100;
       let elapsed = 0;
@@ -91,12 +139,12 @@ export default function AudioPitchPlayer() {
       className="card"
       style={{
         padding: '16px 20px',
-        borderRadius: '22px',
-        border: '1px solid rgba(0, 255, 204, 0.3)',
+        borderRadius: '24px',
+        border: '1px solid rgba(0, 255, 204, 0.35)',
         background: 'var(--btn-sec-bg)',
-        maxWidth: '720px',
-        margin: '1.5rem auto 0',
-        boxShadow: isPlaying ? '0 0 30px rgba(0, 255, 204, 0.25)' : 'none',
+        maxWidth: '740px',
+        margin: '1.4rem auto 0',
+        boxShadow: isPlaying ? '0 0 35px rgba(0, 255, 204, 0.25)' : 'var(--card-shadow)',
         transition: 'all 0.3s'
       }}
     >
@@ -106,8 +154,8 @@ export default function AudioPitchPlayer() {
           <button
             onClick={togglePlay}
             style={{
-              width: '44px',
-              height: '44px',
+              width: '46px',
+              height: '46px',
               borderRadius: '50%',
               background: 'var(--accent-gradient)',
               border: 'none',
@@ -116,12 +164,12 @@ export default function AudioPitchPlayer() {
               alignItems: 'center',
               justifyContent: 'center',
               cursor: 'pointer',
-              boxShadow: '0 4px 15px rgba(0, 255, 204, 0.4)',
+              boxShadow: '0 4px 18px rgba(0, 255, 204, 0.4)',
               transition: 'transform 0.2s',
               flexShrink: 0
             }}
             whileHover={{ scale: 1.08 }}
-            title={isPlaying ? "Pause Briefing" : "Play Executive 15s Pitch"}
+            title={isPlaying ? "Pause Briefing" : "Play Studio Executive Audio Brief"}
           >
             {isPlaying ? <Pause size={20} color="#fff" /> : <Play size={20} color="#fff" style={{ marginLeft: '2px' }} />}
           </button>
@@ -139,52 +187,121 @@ export default function AudioPitchPlayer() {
           </div>
         </div>
 
-        {/* Animated Waveform Bars */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '3px', height: '24px' }}>
-          {[12, 22, 16, 28, 14, 24, 18, 10, 26, 15, 20, 12].map((height, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                height: isPlaying ? [height * 0.4, height, height * 0.4] : 4,
-                opacity: isPlaying ? 1 : 0.4
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 0.6,
-                delay: i * 0.05
+        {/* Voice Gender Switcher & Visual Waveform */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          {/* Gender Selector Chips */}
+          <div style={{
+            display: 'inline-flex',
+            background: 'var(--card-bg)',
+            border: '1px solid var(--card-border)',
+            borderRadius: '20px',
+            padding: '2px',
+            gap: '2px'
+          }}>
+            <button
+              onClick={() => {
+                playSound('click');
+                setGender('female');
+                if (isPlaying) {
+                  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+                  setIsPlaying(false);
+                }
               }}
               style={{
-                width: '3px',
-                borderRadius: '3px',
-                background: 'var(--accent-color)'
+                background: gender === 'female' ? 'rgba(0, 255, 204, 0.15)' : 'transparent',
+                border: gender === 'female' ? '1px solid var(--accent-color)' : '1px solid transparent',
+                color: gender === 'female' ? 'var(--accent-color)' : 'var(--text-secondary)',
+                borderRadius: '16px',
+                padding: '3px 9px',
+                fontSize: '0.74rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '3px'
               }}
-            />
-          ))}
-        </div>
+              title="Studio Natural Female Voice"
+            >
+              👩 Female AI
+            </button>
 
-        {/* Transcript Toggle Button */}
-        <button
-          onClick={() => {
-            playSound('click');
-            setShowTranscript(!showTranscript);
-          }}
-          style={{
-            background: 'transparent',
-            border: 'none',
-            color: 'var(--text-secondary)',
-            fontSize: '0.78rem',
-            fontWeight: 600,
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '4px',
-            padding: '4px 8px'
-          }}
-        >
-          <FileText size={14} />
-          <span>{showTranscript ? 'Hide' : 'Transcript'}</span>
-          {showTranscript ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
-        </button>
+            <button
+              onClick={() => {
+                playSound('click');
+                setGender('male');
+                if (isPlaying) {
+                  if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+                  setIsPlaying(false);
+                }
+              }}
+              style={{
+                background: gender === 'male' ? 'rgba(56, 189, 248, 0.15)' : 'transparent',
+                border: gender === 'male' ? '1px solid var(--accent-cyan)' : '1px solid transparent',
+                color: gender === 'male' ? 'var(--accent-cyan)' : 'var(--text-secondary)',
+                borderRadius: '16px',
+                padding: '3px 9px',
+                fontSize: '0.74rem',
+                fontWeight: 700,
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '3px'
+              }}
+              title="Studio Natural Male Voice"
+            >
+              👨 Male AI
+            </button>
+          </div>
+
+          {/* Animated Waveform Bars */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '3px', height: '24px' }}>
+            {[12, 22, 16, 28, 14, 24, 18, 10, 26, 15, 20, 12].map((height, i) => (
+              <motion.div
+                key={i}
+                animate={{
+                  height: isPlaying ? [height * 0.4, height, height * 0.4] : 4,
+                  opacity: isPlaying ? 1 : 0.4
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 0.6,
+                  delay: i * 0.05
+                }}
+                style={{
+                  width: '3px',
+                  borderRadius: '3px',
+                  background: gender === 'female' ? 'var(--accent-color)' : 'var(--accent-cyan)'
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Transcript Toggle Button */}
+          <button
+            onClick={() => {
+              playSound('click');
+              setShowTranscript(!showTranscript);
+            }}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: 'var(--text-secondary)',
+              fontSize: '0.78rem',
+              fontWeight: 600,
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '4px',
+              padding: '4px 6px'
+            }}
+          >
+            <FileText size={14} />
+            <span>{showTranscript ? 'Hide' : 'Transcript'}</span>
+            {showTranscript ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          </button>
+        </div>
       </div>
 
       {/* Progress Bar */}
@@ -193,13 +310,13 @@ export default function AudioPitchPlayer() {
         height: '3px',
         background: 'rgba(255, 255, 255, 0.08)',
         borderRadius: '2px',
-        marginTop: '10px',
+        marginTop: '12px',
         overflow: 'hidden'
       }}>
         <div style={{
           width: `${progress}%`,
           height: '100%',
-          background: 'var(--accent-gradient)',
+          background: gender === 'female' ? 'var(--accent-gradient)' : 'linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%)',
           transition: 'width 0.1s linear'
         }} />
       </div>
