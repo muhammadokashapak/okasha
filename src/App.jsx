@@ -67,12 +67,9 @@ function App() {
   const navItems = [
     { label: 'About', href: '#about' },
     { label: 'Topology', href: '#architecture-graph' },
-    { label: 'Expertise', href: '#expertise' },
-    { label: 'Projects', href: '#projects' },
+    { label: 'Systems', href: '#projects' },
     { label: 'RAG Lab', href: '#rag-simulator' },
     { label: 'Benchmarks', href: '#benchmarks' },
-    { label: 'Experience', href: '#experience' },
-    { label: 'Skills', href: '#skills' },
     { label: 'Contact', href: '#contact' },
   ];
 
@@ -104,8 +101,8 @@ function App() {
             MO<span style={{ color: 'var(--accent-color)' }}>.</span>
           </a>
 
-          {/* Desktop Nav Links & Actions */}
-          <div className="nav-links nav-links-desktop" style={{ alignItems: 'center' }}>
+          {/* Desktop Nav Links */}
+          <div className="nav-links nav-links-desktop" style={{ alignItems: 'center', gap: '4px' }}>
             {navItems.map((item) => (
               <a
                 key={item.label}
@@ -116,6 +113,8 @@ function App() {
               </a>
             ))}
 
+            <div style={{ width: '1px', height: '20px', background: 'var(--card-border)', margin: '0 4px' }} />
+
             {/* Recruiter Fast-Track Header Pill */}
             <button
               onClick={() => {
@@ -123,23 +122,25 @@ function App() {
                 setRecruiterOpen(true);
               }}
               style={{
-                background: 'linear-gradient(135deg, rgba(0,255,204,0.15) 0%, rgba(56,189,248,0.15) 100%)',
+                background: 'linear-gradient(135deg, rgba(0,255,204,0.14) 0%, rgba(56,189,248,0.14) 100%)',
                 border: '1px solid var(--accent-color)',
                 color: 'var(--accent-color)',
-                padding: '6px 14px',
+                padding: '6px 13px',
                 borderRadius: '20px',
                 fontSize: '0.8rem',
                 fontWeight: 800,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
-                boxShadow: '0 0 15px rgba(0,255,204,0.25)',
+                gap: '5px',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
+                boxShadow: '0 0 15px rgba(0,255,204,0.22)',
                 transition: 'all 0.2s'
               }}
               title="Open Recruiter 30-Second Executive Fast-Track"
             >
-              <Zap size={14} /> ⚡ Recruiter Brief
+              <Zap size={13} style={{ flexShrink: 0 }} /> <span>⚡ Recruiter Brief</span>
             </button>
 
             {/* Audio Sound Effects Toggle */}
@@ -149,7 +150,7 @@ function App() {
               title={soundMuted ? "Unmute Sci-Fi UI Sounds" : "Mute Sci-Fi UI Sounds"}
               aria-label="Toggle Sound Effects"
             >
-              {soundMuted ? <VolumeX size={16} color="var(--text-muted)" /> : <Volume2 size={16} color="var(--accent-color)" />}
+              {soundMuted ? <VolumeX size={15} color="var(--text-muted)" /> : <Volume2 size={15} color="var(--accent-color)" />}
             </button>
 
             {/* Theme Switcher Button */}
@@ -160,9 +161,9 @@ function App() {
               aria-label="Toggle Theme"
             >
               {theme === 'dark' ? (
-                <Sun size={17} color="#fbbf24" />
+                <Sun size={15} color="#fbbf24" />
               ) : (
-                <Moon size={17} color="#7c3aed" />
+                <Moon size={15} color="#7c3aed" />
               )}
             </button>
 
@@ -173,23 +174,25 @@ function App() {
                 setTerminalOpen(true);
               }}
               style={{
-                background: 'rgba(139, 92, 246, 0.1)',
+                background: 'rgba(139, 92, 246, 0.12)',
                 border: '1px solid rgba(139, 92, 246, 0.4)',
                 color: 'var(--accent-alt)',
-                padding: '6px 14px',
+                padding: '6px 12px',
                 borderRadius: '20px',
                 fontSize: '0.8rem',
                 fontWeight: 700,
                 cursor: 'pointer',
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px'
+                gap: '5px',
+                whiteSpace: 'nowrap',
+                flexShrink: 0
               }}
             >
-              <Terminal size={14} /> &gt;_ CLI
+              <Terminal size={13} style={{ flexShrink: 0 }} /> <span>&gt;_ CLI</span>
             </button>
 
-            {/* CV Download */}
+            {/* Resume Download */}
             <a
               href="/Muhammad_Okasha_Resume.pdf"
               download="Muhammad_Okasha_Resume.pdf"
@@ -197,17 +200,19 @@ function App() {
               style={{
                 background: 'var(--accent-gradient)',
                 color: '#fff',
-                padding: '6px 16px',
+                padding: '6px 14px',
                 borderRadius: '20px',
-                fontSize: '0.82rem',
+                fontSize: '0.8rem',
                 fontWeight: 700,
                 display: 'inline-flex',
                 alignItems: 'center',
-                gap: '6px',
+                gap: '5px',
+                whiteSpace: 'nowrap',
+                flexShrink: 0,
                 boxShadow: '0 4px 14px rgba(0, 255, 204, 0.25)'
               }}
             >
-              <FileText size={14} /> CV
+              <FileText size={13} style={{ flexShrink: 0 }} /> <span>Resume</span>
             </a>
           </div>
 
@@ -226,7 +231,8 @@ function App() {
                 borderRadius: '14px',
                 fontSize: '0.75rem',
                 fontWeight: 800,
-                marginRight: '6px'
+                marginRight: '6px',
+                whiteSpace: 'nowrap'
               }}
             >
               ⚡ Brief
@@ -237,7 +243,7 @@ function App() {
               style={{ marginRight: '6px' }}
               aria-label="Toggle Sound Effects"
             >
-              {soundMuted ? <VolumeX size={16} color="var(--text-muted)" /> : <Volume2 size={16} color="var(--accent-color)" />}
+              {soundMuted ? <VolumeX size={15} color="var(--text-muted)" /> : <Volume2 size={15} color="var(--accent-color)" />}
             </button>
             <button
               onClick={toggleTheme}
@@ -245,7 +251,7 @@ function App() {
               style={{ marginRight: '8px' }}
               aria-label="Toggle Theme"
             >
-              {theme === 'dark' ? <Sun size={18} color="#fbbf24" /> : <Moon size={18} color="#7c3aed" />}
+              {theme === 'dark' ? <Sun size={16} color="#fbbf24" /> : <Moon size={16} color="#7c3aed" />}
             </button>
             <button
               className="nav-toggle"
@@ -255,7 +261,7 @@ function App() {
               }}
               aria-label="Toggle navigation menu"
             >
-              {mobileMenuOpen ? <X size={26} color="var(--accent-color)" /> : <Menu size={26} />}
+              {mobileMenuOpen ? <X size={24} color="var(--accent-color)" /> : <Menu size={24} />}
             </button>
           </div>
         </div>
@@ -370,7 +376,7 @@ function App() {
       </main>
 
       <style>{`
-        @media (max-width: 900px) {
+        @media (max-width: 1100px) {
           .mobile-actions-wrapper {
             display: flex !important;
             align-items: center;
