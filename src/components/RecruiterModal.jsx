@@ -64,11 +64,25 @@ Portfolio: https://github.com/muhammadokashapak/okasha`;
     setTimeout(() => setCopiedDossier(false), 2500);
   };
 
-  const handleCopyEmail = () => {
-    playSound('success');
-    navigator.clipboard.writeText('muhammad.okasha2146@gmail.com');
+  const handleSendEmail = () => {
+    playSound('click');
+    const email = "muhammad.okasha2146@gmail.com";
+    const subject = encodeURIComponent("Interview Invitation for Muhammad Okasha (AI Architect / Engineer)");
+    const body = encodeURIComponent("Hi Muhammad Okasha,\n\nWe reviewed your portfolio and production AI systems and would love to schedule a preliminary technical interview / discussion.\n\nBest regards,");
+    
+    // Copy email to clipboard as guarantee
+    navigator.clipboard.writeText(email);
     setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
+    setTimeout(() => setCopiedEmail(false), 3000);
+
+    // Open Web Gmail in new tab (best for 95% of recruiters)
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank');
+
+    // Also trigger default mail client fallback
+    setTimeout(() => {
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }, 200);
   };
 
   if (!isOpen) return null;
@@ -328,14 +342,20 @@ Portfolio: https://github.com/muhammadokashapak/okasha`;
                 <Phone size={15} color="var(--accent-emerald)" /> WhatsApp Call
               </a>
 
-              <a
-                href="mailto:muhammad.okasha2146@gmail.com?subject=Interview%20Inquiry%20for%20Muhammad%20Okasha"
-                onClick={() => playSound('click')}
+              <button
+                onClick={handleSendEmail}
                 className="btn-secondary"
-                style={{ padding: '10px 16px', fontSize: '0.88rem' }}
+                style={{
+                  padding: '10px 16px',
+                  fontSize: '0.88rem',
+                  cursor: 'pointer',
+                  border: copiedEmail ? '1px solid var(--accent-emerald)' : '1px solid var(--btn-sec-border)',
+                  color: copiedEmail ? 'var(--accent-emerald)' : 'var(--text-primary)'
+                }}
               >
-                <Mail size={15} color="var(--accent-cyan)" /> Email Interview Invitation
-              </a>
+                {copiedEmail ? <Check size={15} color="var(--accent-emerald)" /> : <Mail size={15} color="var(--accent-cyan)" />}
+                <span>{copiedEmail ? 'Email Copied & Gmail Opened!' : 'Email Interview Invitation'}</span>
+              </button>
             </div>
           </div>
         </motion.div>

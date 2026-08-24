@@ -44,12 +44,18 @@ export default function Contact() {
     playSound('success');
     setSentStatus(true);
 
-    // Formulate mailto link
-    const mailtoUrl = `mailto:muhammad.okasha2146@gmail.com?subject=${encodeURIComponent(formData.subject || 'Portfolio Project Inquiry from ' + formData.name)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`)}`;
-    
+    const email = "muhammad.okasha2146@gmail.com";
+    const subject = encodeURIComponent(formData.subject || `AI Architecture Project Inquiry from ${formData.name || 'Client'}`);
+    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`);
+
+    // Open Web Gmail in new tab for seamless compose
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank');
+
+    // Mailto fallback
     setTimeout(() => {
-      window.location.href = mailtoUrl;
-    }, 400);
+      window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    }, 300);
   };
 
   return (
