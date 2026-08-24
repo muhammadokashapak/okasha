@@ -2,21 +2,21 @@ import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal, X, CornerDownLeft, Sparkles, Gamepad2 } from 'lucide-react';
 import { playSound } from '../utils/soundFx';
+import { queryKnowledgeBase } from '../data/okashaKnowledge';
 
 const COMMANDS = [
   'help', 'projects', 'ghl', 'sales', 'translator', 'school',
   'hospital', 'medprep', 'medconnect', 'chashm', 'shina', 'toxicity',
-  'stats', 'skills', 'whoami', 'resume', 'contact', 'matrix', 'snake', 'clear'
+  'stats', 'skills', 'whoami', 'resume', 'contact', 'matrix', 'snake', 'clear', 'exit'
 ];
 
 export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
   const [input, setInput] = useState('');
   const [cmdHistory, setCmdHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
-  const [gameState, setGameState] = useState(null); // 'snake' | null
   const [history, setHistory] = useState([
-    { text: '⚡ OKASHA AI NEURAL TERMINAL v4.0.0 [ONLINE]', type: 'system' },
-    { text: 'Type "help" for commands, "matrix" for cyber rain, or "snake" to play terminal arcade.', type: 'info' }
+    { text: '⚡ OKASHA AI NEURAL TERMINAL v4.2.0 [ONLINE]', type: 'system' },
+    { text: 'Type "help" for commands, "matrix" for cyber rain, or ask any natural question directly.', type: 'info' }
   ]);
   const bottomRef = useRef(null);
 
@@ -70,11 +70,13 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
     const cmd = rawCmd.toLowerCase();
     const newHistory = [...history, { text: `okasha@ai-core:~$ ${rawCmd}`, type: 'input' }];
 
+    // Direct 'ask <query>' command or questions
     if (cmd.startsWith('ask ')) {
       const query = rawCmd.substring(4);
+      const result = queryKnowledgeBase(query);
       newHistory.push({
-        text: `🤖 [AI REASONING]: Analyzing query: "${query}"...\nMuhammad Okasha has engineered production RAG systems with 5,717 vector chunks, Whisper INT8 edge translation, and scalable microservices. For deep details, check the interactive 'Ask Okasha AI' assistant on the bottom-right!`,
-        type: 'system'
+        text: `🤖 [NEURAL KNOWLEDGE ENGINE]:\n${result.answer}`,
+        type: 'output'
       });
       setHistory(newHistory);
       setInput('');
@@ -87,7 +89,7 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
           { text: '═══════════════ AVAILABLE COMMANDS ═══════════════', type: 'system' },
           { text: '  projects     - List all 10 production AI & systems projects', type: 'output' },
           { text: '  ghl          - GoHighLevel Enterprise RAG (5,717 Chunks, Gemini 3.7)', type: 'output' },
-          { text: '  sales        - Real-Time Sales Voice Co-Pilot & Intent Decider', type: 'output' },
+          { text: '  sales        - Real-Time Sales Voice Co-Pilot & Intent Decider (<50ms)', type: 'output' },
           { text: '  translator   - 100% On-Device AI Video & Subtitle Translator (Android)', type: 'output' },
           { text: '  school       - Apex Digital School OS & Socratic AI Tutor', type: 'output' },
           { text: '  hospital     - Clinical Care & Hospital Management ERP', type: 'output' },
@@ -104,7 +106,8 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
           { text: '  whoami       - Engineer bio & architectural philosophy', type: 'output' },
           { text: '  resume       - Trigger official Resume PDF download', type: 'output' },
           { text: '  contact      - Direct communication channels & socials', type: 'output' },
-          { text: '  clear        - Reset terminal window', type: 'output' }
+          { text: '  clear / cls  - Reset terminal window', type: 'output' },
+          { text: '  exit / quit  - Close terminal window', type: 'output' }
         );
         break;
 
@@ -120,38 +123,97 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
         break;
 
       case 'projects':
+      case 'ls':
+      case 'dir':
         newHistory.push(
           { text: 'ACTIVE ENGINEERING REPOSITORY (10 Production Systems):', type: 'system' },
-          { text: '  1. [GHL RAG] Enterprise Multimodal AI Cockpit (FastAPI + ChromaDB 5.7k Chunks)', type: 'output' },
-          { text: '  2. [Sales Co-Pilot] Sub-50ms Real-Time Voice Intelligence (Whisper + Ollama + HUD)', type: 'output' },
-          { text: '  3. [Offline Translator] 100% On-Device Whisper INT8 + MarianMT Android Player', type: 'output' },
-          { text: '  4. [Apex Digital School] 5-Portal School Management ERP & Socratic AI Engine', type: 'output' },
-          { text: '  5. [Hospital ERP] Cross-Platform Clinical Operations & Patient EHR Ledger', type: 'output' },
-          { text: '  6. [MedPrep Pro] AI Medical Licensure Exam Platform (10k+ Clinical MCQs)', type: 'output' },
-          { text: '  7. [Med Connect] Telehealth Network & Specialist Consultation Hub', type: 'output' },
-          { text: '  8. [CHASHM AI] Assistive Smart Headset (Quantized YOLO on ESP32-CAM)', type: 'output' },
-          { text: '  9. [Shina NLP] Hybrid LSTM/CNN Deep Learning for Endangered Dialects', type: 'output' },
-          { text: ' 10. [Toxicity Sentinel] High-Throughput NLP Content Safety & Hate Speech Detection', type: 'output' }
+          { text: '  1. [ghl]        - GoHighLevel Enterprise RAG (FastAPI + ChromaDB 5.7k Chunks)', type: 'output' },
+          { text: '  2. [sales]      - Sub-50ms Real-Time Voice Intelligence (Whisper + Ollama + HUD)', type: 'output' },
+          { text: '  3. [translator] - 100% On-Device Whisper INT8 + MarianMT Android Player', type: 'output' },
+          { text: '  4. [school]     - Apex Digital School OS & Socratic AI Engine (5 Portals)', type: 'output' },
+          { text: '  5. [hospital]   - Cross-Platform Clinical Operations & Patient EHR Ledger', type: 'output' },
+          { text: '  6. [medprep]    - AI Medical Licensure Exam Platform (10k+ Clinical MCQs)', type: 'output' },
+          { text: '  7. [medconnect] - Telehealth Network & Specialist Consultation Hub', type: 'output' },
+          { text: '  8. [chashm]     - CHASHM AI Assistive Smart Headset (Quantized YOLO on ESP32-CAM)', type: 'output' },
+          { text: '  9. [shina]      - Shina NLP Hybrid LSTM/CNN Deep Learning for Endangered Dialects', type: 'output' },
+          { text: ' 10. [toxicity]   - Toxicity Sentinel NLP Content Safety & Moderation (10k req/sec)', type: 'output' }
         );
         break;
 
       case 'ghl':
         newHistory.push({
-          text: '⚡ GHL ENTERPRISE RAG PLATFORM:\n• 5,717 vector chunks indexed in ChromaDB\n• FastEmbed ONNX (nomic-embed-text-v1.5) sub-second latency\n• Gemini 3.7 Flash multimodal vision & voice notes\n• Full REST API v2 & OAuth 2.0 specs\n• 1:1 ChatGPT Dark cockpit with SSE token streaming',
+          text: '⚡ GHL ENTERPRISE RAG PLATFORM:\n• 5,717 vector chunks indexed in ChromaDB (nomic-embed-text-v1.5)\n• FastEmbed ONNX sub-150ms vectorization latency\n• Gemini 3.7 Flash multimodal vision (clipboard paste OCR) & voice notes\n• Official REST API v2 & OAuth 2.0 specs\n• 1:1 ChatGPT Dark cockpit with SSE token typewriter streaming',
           type: 'output'
         });
         break;
 
       case 'sales':
         newHistory.push({
-          text: '🎙️ SALES VOICE CO-PILOT:\n• Captures live audio from Zoom / Google Meet tabs via WebRTC\n• Local Whisper STT + Ollama intent classification (<50ms)\n• Detects client skepticism, objections & subconscious fears\n• Whisper cues into representative\'s earphone feed\n• Floating transparent Zoom HUD overlay',
+          text: '🎙️ SALES VOICE CO-PILOT:\n• Captures live audio from Zoom / Google Meet tabs via WebRTC\n• Local Whisper STT + Ollama intent classification (<50ms)\n• Detects client skepticism, objections & subconscious hesitation\n• Secret whisper TTS cues fed directly into rep\'s earphone\n• Floating transparent Zoom HUD overlay for stealth execution',
           type: 'output'
         });
         break;
 
       case 'translator':
         newHistory.push({
-          text: '🎬 OFFLINE AI VIDEO TRANSLATOR:\n• 100% On-Device Android app running on Jetpack Compose\n• Quantized INT8 OpenAI Whisper speech-to-text with VAD\n• MarianMT seq2seq neural translation (Urdu, Spanish, etc.)\n• Media3 ExoPlayer with binary search subtitle synchronization\n• Zero cloud costs & Zero privacy leakage',
+          text: '🎬 OFFLINE AI VIDEO TRANSLATOR:\n• 100% On-Device Android app running on Jetpack Compose Material 3\n• Quantized INT8 OpenAI Whisper speech-to-text with VAD\n• MarianMT seq2seq neural translation (Urdu, Spanish, etc.)\n• Media3 ExoPlayer with binary search subtitle synchronization\n• Zero cloud costs & 0 KB data leakage with Room SQLite cache',
+          type: 'output'
+        });
+        break;
+
+      case 'school':
+      case 'apex':
+        newHistory.push({
+          text: '🎓 APEX DIGITAL SCHOOL OPERATING SYSTEM:\n• 5 Role-based portals (Student, Teacher, Parent, Admin, Finance) with RBAC\n• Interactive Socratic AI diagnostic tutor & automated quiz engine\n• Virtual broadcast studio with real-time collaborative whiteboard\n• Cryptographic PDF marksheet & transcript generation\n• 360 Parent fee ledger & GPS bus route tracking',
+          type: 'output'
+        });
+        break;
+
+      case 'hospital':
+      case 'erp':
+        newHistory.push({
+          text: '🏥 CLINICAL CARE & HOSPITAL MANAGEMENT ERP:\n• Centralized Patient EHR ledger for sanitized medical histories & labs\n• OPD/IPD ward management, bed allocation, and nurse handover logs\n• Pharmacy POS inventory tracking with batch expiration warnings\n• Cross-platform compilation for Android tablets and Windows desktop via Capacitor\n• Strict role-based clinical security protocols',
+          type: 'output'
+        });
+        break;
+
+      case 'medprep':
+      case 'fcps':
+        newHistory.push({
+          text: '🩺 MEDPREP PRO & FCPS EXAMINATION ENGINE:\n• 10,000+ high-yield clinical MCQs covering Anatomy, Physiology, Pathology, Surgery\n• In-depth pathophysiological explanations & medical references for all options\n• Timed examination simulator with official negative marking rules\n• Spaced-repetition learning matrix tracking mistake patterns\n• Standalone Windows .exe installer & Android APK',
+          type: 'output'
+        });
+        break;
+
+      case 'medconnect':
+      case 'telehealth':
+        newHistory.push({
+          text: '🌐 MED CONNECT TELEMEDICINE NETWORK:\n• Specialist discovery directory with verified doctor credentials\n• Real-time calendar appointment scheduling & slot reservation\n• Automated digital prescription issuance & medicine schedule sync\n• Encrypted patient diagnostic health vault with permissioned doctor access',
+          type: 'output'
+        });
+        break;
+
+      case 'chashm':
+      case 'chashm-ai':
+      case 'glasses':
+        newHistory.push({
+          text: '👁️ CHASHM AI ASSISTIVE SMART HEADSET:\n• Wireless ESP32-CAM module streaming ultra-low latency MJPEG video\n• Custom INT8 quantized YOLO model (.tflite) with sub-30ms detection\n• Real-time spatial depth estimation for obstacle trajectory tracking\n• 3D directional Text-to-Speech audio navigation guidance\n• Live browser telemetry dashboard for caretakers',
+          type: 'output'
+        });
+        break;
+
+      case 'shina':
+      case 'nlp':
+        newHistory.push({
+          text: '📜 SHINA NLP LINGUISTIC DEEP LEARNING ENGINE:\n• First standardized digital linguistic corpus for endangered Shina language\n• Custom N-gram tokenizers & phonetic word embeddings\n• Hybrid Bidirectional LSTM + 1D-CNN contextual neural architecture\n• 94%+ F1 classification benchmark score across regional dialects',
+          type: 'output'
+        });
+        break;
+
+      case 'toxicity':
+      case 'sentinel':
+        newHistory.push({
+          text: '🛡️ TOXICITY SENTINEL & MODERATION ENGINE:\n• 10,000 req/sec async inference throughput on FastAPI microservice\n• Advanced NLP cleaning with regex slang expansion & lemmatization\n• N-gram TF-IDF vectorization & multi-label classifier\n• 98.2% detection precision across toxic content, threats & hate speech',
           type: 'output'
         });
         break;
@@ -165,7 +227,7 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
 
       case 'skills':
         newHistory.push({
-          text: '⚡ TECH MATRIX:\n• AI/LLMs: Gemini 3.7 Flash, ChromaDB, FastEmbed, LangChain, Ollama\n• Deep Learning: Whisper INT8, YOLOv8, PyTorch, TensorFlow, ONNX\n• Systems: FastAPI, React 19, WebSockets, WebRTC, Jetpack Compose, SQLite WAL',
+          text: '⚡ TECH MATRIX & ARSENAL:\n• AI/LLMs: Gemini 3.7 Flash, ChromaDB, FastEmbed ONNX, LangChain, Ollama\n• Deep Learning: PyTorch, TensorFlow, Whisper INT8, MarianMT, YOLOv8, OpenCV\n• Full-Stack: FastAPI (Async), React 19/18, WebSockets, WebRTC, Jetpack Compose, SQLite WAL, Docker',
           type: 'output'
         });
         break;
@@ -178,6 +240,7 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
         break;
 
       case 'resume':
+      case 'cv':
         newHistory.push({
           text: '📄 Downloading Muhammad_Okasha_Resume.pdf...',
           type: 'system'
@@ -187,21 +250,30 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
 
       case 'contact':
         newHistory.push({
-          text: '📫 DIRECT CONTACT CHANNELS:\n• Email: muhammad.okasha2146@gmail.com\n• Phone: +92 3495696659\n• Location: Islamabad, Pakistan',
+          text: '📫 DIRECT CONTACT CHANNELS:\n• Email: muhammad.okasha2146@gmail.com\n• Phone: +92 3495696659\n• Location: Islamabad, Pakistan (PKT UTC+5)',
           type: 'output'
         });
         break;
 
       case 'clear':
+      case 'cls':
         setHistory([]);
         setInput('');
         return;
 
+      case 'exit':
+      case 'quit':
+        onClose();
+        return;
+
       default:
+        // Automatically query the Neural Knowledge Base for natural language questions
+        const fallbackResult = queryKnowledgeBase(rawCmd);
         newHistory.push({
-          text: `Command not recognized: "${rawCmd}". Type "help" for valid commands or "ask <query>" to query AI.`,
-          type: 'error'
+          text: `🤖 [NEURAL KNOWLEDGE RESPONSE]:\n${fallbackResult.answer}`,
+          type: 'output'
         });
+        break;
     }
 
     setHistory(newHistory);
@@ -248,98 +320,85 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }} />
-              <span
-                style={{
-                  color: 'var(--accent-color)',
-                  fontFamily: 'var(--font-mono)',
-                  fontSize: '0.82rem',
-                  fontWeight: 700,
-                  marginLeft: '8px',
-                  letterSpacing: '0.5px'
-                }}
-              >
-                okasha@neural-core:~ (zsh v4.0)
+              <span style={{ fontSize: '0.82rem', fontFamily: 'JetBrains Mono, monospace', color: 'var(--accent-color)', marginLeft: '8px' }}>
+                okasha@neural-terminal: ~ (bash v4.2)
               </span>
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <button
-                onClick={() => {
-                  if (onTriggerMatrix) {
-                    onTriggerMatrix();
-                  }
-                }}
-                title="Matrix Mode"
-                style={{
-                  background: 'rgba(0, 255, 204, 0.1)',
-                  border: '1px solid rgba(0, 255, 204, 0.3)',
-                  color: 'var(--accent-color)',
-                  padding: '2px 8px',
-                  borderRadius: '10px',
-                  fontSize: '0.72rem',
-                  fontWeight: 700,
-                  cursor: 'pointer'
-                }}
-              >
-                Matrix
-              </button>
-
-              <button
-                onClick={() => {
-                  playSound('close');
-                  onClose();
-                }}
-                style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'var(--text-secondary)',
-                  cursor: 'pointer'
-                }}
-              >
-                <X size={18} />
-              </button>
-            </div>
+            <button
+              onClick={() => {
+                playSound('close');
+                onClose();
+              }}
+              style={{
+                background: 'transparent',
+                border: 'none',
+                color: '#fff',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center'
+              }}
+              title="Close Terminal"
+            >
+              <X size={18} />
+            </button>
           </div>
 
-          {/* Terminal Console Output */}
+          {/* Terminal Body */}
           <div
             style={{
-              fontFamily: 'var(--font-mono)',
-              fontSize: '0.85rem',
-              minHeight: '300px',
               maxHeight: '440px',
               overflowY: 'auto',
-              paddingRight: '8px',
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '0.86rem',
+              lineHeight: 1.6,
+              color: '#d1d5db',
               display: 'flex',
               flexDirection: 'column',
-              gap: '8px'
+              gap: '6px'
             }}
           >
-            {history.map((item, idx) => (
-              <div
-                key={idx}
-                style={{
-                  color:
-                    item.type === 'system'
-                      ? '#00ffcc'
-                      : item.type === 'info'
-                      ? '#38bdf8'
-                      : item.type === 'input'
-                      ? '#f8fafc'
-                      : item.type === 'error'
-                      ? '#f43f5e'
-                      : '#94a3b8',
-                  lineHeight: 1.6,
-                  whiteSpace: 'pre-wrap'
-                }}
-              >
-                {item.text}
-              </div>
-            ))}
+            {history.map((item, idx) => {
+              if (item.type === 'input') {
+                return (
+                  <div key={idx} style={{ color: 'var(--accent-color)', fontWeight: 600 }}>
+                    {item.text}
+                  </div>
+                );
+              }
+              if (item.type === 'system') {
+                return (
+                  <div key={idx} style={{ color: 'var(--accent-cyan)', fontWeight: 600, whiteSpace: 'pre-line' }}>
+                    {item.text}
+                  </div>
+                );
+              }
+              if (item.type === 'error') {
+                return (
+                  <div key={idx} style={{ color: 'var(--accent-rose)', whiteSpace: 'pre-line' }}>
+                    {item.text}
+                  </div>
+                );
+              }
+              if (item.type === 'info') {
+                return (
+                  <div key={idx} style={{ color: 'var(--text-secondary)', whiteSpace: 'pre-line' }}>
+                    {item.text}
+                  </div>
+                );
+              }
+              return (
+                <div key={idx} style={{ color: '#f8fafc', whiteSpace: 'pre-line' }}>
+                  {item.text}
+                </div>
+              );
+            })}
+
             <div ref={bottomRef} />
           </div>
 
-          {/* Terminal Input Box */}
+          {/* Terminal Input Form */}
           <form
             onSubmit={handleCommand}
             style={{
@@ -347,47 +406,45 @@ export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
               alignItems: 'center',
               gap: '8px',
               borderTop: '1px solid rgba(0, 255, 204, 0.15)',
-              paddingTop: '0.9rem',
-              marginTop: '1rem'
+              paddingTop: '0.8rem',
+              marginTop: '1rem',
+              fontFamily: 'JetBrains Mono, monospace'
             }}
           >
-            <span style={{ color: 'var(--accent-color)', fontFamily: 'var(--font-mono)', fontWeight: 700 }}>
-              &gt;
+            <span style={{ color: 'var(--accent-color)', fontSize: '0.9rem', flexShrink: 0 }}>
+              okasha@ai-core:~$
             </span>
             <input
               type="text"
+              autoFocus
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}
-              placeholder="Enter command (e.g. 'help', 'matrix', 'snake', 'ghl', 'ask <query>')..."
-              autoFocus
+              placeholder="type a command (e.g. chashm, ghl, projects, help)..."
               style={{
                 flex: 1,
                 background: 'transparent',
                 border: 'none',
-                outline: 'none',
                 color: '#fff',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.88rem'
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '0.9rem',
+                outline: 'none'
               }}
             />
             <button
               type="submit"
               style={{
                 background: 'rgba(0, 255, 204, 0.15)',
-                border: '1px solid rgba(0, 255, 204, 0.4)',
+                border: '1px solid var(--accent-color)',
                 color: 'var(--accent-color)',
                 borderRadius: '8px',
-                padding: '5px 12px',
+                padding: '4px 8px',
                 cursor: 'pointer',
                 display: 'flex',
-                alignItems: 'center',
-                gap: '4px',
-                fontSize: '0.78rem',
-                fontWeight: 600
+                alignItems: 'center'
               }}
             >
-              <CornerDownLeft size={14} /> Send
+              <CornerDownLeft size={14} />
             </button>
           </form>
         </motion.div>
