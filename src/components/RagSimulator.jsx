@@ -10,6 +10,7 @@ import {
   ArrowRight, 
   Play, 
   RefreshCw, 
+  RotateCcw, 
   Code2, 
   Zap, 
   Sliders,
