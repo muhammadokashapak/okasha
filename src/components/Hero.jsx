@@ -1,18 +1,19 @@
 import React, { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Points, PointMaterial, OrbitControls } from '@react-three/drei';
+import { Points, PointMaterial, Float, MeshDistortMaterial } from '@react-three/drei';
 import * as random from 'maath/random/dist/maath-random.esm';
 import { motion } from 'framer-motion';
-import { FileText, Terminal, Zap, ShieldCheck, ArrowRight } from 'lucide-react';
+import { FileText, Terminal, Zap, Sparkles, MessageSquare } from 'lucide-react';
+import { playSound } from '../utils/soundFx';
 
 function Starfield({ color = "#00ffcc", ...props }) {
   const ref = useRef();
-  const sphere = useMemo(() => random.inSphere(new Float32Array(6000), { radius: 1.6 }), []);
+  const sphere = useMemo(() => random.inSphere(new Float32Array(5000), { radius: 1.8 }), []);
 
   useFrame((state, delta) => {
     if (ref.current) {
-      ref.current.rotation.x -= delta / 12;
-      ref.current.rotation.y -= delta / 18;
+      ref.current.rotation.x -= delta / 15;
+      ref.current.rotation.y -= delta / 22;
     }
   });
 
@@ -22,10 +23,10 @@ function Starfield({ color = "#00ffcc", ...props }) {
         <PointMaterial
           transparent
           color={color}
-          size={0.0045}
+          size={0.004}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.8}
+          opacity={0.75}
         />
       </Points>
     </group>
@@ -34,12 +35,12 @@ function Starfield({ color = "#00ffcc", ...props }) {
 
 function StarfieldViolet({ color = "#8b5cf6", ...props }) {
   const ref = useRef();
-  const sphere = useMemo(() => random.inSphere(new Float32Array(3000), { radius: 1.3 }), []);
+  const sphere = useMemo(() => random.inSphere(new Float32Array(3000), { radius: 1.4 }), []);
 
   useFrame((state, delta) => {
     if (ref.current) {
-      ref.current.rotation.x += delta / 16;
-      ref.current.rotation.y += delta / 22;
+      ref.current.rotation.x += delta / 18;
+      ref.current.rotation.y += delta / 25;
     }
   });
 
@@ -49,17 +50,58 @@ function StarfieldViolet({ color = "#8b5cf6", ...props }) {
         <PointMaterial
           transparent
           color={color}
-          size={0.005}
+          size={0.0045}
           sizeAttenuation={true}
           depthWrite={false}
-          opacity={0.7}
+          opacity={0.65}
         />
       </Points>
     </group>
   );
 }
 
-export default function Hero({ onOpenTerminal, theme = 'dark' }) {
+function NeuralFloatingCore({ color1 = "#00ffcc", color2 = "#8b5cf6" }) {
+  const meshRef = useRef();
+  const outerRef = useRef();
+
+  useFrame((state, delta) => {
+    if (meshRef.current) {
+      meshRef.current.rotation.x += delta * 0.25;
+      meshRef.current.rotation.y += delta * 0.35;
+    }
+    if (outerRef.current) {
+      outerRef.current.rotation.x -= delta * 0.15;
+      outerRef.current.rotation.z += delta * 0.2;
+    }
+  });
+
+  return (
+    <Float speed={2} rotationIntensity={0.8} floatIntensity={1.2}>
+      <group position={[0, 0, -0.2]}>
+        {/* Inner Glowing Wireframe Core */}
+        <mesh ref={meshRef} scale={0.48}>
+          <icosahedronGeometry args={[1, 2]} />
+          <meshStandardMaterial
+            color={color1}
+            wireframe
+            transparent
+            opacity={0.35}
+            emissive={color1}
+            emissiveIntensity={0.6}
+          />
+        </mesh>
+
+        {/* Outer Orbit Synapse Ring */}
+        <mesh ref={outerRef} scale={0.7}>
+          <torusGeometry args={[1, 0.02, 16, 100]} />
+          <meshBasicMaterial color={color2} transparent opacity={0.4} />
+        </mesh>
+      </group>
+    </Float>
+  );
+}
+
+export default function Hero({ onOpenTerminal, onOpenChat, theme = 'dark' }) {
   const isLight = theme === 'light';
   const starColor1 = isLight ? "#0284c7" : "#00ffcc";
   const starColor2 = isLight ? "#7c3aed" : "#8b5cf6";
@@ -73,12 +115,14 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
 
   return (
     <section id="home" style={{ position: 'relative', minHeight: '100dvh', width: '100%', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-      {/* 3D Cosmic Starfield Canvas */}
-      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: isLight ? 0.6 : 1 }}>
-        <Canvas camera={{ position: [0, 0, 1] }}>
+      {/* 3D Cosmic Neural Canvas */}
+      <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, opacity: isLight ? 0.65 : 1 }}>
+        <Canvas camera={{ position: [0, 0, 1.2] }}>
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} />
           <Starfield color={starColor1} />
           <StarfieldViolet color={starColor2} />
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.4} />
+          <NeuralFloatingCore color1={starColor1} color2={starColor2} />
         </Canvas>
       </div>
 
@@ -88,12 +132,12 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
         top: '40%', 
         left: '50%', 
         transform: 'translate(-50%, -50%)', 
-        width: 'min(700px, 90vw)', 
-        height: 'min(700px, 90vw)', 
+        width: 'min(750px, 92vw)', 
+        height: 'min(750px, 92vw)', 
         background: isLight
           ? 'radial-gradient(circle, rgba(14,165,233,0.18) 0%, rgba(124,58,237,0.12) 40%, transparent 75%)'
           : 'radial-gradient(circle, rgba(0,255,204,0.18) 0%, rgba(56,189,248,0.12) 30%, rgba(139,92,246,0.1) 60%, transparent 80%)', 
-        filter: 'blur(60px)', 
+        filter: 'blur(65px)', 
         zIndex: 0,
         pointerEvents: 'none'
       }} />
@@ -190,7 +234,11 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
               pointerEvents: 'auto'
             }}
           >
-            <a href="#projects" className="btn-primary">
+            <a 
+              href="#projects" 
+              className="btn-primary"
+              onClick={() => playSound('click')}
+            >
               <Zap size={18} /> View Featured Work
             </a>
 
@@ -198,13 +246,17 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
               href="/Muhammad_Okasha_Resume.pdf"
               download="Muhammad_Okasha_Resume.pdf"
               className="btn-secondary"
+              onClick={() => playSound('click')}
             >
               <FileText size={18} color="var(--accent-color)" />
               Download Resume
             </a>
 
             <button
-              onClick={onOpenTerminal}
+              onClick={() => {
+                playSound('open');
+                onOpenTerminal();
+              }}
               className="btn-secondary"
               style={{
                 border: '1px solid rgba(139, 92, 246, 0.4)',
@@ -236,7 +288,8 @@ export default function Hero({ onOpenTerminal, theme = 'dark' }) {
             {heroMetrics.map((item, idx) => (
               <div 
                 key={idx}
-                className="card hero-metric-card"
+                className="card hero-metric-card spotlight-card"
+                onMouseEnter={() => playSound('hover')}
                 style={{ 
                   padding: '16px 14px', 
                   borderRadius: '18px',

@@ -39,6 +39,13 @@ export const allProjects = [
       { val: "<150ms", label: "FastEmbed ONNX Latency" },
       { val: "100%", label: "API v2 & OAuth 2.0 Coverage" }
     ],
+    pipeline: [
+      "REST API & Docs Scraper",
+      "FastEmbed ONNX Vectorizer",
+      "ChromaDB (5,717 Chunks)",
+      "Gemini 3.7 Multimodal",
+      "Typewriter SSE Stream"
+    ],
     tags: ["Gemini 3.7 Flash", "ChromaDB", "FastEmbed ONNX", "FastAPI", "Multimodal Vision", "SSE Stream", "SQLite WAL"],
     description: "Enterprise ChatGPT-Grade AI Cockpit powered by Gemini 3.7 Flash and a hybrid ChromaDB vector store indexing 5,717 chunks of official GoHighLevel specs, REST API v2, and OAuth 2.0. Supports clipboard screenshot analysis, voice notes, and document ingestion.",
     deepOverview: "Engineered a high-throughput hybrid RAG architecture using nomic-embed-text-v1.5 running on ONNX runtime for sub-second embeddings. Combines Reciprocal Rank Fusion (RRF) with exact entity token matching. Features a pixel-perfect 1:1 ChatGPT Dark UI with Server-Sent Events (SSE) word streaming, clipboard paste vision inspection, voice note waveforms, and complete GHL workflows architecture solutions.",
@@ -61,6 +68,13 @@ export const allProjects = [
       { val: "<50ms", label: "Battlecard Retrieval" },
       { val: "Live", label: "Zoom & Meet Tab Capture" },
       { val: "Local", label: "Ollama LLM + Whisper STT" }
+    ],
+    pipeline: [
+      "Zoom/Meet WebRTC Audio",
+      "Local Whisper STT",
+      "Psychological Intent Decider",
+      "ChromaDB Sub-50ms Vector RAG",
+      "Floating Zoom HUD"
     ],
     tags: ["FastAPI", "WebSockets", "Local Whisper STT", "Ollama LLM", "ChromaDB", "WebRTC", "Zoom HUD"],
     description: "Real-time voice intelligence co-pilot capturing live audio from Google Meet and Zoom tabs. Transcribes speaker audio with local Whisper and retrieves objection-handling battlecards within 50ms, giving reps secret in-ear cues.",
@@ -85,6 +99,13 @@ export const allProjects = [
       { val: "INT8", label: "Quantized Whisper ONNX" },
       { val: "4+", label: "Offline Language Pairs" }
     ],
+    pipeline: [
+      "Media File Input",
+      "INT8 Whisper with VAD",
+      "MarianMT Seq2Seq Translation",
+      "Media3 ExoPlayer Sync",
+      "Room Database Cache"
+    ],
     tags: ["Android Kotlin", "Jetpack Compose", "OpenAI Whisper ONNX", "MarianMT Seq2Seq", "Media3 ExoPlayer", "Room SQLite"],
     description: "Native Android media player that transcribes and translates video/audio files into synchronized multi-lingual subtitles completely offline with pre-bundled neural models — zero cloud APIs and zero subscription costs.",
     deepOverview: "Architected an end-to-end edge AI pipeline on Android. Utilizes OpenAI Whisper quantized to INT8 with Voice Activity Detection (VAD) alongside MarianMT / OPUS-MT seq2seq models running on ONNX Runtime. Bundles Media3 ExoPlayer with binary-search subtitle synchronization and Room SQLite caching so media is never transcribed twice.",
@@ -107,6 +128,13 @@ export const allProjects = [
       { val: "5 Portals", label: "Role-Based Access (RBAC)" },
       { val: "Live", label: "Collaborative Whiteboard" },
       { val: "Instant", label: "PDF Marksheets & Transcripts" }
+    ],
+    pipeline: [
+      "Role-Based RBAC Gateway",
+      "Socratic AI Tutor Engine",
+      "Live Classroom Studio",
+      "Gradebook Assessment Suite",
+      "Cryptographic PDF Export"
     ],
     tags: ["React 18", "Vite", "AI Socratic Tutor", "Glassmorphism", "Dynamic Analytics", "PDF Engine"],
     description: "Unified AI-powered education operating system featuring 5 role-based portals (Student, Teacher, Parent, Admin, Finance), live virtual broadcast studios with collaborative whiteboards, automated marksheet PDF generators, and Socratic AI diagnostic tutors.",
@@ -131,6 +159,13 @@ export const allProjects = [
       { val: "EHR", label: "Electronic Health Records" },
       { val: "Multi-OS", label: "Android & Desktop Native" }
     ],
+    pipeline: [
+      "Patient EHR Central Ledger",
+      "OPD/IPD Bed Allocation",
+      "Automated Prescription Engine",
+      "Pharmacy POS & Expiry Tracker",
+      "Capacitor Native Deployment"
+    ],
     tags: ["React", "FastAPI", "Capacitor", "TailwindCSS", "PostgreSQL/SQLite", "Role Security"],
     description: "Enterprise hospital management platform supporting electronic health records (EHR), multi-specialty doctor appointment scheduling, OPD/IPD inpatient admission workflows, pharmacy inventory tracking, and point-of-sale billing pipelines.",
     deepOverview: "Designed a high-reliability clinical management system built for high-throughput hospitals. Features sanitized medical record storage, automated prescription formatting, real-time bed occupancy monitoring, pharmacy batch tracking, and native multi-platform compilation for both desktop and mobile hospital tablets.",
@@ -153,6 +188,13 @@ export const allProjects = [
       { val: "10,000+", label: "High-Yield Medical MCQs" },
       { val: "100%", label: "Clinical Rationale & Refs" },
       { val: "Native", label: "Desktop EXE & Android" }
+    ],
+    pipeline: [
+      "10k+ MCQ Clinical Bank",
+      "Spaced Repetition Algorithm",
+      "Timed Exam Simulation Engine",
+      "Pathophysiology Rationale Matrix",
+      "Windows EXE & Android Native"
     ],
     tags: ["Python", "Vite", "React", "PyInstaller", "Capacitor", "SQLite", "Clinical Explanations"],
     description: "Medical licensure and FCPS examination platform packed with thousands of high-yield clinical MCQs, topic-wise diagnostic breakdowns, timed exam simulation engines, and in-depth pathophysiological explanations.",
@@ -177,6 +219,13 @@ export const allProjects = [
       { val: "Instant", label: "Digital Prescription Sync" },
       { val: "Secure", label: "Encrypted Health Data" }
     ],
+    pipeline: [
+      "Specialist Discovery Directory",
+      "Encrypted Health Vault",
+      "Real-Time Slot Reservation",
+      "Digital Prescription Dispatch",
+      "Live Telehealth Hub"
+    ],
     tags: ["React", "Node.js", "WebSockets", "Express", "Secure Telehealth"],
     description: "Modern telehealth collaboration network connecting patients with licensed physicians, facilitating instantaneous video consultations, electronic prescription dispatch, and encrypted diagnostic report exchange.",
     deepOverview: "Provides a friction-free healthcare bridge. Enables smart doctor discovery by specialty, calendar availability booking, live consultation rooms, and a unified health passport for patients to store laboratory findings securely.",
@@ -199,6 +248,13 @@ export const allProjects = [
       { val: "INT8", label: "Quantized Custom YOLO" },
       { val: "30 FPS", label: "ESP32-CAM MJPEG Stream" },
       { val: "Spatial", label: "Real-Time 3D Audio TTS" }
+    ],
+    pipeline: [
+      "Wireless ESP32-CAM MJPEG",
+      "Quantized INT8 YOLO (.tflite)",
+      "3D Spatial Depth Estimator",
+      "Directional Text-to-Speech",
+      "Audible Navigation Guidance"
     ],
     tags: ["FastAPI", "OpenCV", "YOLO .tflite", "ESP32-CAM", "WebSockets", "Spatial TTS"],
     description: "Smart assistive headset for the visually impaired utilizing an INT8 quantized YOLO model on ESP32-CAM to detect obstacles and stream 3D spatial audio navigation cues in real time.",
@@ -223,6 +279,13 @@ export const allProjects = [
       { val: "Custom", label: "Corpus Preprocessing" },
       { val: "Hybrid", label: "LSTM + CNN Architecture" }
     ],
+    pipeline: [
+      "Indigenous Corpus Ingestion",
+      "Morphological Tokenizer",
+      "Hybrid Bi-LSTM & 1D-CNN",
+      "Dialect & Sentiment Classifier",
+      "94%+ F1 Evaluation Benchmark"
+    ],
     tags: ["Python", "LSTM", "CNN", "TensorFlow", "Word Embeddings", "NLP Pipeline"],
     description: "Pioneered specialized deep learning architectures to preserve and classify the endangered regional Shina language using custom tokenizers, word embeddings, and hybrid LSTM/CNN models.",
     deepOverview: "Designed an NLP pipeline for a low-resource indigenous language. Handled complex morphological challenges through custom normalization, N-gram tokenization, and trained neural embeddings to classify dialects and semantic sentiment with high precision.",
@@ -245,6 +308,13 @@ export const allProjects = [
       { val: "10k/sec", label: "Inference Throughput" },
       { val: "TF-IDF", label: "N-Gram Vectorizer" },
       { val: "98.2%", label: "Detection Accuracy" }
+    ],
+    pipeline: [
+      "Social Stream Ingestion",
+      "TF-IDF & Lemmatization Pipeline",
+      "Multi-Label NLP Classifier",
+      "10k req/sec Async Gateway",
+      "Live Content Moderation API"
     ],
     tags: ["NLP", "TF-IDF", "Lemmatization", "Scikit-learn", "FastAPI", "Data Pipelines"],
     description: "High-throughput text-classification sentinel that ingests real-time social media streams, applies rigorous NLP preprocessing (lemmatization, TF-IDF), and flags digital toxicity and hate speech with high precision.",

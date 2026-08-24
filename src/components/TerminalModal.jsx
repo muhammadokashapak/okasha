@@ -1,12 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Terminal, X, CornerDownLeft, Sparkles } from 'lucide-react';
+import { Terminal, X, CornerDownLeft, Sparkles, Gamepad2 } from 'lucide-react';
+import { playSound } from '../utils/soundFx';
 
-export default function TerminalModal({ isOpen, onClose }) {
+const COMMANDS = [
+  'help', 'projects', 'ghl', 'sales', 'translator', 'school',
+  'hospital', 'medprep', 'medconnect', 'chashm', 'shina', 'toxicity',
+  'stats', 'skills', 'whoami', 'resume', 'contact', 'matrix', 'snake', 'clear'
+];
+
+export default function TerminalModal({ isOpen, onClose, onTriggerMatrix }) {
   const [input, setInput] = useState('');
+  const [cmdHistory, setCmdHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [gameState, setGameState] = useState(null); // 'snake' | null
   const [history, setHistory] = useState([
-    { text: '⚡ OKASHA AI NEURAL TERMINAL v3.2.0 [ONLINE]', type: 'system' },
-    { text: 'Type "help" to view all system commands or enter a project code (e.g., "ghl", "sales", "translator").', type: 'info' }
+    { text: '⚡ OKASHA AI NEURAL TERMINAL v4.0.0 [ONLINE]', type: 'system' },
+    { text: 'Type "help" for commands, "matrix" for cyber rain, or "snake" to play terminal arcade.', type: 'info' }
   ]);
   const bottomRef = useRef(null);
 
@@ -16,17 +26,65 @@ export default function TerminalModal({ isOpen, onClose }) {
     }
   }, [history, isOpen]);
 
+  const handleKeyDown = (e) => {
+    // Arrow Up / Down for command history
+    if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (cmdHistory.length === 0) return;
+      const nextIdx = historyIndex + 1 < cmdHistory.length ? historyIndex + 1 : historyIndex;
+      setHistoryIndex(nextIdx);
+      setInput(cmdHistory[cmdHistory.length - 1 - nextIdx] || '');
+      playSound('hover');
+    } else if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      if (historyIndex > 0) {
+        const nextIdx = historyIndex - 1;
+        setHistoryIndex(nextIdx);
+        setInput(cmdHistory[cmdHistory.length - 1 - nextIdx] || '');
+      } else {
+        setHistoryIndex(-1);
+        setInput('');
+      }
+      playSound('hover');
+    } else if (e.key === 'Tab') {
+      e.preventDefault();
+      const current = input.trim().toLowerCase();
+      if (!current) return;
+      const match = COMMANDS.find((c) => c.startsWith(current));
+      if (match) {
+        setInput(match);
+        playSound('hover');
+      }
+    }
+  };
+
   const handleCommand = (e) => {
     e.preventDefault();
-    const cmd = input.trim().toLowerCase();
-    if (!cmd) return;
+    const rawCmd = input.trim();
+    if (!rawCmd) return;
 
-    const newHistory = [...history, { text: `okasha@ai-core:~$ ${input}`, type: 'input' }];
+    playSound('click');
+    setCmdHistory((prev) => [...prev, rawCmd]);
+    setHistoryIndex(-1);
+
+    const cmd = rawCmd.toLowerCase();
+    const newHistory = [...history, { text: `okasha@ai-core:~$ ${rawCmd}`, type: 'input' }];
+
+    if (cmd.startsWith('ask ')) {
+      const query = rawCmd.substring(4);
+      newHistory.push({
+        text: `🤖 [AI REASONING]: Analyzing query: "${query}"...\nMuhammad Okasha has engineered production RAG systems with 5,717 vector chunks, Whisper INT8 edge translation, and scalable microservices. For deep details, check the interactive 'Ask Okasha AI' assistant on the bottom-right!`,
+        type: 'system'
+      });
+      setHistory(newHistory);
+      setInput('');
+      return;
+    }
 
     switch (cmd) {
       case 'help':
         newHistory.push(
-          { text: 'Available System Commands:', type: 'system' },
+          { text: '═══════════════ AVAILABLE COMMANDS ═══════════════', type: 'system' },
           { text: '  projects     - List all 10 production AI & systems projects', type: 'output' },
           { text: '  ghl          - GoHighLevel Enterprise RAG (5,717 Chunks, Gemini 3.7)', type: 'output' },
           { text: '  sales        - Real-Time Sales Voice Co-Pilot & Intent Decider', type: 'output' },
@@ -38,6 +96,9 @@ export default function TerminalModal({ isOpen, onClose }) {
           { text: '  chashm       - CHASHM AI Assistive Smart Headset (YOLO INT8 + ESP32)', type: 'output' },
           { text: '  shina        - Shina NLP Linguistic Deep Learning Architecture', type: 'output' },
           { text: '  toxicity     - Toxicity Sentinel & Social Media Moderation', type: 'output' },
+          { text: '  matrix       - 🟢 Trigger Fullscreen Digital Matrix Rain Mode', type: 'system' },
+          { text: '  snake        - 🐍 Launch Terminal Arcade Snake Game', type: 'system' },
+          { text: '  ask <query>  - Ask the neural knowledge engine directly', type: 'output' },
           { text: '  stats        - Live system metrics & performance indicators', type: 'output' },
           { text: '  skills       - Core technology matrix & competencies', type: 'output' },
           { text: '  whoami       - Engineer bio & architectural philosophy', type: 'output' },
@@ -47,9 +108,20 @@ export default function TerminalModal({ isOpen, onClose }) {
         );
         break;
 
+      case 'matrix':
+        newHistory.push({ text: '🟢 INITIALIZING CYBER MATRIX PROTOCOL...', type: 'system' });
+        if (onTriggerMatrix) {
+          onTriggerMatrix();
+        }
+        break;
+
+      case 'snake':
+        newHistory.push({ text: '🐍 [SNAKE ARCADE ACTIVE]: Use arrow keys in your browser or commands to navigate. Score: 120 pts [SIMULATED]. Type "help" to resume console.', type: 'system' });
+        break;
+
       case 'projects':
         newHistory.push(
-          { text: 'ACTIVE ENGINEERING REPOSITORY (10 Systems):', type: 'system' },
+          { text: 'ACTIVE ENGINEERING REPOSITORY (10 Production Systems):', type: 'system' },
           { text: '  1. [GHL RAG] Enterprise Multimodal AI Cockpit (FastAPI + ChromaDB 5.7k Chunks)', type: 'output' },
           { text: '  2. [Sales Co-Pilot] Sub-50ms Real-Time Voice Intelligence (Whisper + Ollama + HUD)', type: 'output' },
           { text: '  3. [Offline Translator] 100% On-Device Whisper INT8 + MarianMT Android Player', type: 'output' },
@@ -71,7 +143,6 @@ export default function TerminalModal({ isOpen, onClose }) {
         break;
 
       case 'sales':
-      case 'salescopilot':
         newHistory.push({
           text: '🎙️ SALES VOICE CO-PILOT:\n• Captures live audio from Zoom / Google Meet tabs via WebRTC\n• Local Whisper STT + Ollama intent classification (<50ms)\n• Detects client skepticism, objections & subconscious fears\n• Whisper cues into representative\'s earphone feed\n• Floating transparent Zoom HUD overlay',
           type: 'output'
@@ -79,60 +150,8 @@ export default function TerminalModal({ isOpen, onClose }) {
         break;
 
       case 'translator':
-      case 'video':
         newHistory.push({
           text: '🎬 OFFLINE AI VIDEO TRANSLATOR:\n• 100% On-Device Android app running on Jetpack Compose\n• Quantized INT8 OpenAI Whisper speech-to-text with VAD\n• MarianMT seq2seq neural translation (Urdu, Spanish, etc.)\n• Media3 ExoPlayer with binary search subtitle synchronization\n• Zero cloud costs & Zero privacy leakage',
-          type: 'output'
-        });
-        break;
-
-      case 'school':
-      case 'digitalschool':
-        newHistory.push({
-          text: '🎓 APEX DIGITAL SCHOOL OS:\n• 5 Role-Based Portals: Student, Teacher, Parent, Admin, Finance\n• Socratic AI Diagnostic Tutor & auto quiz generator\n• Live Virtual Broadcast Studio with collaborative whiteboard\n• Automated PDF Marks Sheets & Transcript generator',
-          type: 'output'
-        });
-        break;
-
-      case 'hospital':
-        newHistory.push({
-          text: '🏥 CLINICAL CARE HOSPITAL ERP:\n• Electronic Health Records (EHR) & Sanitized Medical Ledgers\n• OPD / IPD ward admission, bed occupancy & nurse handover logs\n• Pharmacy inventory tracking with batch expiration warnings\n• Native Android and Desktop packaging via Capacitor',
-          type: 'output'
-        });
-        break;
-
-      case 'medprep':
-      case 'fcps':
-        newHistory.push({
-          text: '🩺 MEDPREP PRO & FCPS ENGINE:\n• 10,000+ high-yield MBBS & FCPS clinical MCQs\n• Detailed anatomical & pathophysiological explanations for all options\n• Timed examination simulator with negative marking\n• Compiled as standalone Windows .exe and Android APK',
-          type: 'output'
-        });
-        break;
-
-      case 'medconnect':
-        newHistory.push({
-          text: '🌐 MED CONNECT TELEMEDICINE:\n• Doctor discovery and calendar slot booking\n• Encrypted patient health vault and consultation records\n• Digital prescription issuance & medicine schedule sync',
-          type: 'output'
-        });
-        break;
-
-      case 'chashm':
-        newHistory.push({
-          text: '👁️ CHASHM AI SMART HEADSET:\n• Quantized INT8 custom YOLO model deployed on ESP32-CAM\n• Sub-30ms obstacle detection streaming over WebSockets\n• Directional 3D spatial Text-to-Speech audio navigation feedback',
-          type: 'output'
-        });
-        break;
-
-      case 'shina':
-        newHistory.push({
-          text: '📜 SHINA NLP ENGINE:\n• Custom corpus preprocessing for endangered regional language\n• Hybrid Bidirectional LSTM and 1D-CNN neural architecture\n• 94%+ F1 classification benchmark score',
-          type: 'output'
-        });
-        break;
-
-      case 'toxicity':
-        newHistory.push({
-          text: '🛡️ TOXICITY SENTINEL:\n• High-throughput TF-IDF + Lemmatization NLP pipeline\n• 10,000 req/sec inference capacity for live social streams\n• 98.2% accuracy in detecting insults, threats & toxic text',
           type: 'output'
         });
         break;
@@ -146,7 +165,7 @@ export default function TerminalModal({ isOpen, onClose }) {
 
       case 'skills':
         newHistory.push({
-          text: '⚡ TECH MATRIX:\n• AI/LLMs: Gemini 3.7 Flash, ChromaDB, FastEmbed, LangChain, Ollama\n• Deep Learning: Whisper INT8, YOLOv8, PyTorch, TensorFlow, ONNX\n• Systems: FastAPI, React 18, WebSockets, WebRTC, Jetpack Compose, SQLite WAL',
+          text: '⚡ TECH MATRIX:\n• AI/LLMs: Gemini 3.7 Flash, ChromaDB, FastEmbed, LangChain, Ollama\n• Deep Learning: Whisper INT8, YOLOv8, PyTorch, TensorFlow, ONNX\n• Systems: FastAPI, React 19, WebSockets, WebRTC, Jetpack Compose, SQLite WAL',
           type: 'output'
         });
         break;
@@ -168,7 +187,7 @@ export default function TerminalModal({ isOpen, onClose }) {
 
       case 'contact':
         newHistory.push({
-          text: '📫 DIRECT CONTACT CHANNELS:\n• Email: muhammadokashaofficial@gmail.com\n• GitHub: https://github.com/muhammadokashapak\n• Location: Islamabad, Pakistan',
+          text: '📫 DIRECT CONTACT CHANNELS:\n• Email: muhammad.okasha2146@gmail.com\n• Phone: +92 3495696659\n• Location: Islamabad, Pakistan',
           type: 'output'
         });
         break;
@@ -180,7 +199,7 @@ export default function TerminalModal({ isOpen, onClose }) {
 
       default:
         newHistory.push({
-          text: `Command not recognized: "${cmd}". Type "help" for a list of valid commands.`,
+          text: `Command not recognized: "${rawCmd}". Type "help" for valid commands or "ask <query>" to query AI.`,
           type: 'error'
         });
     }
@@ -193,7 +212,13 @@ export default function TerminalModal({ isOpen, onClose }) {
 
   return (
     <AnimatePresence>
-      <div className="modal-backdrop" onClick={onClose}>
+      <div
+        className="modal-backdrop"
+        onClick={() => {
+          playSound('close');
+          onClose();
+        }}
+      >
         <motion.div
           className="modal-dialog crt-scanlines"
           onClick={(e) => e.stopPropagation()}
@@ -202,62 +227,94 @@ export default function TerminalModal({ isOpen, onClose }) {
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           transition={{ duration: 0.3 }}
           style={{
-            background: 'rgba(5, 7, 16, 0.96)',
+            background: 'rgba(5, 7, 16, 0.97)',
             border: '1px solid rgba(0, 255, 204, 0.4)',
-            maxWidth: '820px',
-            boxShadow: '0 0 50px rgba(0, 255, 204, 0.25), 0 0 30px rgba(139, 92, 246, 0.2)'
+            maxWidth: '840px',
+            boxShadow: '0 0 60px rgba(0, 255, 204, 0.3), 0 0 35px rgba(139, 92, 246, 0.25)'
           }}
         >
           {/* Terminal Window Header */}
-          <div style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            borderBottom: '1px solid rgba(0, 255, 204, 0.2)',
-            paddingBottom: '0.8rem',
-            marginBottom: '1rem'
-          }}>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              borderBottom: '1px solid rgba(0, 255, 204, 0.2)',
+              paddingBottom: '0.8rem',
+              marginBottom: '1rem'
+            }}
+          >
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ff5f56' }} />
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#ffbd2e' }} />
               <div style={{ width: '12px', height: '12px', borderRadius: '50%', background: '#27c93f' }} />
-              <span style={{
-                color: 'var(--accent-color)',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.82rem',
-                fontWeight: 700,
-                marginLeft: '8px',
-                letterSpacing: '0.5px'
-              }}>
-                okasha@neural-core:~ (zsh)
+              <span
+                style={{
+                  color: 'var(--accent-color)',
+                  fontFamily: 'var(--font-mono)',
+                  fontSize: '0.82rem',
+                  fontWeight: 700,
+                  marginLeft: '8px',
+                  letterSpacing: '0.5px'
+                }}
+              >
+                okasha@neural-core:~ (zsh v4.0)
               </span>
             </div>
 
-            <button
-              onClick={onClose}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: 'var(--text-secondary)',
-                cursor: 'pointer'
-              }}
-            >
-              <X size={18} />
-            </button>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <button
+                onClick={() => {
+                  if (onTriggerMatrix) {
+                    onTriggerMatrix();
+                  }
+                }}
+                title="Matrix Mode"
+                style={{
+                  background: 'rgba(0, 255, 204, 0.1)',
+                  border: '1px solid rgba(0, 255, 204, 0.3)',
+                  color: 'var(--accent-color)',
+                  padding: '2px 8px',
+                  borderRadius: '10px',
+                  fontSize: '0.72rem',
+                  fontWeight: 700,
+                  cursor: 'pointer'
+                }}
+              >
+                Matrix
+              </button>
+
+              <button
+                onClick={() => {
+                  playSound('close');
+                  onClose();
+                }}
+                style={{
+                  background: 'transparent',
+                  border: 'none',
+                  color: 'var(--text-secondary)',
+                  cursor: 'pointer'
+                }}
+              >
+                <X size={18} />
+              </button>
+            </div>
           </div>
 
           {/* Terminal Console Output */}
-          <div style={{
-            fontFamily: 'var(--font-mono)',
-            fontSize: '0.85rem',
-            minHeight: '280px',
-            maxHeight: '420px',
-            overflowY: 'auto',
-            paddingRight: '8px',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '8px'
-          }}>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: '0.85rem',
+              minHeight: '300px',
+              maxHeight: '440px',
+              overflowY: 'auto',
+              paddingRight: '8px',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '8px'
+            }}
+          >
             {history.map((item, idx) => (
               <div
                 key={idx}
@@ -301,7 +358,8 @@ export default function TerminalModal({ isOpen, onClose }) {
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder="Enter command (e.g. 'help', 'ghl', 'sales', 'translator', 'stats')..."
+              onKeyDown={handleKeyDown}
+              placeholder="Enter command (e.g. 'help', 'matrix', 'snake', 'ghl', 'ask <query>')..."
               autoFocus
               style={{
                 flex: 1,
