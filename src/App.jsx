@@ -255,6 +255,7 @@ function App() {
               }}
             >
               <FileText size={14} /> <span>Resume</span>
+            </a>
           </div>
 
           {/* Mobile Actions (Theme + Audio + Hamburger) */}
