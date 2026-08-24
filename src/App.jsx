@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, FileText, Terminal, Sun, Moon, Volume2, VolumeX, Sparkles, Zap, Award, Mic } from 'lucide-react';
+import { Menu, X, FileText, Terminal, Sun, Moon, Volume2, VolumeX, Sparkles, Zap, Award, Mic, ArrowUpRight } from 'lucide-react';
 import Hero from './components/Hero';
 import Expertise from './components/Expertise';
 import About from './components/About';
@@ -108,7 +108,27 @@ function App() {
 
       <nav className="glass-nav">
         <div className="nav-content" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%', gap: '10px' }}>
-          {/* Left/Center Group: Primary Section Links */}
+          {/* Mobile/Tablet Brand Logo */}
+          <a
+            href="#hero"
+            onClick={() => playSound('hover')}
+            className="nav-brand-mobile"
+            style={{
+              display: 'none',
+              alignItems: 'center',
+              gap: '6px',
+              textDecoration: 'none'
+            }}
+          >
+            <span className="nav-brand" style={{ fontSize: '1.15rem', fontWeight: 900, letterSpacing: '-0.5px' }}>
+              Okasha<span style={{ color: 'var(--accent-color)' }}>.</span>
+            </span>
+            <span className="badge-neon" style={{ fontSize: '0.66rem', padding: '2px 6px' }}>
+              <span className="pulse-dot" style={{ width: '5px', height: '5px' }} /> AI
+            </span>
+          </a>
+
+          {/* Desktop Left Group: Section Links */}
           <div className="nav-links nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
             {navItems.map((item) => (
               <a
@@ -128,7 +148,7 @@ function App() {
             ))}
           </div>
 
-          {/* Right Group: Action Suite */}
+          {/* Desktop Right Group: Action Suite */}
           <div className="nav-links nav-links-desktop" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             {/* Voice Command Button */}
             <button
@@ -137,18 +157,6 @@ function App() {
                 setVoiceOpen(true);
               }}
               className="sound-toggle-btn"
-              style={{
-                width: '34px',
-                height: '34px',
-                borderRadius: '50%',
-                background: 'rgba(0, 255, 204, 0.12)',
-                border: '1px solid var(--accent-color)',
-                color: 'var(--accent-color)',
-                display: 'inline-flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: 'pointer'
-              }}
               title="Voice Control Mode"
               aria-label="Voice Command Mode"
             >
@@ -186,7 +194,6 @@ function App() {
             <button
               onClick={toggleSound}
               className="sound-toggle-btn"
-              style={{ width: '34px', height: '34px', borderRadius: '50%' }}
               title={soundMuted ? "Unmute Sci-Fi UI Sounds" : "Mute Sci-Fi UI Sounds"}
               aria-label="Toggle Sound Effects"
             >
@@ -197,7 +204,6 @@ function App() {
             <button
               onClick={toggleTheme}
               className="theme-toggle-btn"
-              style={{ width: '34px', height: '34px', borderRadius: '50%' }}
               title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
               aria-label="Toggle Theme"
             >
@@ -261,51 +267,17 @@ function App() {
           {/* Mobile Actions (Theme + Audio + Hamburger) */}
           <div style={{ display: 'none' }} className="mobile-actions-wrapper">
             <button
-              onClick={() => {
-                playSound('open');
-                setVoiceOpen(true);
-              }}
-              className="sound-toggle-btn mobile-hide-small"
-              style={{ marginRight: '6px', color: 'var(--accent-color)', width: '32px', height: '32px' }}
-              title="Voice Control Mode"
-              aria-label="Voice Control Mode"
-            >
-              <Mic size={14} />
-            </button>
-            <button
-              onClick={() => {
-                playSound('open');
-                setRecruiterOpen(true);
-              }}
-              className="mobile-hide-small"
-              style={{
-                background: 'rgba(0,255,204,0.15)',
-                border: '1px solid var(--accent-color)',
-                color: 'var(--accent-color)',
-                padding: '4px 8px',
-                borderRadius: '14px',
-                fontSize: '0.72rem',
-                fontWeight: 800,
-                marginRight: '6px',
-                whiteSpace: 'nowrap',
-                cursor: 'pointer'
-              }}
-              title="Recruiter Fast-Track"
-            >
-              ⚡ Brief
-            </button>
-            <button
               onClick={toggleSound}
               className="sound-toggle-btn"
-              style={{ marginRight: '6px', width: '32px', height: '32px' }}
+              title={soundMuted ? "Unmute Sci-Fi UI Sounds" : "Mute Sci-Fi UI Sounds"}
               aria-label="Toggle Sound Effects"
             >
-              {soundMuted ? <VolumeX size={14} color="var(--text-muted)" /> : <Volume2 size={14} color="var(--accent-color)" />}
+              {soundMuted ? <VolumeX size={15} color="var(--text-muted)" /> : <Volume2 size={15} color="var(--accent-color)" />}
             </button>
             <button
               onClick={toggleTheme}
               className="theme-toggle-btn"
-              style={{ marginRight: '6px', width: '32px', height: '32px' }}
+              title={`Switch to ${theme === 'dark' ? 'Light' : 'Dark'} Mode`}
               aria-label="Toggle Theme"
             >
               {theme === 'dark' ? <Sun size={15} color="#fbbf24" /> : <Moon size={15} color="#7c3aed" />}
@@ -317,9 +289,8 @@ function App() {
                 setMobileMenuOpen(!mobileMenuOpen);
               }}
               aria-label="Toggle navigation menu"
-              style={{ padding: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
-              {mobileMenuOpen ? <X size={22} color="var(--accent-color)" /> : <Menu size={22} />}
+              {mobileMenuOpen ? <X size={18} color="var(--accent-color)" /> : <Menu size={18} />}
             </button>
           </div>
         </div>
@@ -336,7 +307,8 @@ function App() {
                   setMobileMenuOpen(false);
                 }}
               >
-                {item.label}
+                <span>{item.label}</span>
+                <ArrowUpRight size={14} color="var(--text-muted)" />
               </a>
             ))}
             
@@ -351,17 +323,18 @@ function App() {
                   background: 'rgba(0, 255, 204, 0.15)',
                   border: '1px solid var(--accent-color)',
                   color: 'var(--accent-color)',
-                  padding: '10px',
+                  padding: '11px',
                   borderRadius: '12px',
                   fontWeight: 800,
                   fontSize: '0.88rem',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '6px'
+                  gap: '8px',
+                  cursor: 'pointer'
                 }}
               >
-                <Mic size={16} /> 🎙️ Voice Control Mode
+                <Mic size={16} /> <span>Voice Control Mode</span>
               </button>
 
               <button
@@ -381,13 +354,14 @@ function App() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  gap: '6px'
+                  gap: '8px',
+                  cursor: 'pointer'
                 }}
               >
-                <Zap size={16} /> ⚡ Recruiter 30s Fast-Track Brief
+                <Zap size={16} /> <span>Recruiter 30s Fast-Track</span>
               </button>
 
-              <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
                 <button
                   onClick={() => {
                     playSound('open');
@@ -395,21 +369,21 @@ function App() {
                     setTerminalOpen(true);
                   }}
                   style={{
-                    flex: 1,
                     background: 'rgba(139, 92, 246, 0.15)',
                     border: '1px solid var(--accent-alt)',
                     color: 'var(--accent-alt)',
-                    padding: '10px',
-                    borderRadius: '10px',
+                    padding: '11px',
+                    borderRadius: '12px',
                     fontWeight: 700,
-                    fontSize: '0.9rem',
+                    fontSize: '0.88rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '6px'
+                    gap: '6px',
+                    cursor: 'pointer'
                   }}
                 >
-                  <Terminal size={16} /> &gt;_ CLI
+                  <Terminal size={15} /> <span>CLI</span>
                 </button>
 
                 <a
@@ -417,20 +391,20 @@ function App() {
                   download="Muhammad_Okasha_Resume.pdf"
                   onClick={() => playSound('click')}
                   style={{
-                    flex: 1,
                     background: 'var(--accent-gradient)',
                     color: '#fff',
-                    padding: '10px',
-                    borderRadius: '10px',
+                    padding: '11px',
+                    borderRadius: '12px',
                     fontWeight: 700,
-                    fontSize: '0.9rem',
+                    fontSize: '0.88rem',
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    gap: '6px'
+                    gap: '6px',
+                    textDecoration: 'none'
                   }}
                 >
-                  <FileText size={16} /> Resume
+                  <FileText size={15} /> <span>Resume</span>
                 </a>
               </div>
             </div>
